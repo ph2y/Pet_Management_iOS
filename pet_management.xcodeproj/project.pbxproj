@@ -16,6 +16,7 @@
 		8FF0100C27901B8E0087913B /* pet_managementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF0100B27901B8E0087913B /* pet_managementTests.swift */; };
 		8FF0101627901B8E0087913B /* pet_managementUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF0101527901B8E0087913B /* pet_managementUITests.swift */; };
 		8FF0101827901B8E0087913B /* pet_managementUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF0101727901B8E0087913B /* pet_managementUITestsLaunchTests.swift */; };
+		8FF01026279036C40087913B /* SplashImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FF01025279036C40087913B /* SplashImage.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		8FF0101127901B8E0087913B /* pet_managementUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = pet_managementUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FF0101527901B8E0087913B /* pet_managementUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_managementUITests.swift; sourceTree = "<group>"; };
 		8FF0101727901B8E0087913B /* pet_managementUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_managementUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		8FF01025279036C40087913B /* SplashImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SplashImage.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 		8FF00FF327901B8D0087913B /* pet_management */ = {
 			isa = PBXGroup;
 			children = (
+				8FF01024279035D70087913B /* Resources */,
 				8FF00FF427901B8D0087913B /* AppDelegate.swift */,
 				8FF00FF627901B8D0087913B /* SceneDelegate.swift */,
 				8FF00FF827901B8D0087913B /* ViewController.swift */,
@@ -125,6 +128,14 @@
 				8FF0101727901B8E0087913B /* pet_managementUITestsLaunchTests.swift */,
 			);
 			path = pet_managementUITests;
+			sourceTree = "<group>";
+		};
+		8FF01024279035D70087913B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8FF01025279036C40087913B /* SplashImage.png */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -231,6 +242,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FF01026279036C40087913B /* SplashImage.png in Resources */,
 				8FF0100127901B8E0087913B /* LaunchScreen.storyboard in Resources */,
 				8FF00FFE27901B8E0087913B /* Assets.xcassets in Resources */,
 				8FF00FFC27901B8D0087913B /* Main.storyboard in Resources */,
@@ -447,6 +459,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -456,7 +469,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -475,6 +488,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -484,7 +498,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
