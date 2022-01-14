@@ -17,6 +17,21 @@
 		8FF0101627901B8E0087913B /* pet_managementUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF0101527901B8E0087913B /* pet_managementUITests.swift */; };
 		8FF0101827901B8E0087913B /* pet_managementUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF0101727901B8E0087913B /* pet_managementUITestsLaunchTests.swift */; };
 		8FF01026279036C40087913B /* SplashImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FF01025279036C40087913B /* SplashImage.png */; };
+		8FFCCF3D2791349600911F3C /* MarkerTrain.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FFCCF2E2791349600911F3C /* MarkerTrain.png */; };
+		8FFCCF3E2791349600911F3C /* MarkerCafe.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FFCCF2F2791349600911F3C /* MarkerCafe.png */; };
+		8FFCCF3F2791349600911F3C /* AppIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FFCCF302791349600911F3C /* AppIcon.png */; };
+		8FFCCF402791349600911F3C /* MarkerStore.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FFCCF312791349600911F3C /* MarkerStore.png */; };
+		8FFCCF412791349600911F3C /* AppIconWithoutBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FFCCF322791349600911F3C /* AppIconWithoutBackground.png */; };
+		8FFCCF422791349600911F3C /* MarkerCurrentLocation.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FFCCF332791349600911F3C /* MarkerCurrentLocation.png */; };
+		8FFCCF432791349600911F3C /* Img.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FFCCF342791349600911F3C /* Img.png */; };
+		8FFCCF442791349600911F3C /* MarkerPet.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FFCCF352791349600911F3C /* MarkerPet.png */; };
+		8FFCCF452791349600911F3C /* MarkerCar.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FFCCF362791349600911F3C /* MarkerCar.png */; };
+		8FFCCF462791349600911F3C /* AppIconWithoutBackgroundForSplash.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FFCCF372791349600911F3C /* AppIconWithoutBackgroundForSplash.png */; };
+		8FFCCF472791349600911F3C /* MarkerHospital.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FFCCF382791349600911F3C /* MarkerHospital.png */; };
+		8FFCCF482791349600911F3C /* MarkerDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FFCCF392791349600911F3C /* MarkerDefault.png */; };
+		8FFCCF492791349600911F3C /* Crown.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FFCCF3A2791349600911F3C /* Crown.png */; };
+		8FFCCF4A2791349600911F3C /* MarkerSchool.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FFCCF3B2791349600911F3C /* MarkerSchool.png */; };
+		8FFCCF4B2791349600911F3C /* PostDefaultImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FFCCF3C2791349600911F3C /* PostDefaultImage.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +66,21 @@
 		8FF0101527901B8E0087913B /* pet_managementUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_managementUITests.swift; sourceTree = "<group>"; };
 		8FF0101727901B8E0087913B /* pet_managementUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pet_managementUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		8FF01025279036C40087913B /* SplashImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SplashImage.png; sourceTree = "<group>"; };
+		8FFCCF2E2791349600911F3C /* MarkerTrain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MarkerTrain.png; sourceTree = "<group>"; };
+		8FFCCF2F2791349600911F3C /* MarkerCafe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MarkerCafe.png; sourceTree = "<group>"; };
+		8FFCCF302791349600911F3C /* AppIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon.png; sourceTree = "<group>"; };
+		8FFCCF312791349600911F3C /* MarkerStore.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MarkerStore.png; sourceTree = "<group>"; };
+		8FFCCF322791349600911F3C /* AppIconWithoutBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIconWithoutBackground.png; sourceTree = "<group>"; };
+		8FFCCF332791349600911F3C /* MarkerCurrentLocation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MarkerCurrentLocation.png; sourceTree = "<group>"; };
+		8FFCCF342791349600911F3C /* Img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Img.png; sourceTree = "<group>"; };
+		8FFCCF352791349600911F3C /* MarkerPet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MarkerPet.png; sourceTree = "<group>"; };
+		8FFCCF362791349600911F3C /* MarkerCar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MarkerCar.png; sourceTree = "<group>"; };
+		8FFCCF372791349600911F3C /* AppIconWithoutBackgroundForSplash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIconWithoutBackgroundForSplash.png; sourceTree = "<group>"; };
+		8FFCCF382791349600911F3C /* MarkerHospital.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MarkerHospital.png; sourceTree = "<group>"; };
+		8FFCCF392791349600911F3C /* MarkerDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MarkerDefault.png; sourceTree = "<group>"; };
+		8FFCCF3A2791349600911F3C /* Crown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Crown.png; sourceTree = "<group>"; };
+		8FFCCF3B2791349600911F3C /* MarkerSchool.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MarkerSchool.png; sourceTree = "<group>"; };
+		8FFCCF3C2791349600911F3C /* PostDefaultImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PostDefaultImage.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +163,21 @@
 		8FF01024279035D70087913B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8FFCCF302791349600911F3C /* AppIcon.png */,
+				8FFCCF322791349600911F3C /* AppIconWithoutBackground.png */,
+				8FFCCF372791349600911F3C /* AppIconWithoutBackgroundForSplash.png */,
+				8FFCCF3A2791349600911F3C /* Crown.png */,
+				8FFCCF342791349600911F3C /* Img.png */,
+				8FFCCF2F2791349600911F3C /* MarkerCafe.png */,
+				8FFCCF362791349600911F3C /* MarkerCar.png */,
+				8FFCCF332791349600911F3C /* MarkerCurrentLocation.png */,
+				8FFCCF392791349600911F3C /* MarkerDefault.png */,
+				8FFCCF382791349600911F3C /* MarkerHospital.png */,
+				8FFCCF352791349600911F3C /* MarkerPet.png */,
+				8FFCCF3B2791349600911F3C /* MarkerSchool.png */,
+				8FFCCF312791349600911F3C /* MarkerStore.png */,
+				8FFCCF2E2791349600911F3C /* MarkerTrain.png */,
+				8FFCCF3C2791349600911F3C /* PostDefaultImage.png */,
 				8FF01025279036C40087913B /* SplashImage.png */,
 			);
 			path = Resources;
@@ -242,10 +287,25 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FFCCF412791349600911F3C /* AppIconWithoutBackground.png in Resources */,
 				8FF01026279036C40087913B /* SplashImage.png in Resources */,
+				8FFCCF402791349600911F3C /* MarkerStore.png in Resources */,
 				8FF0100127901B8E0087913B /* LaunchScreen.storyboard in Resources */,
 				8FF00FFE27901B8E0087913B /* Assets.xcassets in Resources */,
+				8FFCCF472791349600911F3C /* MarkerHospital.png in Resources */,
+				8FFCCF452791349600911F3C /* MarkerCar.png in Resources */,
+				8FFCCF4B2791349600911F3C /* PostDefaultImage.png in Resources */,
+				8FFCCF462791349600911F3C /* AppIconWithoutBackgroundForSplash.png in Resources */,
 				8FF00FFC27901B8D0087913B /* Main.storyboard in Resources */,
+				8FFCCF3E2791349600911F3C /* MarkerCafe.png in Resources */,
+				8FFCCF3D2791349600911F3C /* MarkerTrain.png in Resources */,
+				8FFCCF492791349600911F3C /* Crown.png in Resources */,
+				8FFCCF482791349600911F3C /* MarkerDefault.png in Resources */,
+				8FFCCF4A2791349600911F3C /* MarkerSchool.png in Resources */,
+				8FFCCF422791349600911F3C /* MarkerCurrentLocation.png in Resources */,
+				8FFCCF432791349600911F3C /* Img.png in Resources */,
+				8FFCCF3F2791349600911F3C /* AppIcon.png in Resources */,
+				8FFCCF442791349600911F3C /* MarkerPet.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
