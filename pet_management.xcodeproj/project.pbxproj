@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		8FF00FF527901B8D0087913B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF00FF427901B8D0087913B /* AppDelegate.swift */; };
 		8FF00FF727901B8D0087913B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF00FF627901B8D0087913B /* SceneDelegate.swift */; };
-		8FF00FF927901B8D0087913B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF00FF827901B8D0087913B /* ViewController.swift */; };
 		8FF00FFC27901B8D0087913B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8FF00FFA27901B8D0087913B /* Main.storyboard */; };
 		8FF00FFE27901B8E0087913B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8FF00FFD27901B8E0087913B /* Assets.xcassets */; };
 		8FF0100127901B8E0087913B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8FF00FFF27901B8E0087913B /* LaunchScreen.storyboard */; };
@@ -32,6 +31,13 @@
 		8FFCCF492791349600911F3C /* Crown.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FFCCF3A2791349600911F3C /* Crown.png */; };
 		8FFCCF4A2791349600911F3C /* MarkerSchool.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FFCCF3B2791349600911F3C /* MarkerSchool.png */; };
 		8FFCCF4B2791349600911F3C /* PostDefaultImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FFCCF3C2791349600911F3C /* PostDefaultImage.png */; };
+		8FFCCF5127913CFD00911F3C /* sunflower_light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8FFCCF4C27913CFD00911F3C /* sunflower_light.ttf */; };
+		8FFCCF5227913CFD00911F3C /* sunflower_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8FFCCF4D27913CFD00911F3C /* sunflower_medium.ttf */; };
+		8FFCCF5327913CFD00911F3C /* noto_sans_kr_light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8FFCCF4E27913CFD00911F3C /* noto_sans_kr_light.otf */; };
+		8FFCCF5427913CFD00911F3C /* noto_sans_kr_thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8FFCCF4F27913CFD00911F3C /* noto_sans_kr_thin.otf */; };
+		8FFCCF5527913CFD00911F3C /* sunflower_bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8FFCCF5027913CFD00911F3C /* sunflower_bold.ttf */; };
+		8FFCCF5D27915D7A00911F3C /* UILoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFCCF5C27915D7A00911F3C /* UILoginVC.swift */; };
+		8FFCCF612791739800911F3C /* UICreateAccountTermsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFCCF602791739800911F3C /* UICreateAccountTermsVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,7 +61,6 @@
 		8FF00FF127901B8D0087913B /* pet_management.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pet_management.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FF00FF427901B8D0087913B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8FF00FF627901B8D0087913B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		8FF00FF827901B8D0087913B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8FF00FFB27901B8D0087913B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8FF00FFD27901B8E0087913B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8FF0100027901B8E0087913B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -81,6 +86,13 @@
 		8FFCCF3A2791349600911F3C /* Crown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Crown.png; sourceTree = "<group>"; };
 		8FFCCF3B2791349600911F3C /* MarkerSchool.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MarkerSchool.png; sourceTree = "<group>"; };
 		8FFCCF3C2791349600911F3C /* PostDefaultImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PostDefaultImage.png; sourceTree = "<group>"; };
+		8FFCCF4C27913CFD00911F3C /* sunflower_light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = sunflower_light.ttf; path = font/sunflower_light.ttf; sourceTree = "<group>"; };
+		8FFCCF4D27913CFD00911F3C /* sunflower_medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = sunflower_medium.ttf; path = font/sunflower_medium.ttf; sourceTree = "<group>"; };
+		8FFCCF4E27913CFD00911F3C /* noto_sans_kr_light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = noto_sans_kr_light.otf; path = font/noto_sans_kr_light.otf; sourceTree = "<group>"; };
+		8FFCCF4F27913CFD00911F3C /* noto_sans_kr_thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = noto_sans_kr_thin.otf; path = font/noto_sans_kr_thin.otf; sourceTree = "<group>"; };
+		8FFCCF5027913CFD00911F3C /* sunflower_bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = sunflower_bold.ttf; path = font/sunflower_bold.ttf; sourceTree = "<group>"; };
+		8FFCCF5C27915D7A00911F3C /* UILoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILoginVC.swift; sourceTree = "<group>"; };
+		8FFCCF602791739800911F3C /* UICreateAccountTermsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICreateAccountTermsVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,10 +143,8 @@
 		8FF00FF327901B8D0087913B /* pet_management */ = {
 			isa = PBXGroup;
 			children = (
-				8FF01024279035D70087913B /* Resources */,
-				8FF00FF427901B8D0087913B /* AppDelegate.swift */,
-				8FF00FF627901B8D0087913B /* SceneDelegate.swift */,
-				8FF00FF827901B8D0087913B /* ViewController.swift */,
+				8FFCCF5627915AFB00911F3C /* src */,
+				8FF01024279035D70087913B /* resource */,
 				8FF00FFA27901B8D0087913B /* Main.storyboard */,
 				8FF00FFD27901B8E0087913B /* Assets.xcassets */,
 				8FF00FFF27901B8E0087913B /* LaunchScreen.storyboard */,
@@ -160,9 +170,14 @@
 			path = pet_managementUITests;
 			sourceTree = "<group>";
 		};
-		8FF01024279035D70087913B /* Resources */ = {
+		8FF01024279035D70087913B /* resource */ = {
 			isa = PBXGroup;
 			children = (
+				8FFCCF4E27913CFD00911F3C /* noto_sans_kr_light.otf */,
+				8FFCCF4F27913CFD00911F3C /* noto_sans_kr_thin.otf */,
+				8FFCCF5027913CFD00911F3C /* sunflower_bold.ttf */,
+				8FFCCF4C27913CFD00911F3C /* sunflower_light.ttf */,
+				8FFCCF4D27913CFD00911F3C /* sunflower_medium.ttf */,
 				8FFCCF302791349600911F3C /* AppIcon.png */,
 				8FFCCF322791349600911F3C /* AppIconWithoutBackground.png */,
 				8FFCCF372791349600911F3C /* AppIconWithoutBackgroundForSplash.png */,
@@ -180,7 +195,42 @@
 				8FFCCF3C2791349600911F3C /* PostDefaultImage.png */,
 				8FF01025279036C40087913B /* SplashImage.png */,
 			);
-			path = Resources;
+			path = resource;
+			sourceTree = "<group>";
+		};
+		8FFCCF5627915AFB00911F3C /* src */ = {
+			isa = PBXGroup;
+			children = (
+				8FFCCF5727915B2800911F3C /* ui */,
+				8FF00FF427901B8D0087913B /* AppDelegate.swift */,
+				8FF00FF627901B8D0087913B /* SceneDelegate.swift */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		8FFCCF5727915B2800911F3C /* ui */ = {
+			isa = PBXGroup;
+			children = (
+				8FFCCF5827915B5700911F3C /* login */,
+			);
+			path = ui;
+			sourceTree = "<group>";
+		};
+		8FFCCF5827915B5700911F3C /* login */ = {
+			isa = PBXGroup;
+			children = (
+				8FFCCF5927915B6200911F3C /* createAccount */,
+				8FFCCF5C27915D7A00911F3C /* UILoginVC.swift */,
+			);
+			path = login;
+			sourceTree = "<group>";
+		};
+		8FFCCF5927915B6200911F3C /* createAccount */ = {
+			isa = PBXGroup;
+			children = (
+				8FFCCF602791739800911F3C /* UICreateAccountTermsVC.swift */,
+			);
+			path = createAccount;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -290,18 +340,23 @@
 				8FFCCF412791349600911F3C /* AppIconWithoutBackground.png in Resources */,
 				8FF01026279036C40087913B /* SplashImage.png in Resources */,
 				8FFCCF402791349600911F3C /* MarkerStore.png in Resources */,
+				8FFCCF5527913CFD00911F3C /* sunflower_bold.ttf in Resources */,
 				8FF0100127901B8E0087913B /* LaunchScreen.storyboard in Resources */,
 				8FF00FFE27901B8E0087913B /* Assets.xcassets in Resources */,
 				8FFCCF472791349600911F3C /* MarkerHospital.png in Resources */,
 				8FFCCF452791349600911F3C /* MarkerCar.png in Resources */,
 				8FFCCF4B2791349600911F3C /* PostDefaultImage.png in Resources */,
+				8FFCCF5327913CFD00911F3C /* noto_sans_kr_light.otf in Resources */,
 				8FFCCF462791349600911F3C /* AppIconWithoutBackgroundForSplash.png in Resources */,
+				8FFCCF5227913CFD00911F3C /* sunflower_medium.ttf in Resources */,
+				8FFCCF5427913CFD00911F3C /* noto_sans_kr_thin.otf in Resources */,
 				8FF00FFC27901B8D0087913B /* Main.storyboard in Resources */,
 				8FFCCF3E2791349600911F3C /* MarkerCafe.png in Resources */,
 				8FFCCF3D2791349600911F3C /* MarkerTrain.png in Resources */,
 				8FFCCF492791349600911F3C /* Crown.png in Resources */,
 				8FFCCF482791349600911F3C /* MarkerDefault.png in Resources */,
 				8FFCCF4A2791349600911F3C /* MarkerSchool.png in Resources */,
+				8FFCCF5127913CFD00911F3C /* sunflower_light.ttf in Resources */,
 				8FFCCF422791349600911F3C /* MarkerCurrentLocation.png in Resources */,
 				8FFCCF432791349600911F3C /* Img.png in Resources */,
 				8FFCCF3F2791349600911F3C /* AppIcon.png in Resources */,
@@ -330,7 +385,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8FF00FF927901B8D0087913B /* ViewController.swift in Sources */,
+				8FFCCF612791739800911F3C /* UICreateAccountTermsVC.swift in Sources */,
+				8FFCCF5D27915D7A00911F3C /* UILoginVC.swift in Sources */,
 				8FF00FF527901B8D0087913B /* AppDelegate.swift in Sources */,
 				8FF00FF727901B8D0087913B /* SceneDelegate.swift in Sources */,
 			);
