@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8F25E7D1279289D7005070D6 /* UICreateAccountCredentialsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F25E7D0279289D7005070D6 /* UICreateAccountCredentialsVC.swift */; };
+		8F25E7D32792B103005070D6 /* UICreateAccountDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F25E7D22792B102005070D6 /* UICreateAccountDetailsVC.swift */; };
+		8F25E7D62792CB1C005070D6 /* APIBackendConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F25E7D52792CB1C005070D6 /* APIBackendConfig.swift */; };
+		8F25E7D92792D280005070D6 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8F25E7D82792D280005070D6 /* Alamofire */; };
+		8F25E7DC2792D51B005070D6 /* AccountSendAuthCodeDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F25E7DB2792D51B005070D6 /* AccountSendAuthCodeDto.swift */; };
+		8F25E7DF2792D5C9005070D6 /* HttpMetaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F25E7DE2792D5C9005070D6 /* HttpMetaData.swift */; };
+		8F25E7E12792E017005070D6 /* AccountVerifyAuthCodeDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F25E7E02792E017005070D6 /* AccountVerifyAuthCodeDto.swift */; };
+		8F25E7E32792E39F005070D6 /* CreateAccountDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F25E7E22792E39F005070D6 /* CreateAccountDto.swift */; };
 		8FF00FF527901B8D0087913B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF00FF427901B8D0087913B /* AppDelegate.swift */; };
 		8FF00FF727901B8D0087913B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF00FF627901B8D0087913B /* SceneDelegate.swift */; };
 		8FF00FFC27901B8D0087913B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8FF00FFA27901B8D0087913B /* Main.storyboard */; };
@@ -58,6 +66,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8F25E7D0279289D7005070D6 /* UICreateAccountCredentialsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICreateAccountCredentialsVC.swift; sourceTree = "<group>"; };
+		8F25E7D22792B102005070D6 /* UICreateAccountDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICreateAccountDetailsVC.swift; sourceTree = "<group>"; };
+		8F25E7D52792CB1C005070D6 /* APIBackendConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIBackendConfig.swift; sourceTree = "<group>"; };
+		8F25E7DB2792D51B005070D6 /* AccountSendAuthCodeDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSendAuthCodeDto.swift; sourceTree = "<group>"; };
+		8F25E7DE2792D5C9005070D6 /* HttpMetaData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpMetaData.swift; sourceTree = "<group>"; };
+		8F25E7E02792E017005070D6 /* AccountVerifyAuthCodeDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountVerifyAuthCodeDto.swift; sourceTree = "<group>"; };
+		8F25E7E22792E39F005070D6 /* CreateAccountDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountDto.swift; sourceTree = "<group>"; };
 		8FF00FF127901B8D0087913B /* pet_management.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pet_management.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FF00FF427901B8D0087913B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8FF00FF627901B8D0087913B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -100,6 +115,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F25E7D92792D280005070D6 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,6 +136,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8F25E7D42792CAD6005070D6 /* restapi */ = {
+			isa = PBXGroup;
+			children = (
+				8F25E7DA2792D4FD005070D6 /* dto */,
+				8F25E7D52792CB1C005070D6 /* APIBackendConfig.swift */,
+			);
+			path = restapi;
+			sourceTree = "<group>";
+		};
+		8F25E7DA2792D4FD005070D6 /* dto */ = {
+			isa = PBXGroup;
+			children = (
+				8F25E7DD2792D5BD005070D6 /* common */,
+				8F25E7DB2792D51B005070D6 /* AccountSendAuthCodeDto.swift */,
+				8F25E7E02792E017005070D6 /* AccountVerifyAuthCodeDto.swift */,
+				8F25E7E22792E39F005070D6 /* CreateAccountDto.swift */,
+			);
+			path = dto;
+			sourceTree = "<group>";
+		};
+		8F25E7DD2792D5BD005070D6 /* common */ = {
+			isa = PBXGroup;
+			children = (
+				8F25E7DE2792D5C9005070D6 /* HttpMetaData.swift */,
+			);
+			path = common;
+			sourceTree = "<group>";
+		};
 		8FF00FE827901B8D0087913B = {
 			isa = PBXGroup;
 			children = (
@@ -201,6 +245,7 @@
 		8FFCCF5627915AFB00911F3C /* src */ = {
 			isa = PBXGroup;
 			children = (
+				8F25E7D42792CAD6005070D6 /* restapi */,
 				8FFCCF5727915B2800911F3C /* ui */,
 				8FF00FF427901B8D0087913B /* AppDelegate.swift */,
 				8FF00FF627901B8D0087913B /* SceneDelegate.swift */,
@@ -229,6 +274,8 @@
 			isa = PBXGroup;
 			children = (
 				8FFCCF602791739800911F3C /* UICreateAccountTermsVC.swift */,
+				8F25E7D0279289D7005070D6 /* UICreateAccountCredentialsVC.swift */,
+				8F25E7D22792B102005070D6 /* UICreateAccountDetailsVC.swift */,
 			);
 			path = createAccount;
 			sourceTree = "<group>";
@@ -249,6 +296,9 @@
 			dependencies = (
 			);
 			name = pet_management;
+			packageProductDependencies = (
+				8F25E7D82792D280005070D6 /* Alamofire */,
+			);
 			productName = pet_management;
 			productReference = 8FF00FF127901B8D0087913B /* pet_management.app */;
 			productType = "com.apple.product-type.application";
@@ -321,6 +371,9 @@
 				Base,
 			);
 			mainGroup = 8FF00FE827901B8D0087913B;
+			packageReferences = (
+				8F25E7D72792D280005070D6 /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = 8FF00FF227901B8D0087913B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -385,9 +438,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F25E7D62792CB1C005070D6 /* APIBackendConfig.swift in Sources */,
+				8F25E7D1279289D7005070D6 /* UICreateAccountCredentialsVC.swift in Sources */,
+				8F25E7DC2792D51B005070D6 /* AccountSendAuthCodeDto.swift in Sources */,
+				8F25E7D32792B103005070D6 /* UICreateAccountDetailsVC.swift in Sources */,
 				8FFCCF612791739800911F3C /* UICreateAccountTermsVC.swift in Sources */,
 				8FFCCF5D27915D7A00911F3C /* UILoginVC.swift in Sources */,
 				8FF00FF527901B8D0087913B /* AppDelegate.swift in Sources */,
+				8F25E7E12792E017005070D6 /* AccountVerifyAuthCodeDto.swift in Sources */,
+				8F25E7E32792E39F005070D6 /* CreateAccountDto.swift in Sources */,
+				8F25E7DF2792D5C9005070D6 /* HttpMetaData.swift in Sources */,
 				8FF00FF727901B8D0087913B /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -734,6 +794,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8F25E7D72792D280005070D6 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8F25E7D82792D280005070D6 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8F25E7D72792D280005070D6 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8FF00FE927901B8D0087913B /* Project object */;
 }
