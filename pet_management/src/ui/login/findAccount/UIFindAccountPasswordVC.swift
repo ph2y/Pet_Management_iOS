@@ -1,27 +1,27 @@
 //
-//  UICreateAccountDetailsVC.swift
+//  UIFindAccountPasswordVC.swift
 //  pet_management
 //
-//  Created by newcentury99 on 2022/01/15.
+//  Created by newcentury99 on 2022/01/16.
 //
 
 import UIKit;
 import Alamofire;
 
-class UICreateAccountDetailsVC: UIViewController {
-    @IBOutlet weak var createAccountBtn: UIBarButtonItem!
-    @IBOutlet weak var phoneTextField: UITextField!;
+class UIFindAccountPasswordVC: UIViewController {
+    
+    @IBOutlet weak var usernameTextField: UITextField!;
     @IBOutlet weak var emailTextField: UITextField!;
+    @IBOutlet weak var verifyCodeTextField: UITextField!;
+    @IBOutlet weak var errorLabel: UILabel!;
+    @IBOutlet weak var timeLimitLabel: UILabel!;
     @IBOutlet weak var sendCodeBtn: UIButton!;
     @IBOutlet weak var changeEmailBtn: UIButton!;
-    @IBOutlet weak var errorLabel:UILabel!;
-    @IBOutlet weak var verifyCodeTextField: UITextField!;
-    @IBOutlet weak var timeLimitLabel: UILabel!;
+    @IBOutlet weak var findAccountPasswordBtn: UIButton!;
     
-    var paramDict = Dictionary<String, String>();
-    var phoneErrorMsg = "";
-    var emailErrorMsg = "";
     var verificationTimer: EmailVerificationTimer?;
+    var usernameErrorMsg = "";
+    var emailErrorMsg = "";
     
     override func viewDidLoad() {
         super.viewDidLoad();
@@ -29,7 +29,7 @@ class UICreateAccountDetailsVC: UIViewController {
         // Initialize button status and label visiblity
         self.sendCodeBtn.isEnabled = false;
         self.changeEmailBtn.isEnabled = false;
-        self.createAccountBtn.isEnabled = false;
+        self.findAccountPasswordBtn.isEnabled = false;
         self.errorLabel.text = "";
         self.timeLimitLabel.isHidden = true;
         self.verifyCodeTextField.isEnabled = false;
@@ -53,14 +53,12 @@ class UICreateAccountDetailsVC: UIViewController {
         );
     }
     
-    // func validatePhoneInput
+    // func valicateUsernameInput
     // No Param
     // Return Bool - validity of input
-    // Validate phone number input
-    func validatePhoneInput() -> Bool {
-        let regex = "(^02|^\\d{3})-(\\d{3}|\\d{4})-\\d{4}";
-        let phonePredicate = NSPredicate(format: "SELF MATCHES %@", regex);
-        return phonePredicate.evaluate(with: self.phoneTextField.text);
+    // Check username input is valid for api requirement
+    func validateUsernameInput() -> Bool {
+        return 5 <= self.usernameTextField.text!.count && self.usernameTextField.text!.count <= 20;
     }
     
     // func validateEmailInput
@@ -78,7 +76,7 @@ class UICreateAccountDetailsVC: UIViewController {
     // Return Void
     // Update error message
     func updateErrorMessage() {
-        self.errorLabel.text = self.phoneErrorMsg + self.emailErrorMsg;
+        self.errorLabel.text = self.usernameErrorMsg + self.emailErrorMsg;
     }
     
     // func checkRequirementsForVerification
@@ -93,15 +91,15 @@ class UICreateAccountDetailsVC: UIViewController {
         }
     }
     
-    // func checkRequeirementsForCreateAccount
+    // func checkRequeirementsForFindPassword
     // No Param
     // Return Void
-    // Check requirements if there is no problem to request to verify verification code and create account
-    func checkRequirementsForCreateAccount() {
-        if (self.validatePhoneInput() && self.validateEmailInput() && self.verificationTimer!.isTimerRunning()) {
-            self.createAccountBtn.isEnabled = true;
+    // Check requirements if there is no problem to request to find password
+    func checkRequirementsForFindPassword() {
+        if (self.validateUsernameInput() && self.validateEmailInput() && self.verificationTimer!.isTimerRunning()) {
+            self.findAccountPasswordBtn.isEnabled = true;
         } else {
-            self.createAccountBtn.isEnabled = false;
+            self.findAccountPasswordBtn.isEnabled = false;
         }
     }
     
@@ -166,46 +164,18 @@ class UICreateAccountDetailsVC: UIViewController {
         };
     }
     
-    // func reqHttpVerifyCode
+    // func reqHttpFindAccountPassword
     // No Param
     // Return Void
-    // Request to the backend to check verification code is valid
-    func reqHttpVerifyCode() {
-        let reqApi = "account/authcode/verify";
+    // Request to the backend to reset account password
+    func reqHttpFindAccountPassword() {
+        let reqApi = "account/recoverPassword";
         let reqUrl = "\(APIBackendConfig.host.rawValue)\(reqApi)";
         var reqBody = Dictionary<String, String>();
-        reqBody["email"] = self.emailTextField.text;
+        reqBody["username"] = self.usernameTextField.text;
         reqBody["code"] = self.verifyCodeTextField.text;
-
-        AF.request(reqUrl, method: .post, parameters: reqBody, encoding: JSONEncoding.default).responseDecodable(of: AccountVerifyAuthCodeDto.self) {
-            (res) in
-            guard (res.error == nil) else {
-                self.showHttpErrorPopup(reqApi: reqApi, errMsg: res.error?.localizedDescription);
-                self.resetVerifyProcess();
-                return;
-            }
-            guard (res.value?._metadata.status == true) else {
-                // Do not reset verify process when user entered wrong verify code to give retry change for user
-                self.showHttpErrorPopup(reqApi: reqApi, errMsg: res.value?._metadata.message);
-                return;
-            }
-            self.reqHttpCreateAccount();
-        }
-    }
-    
-    // func reqHttpCreateAccount
-    // No Param
-    // Return Void
-    // Request to the backend to create new account by the user input
-    func reqHttpCreateAccount() {
-        let reqApi = "account/create";
-        let reqUrl = "\(APIBackendConfig.host.rawValue)\(reqApi)";
-        self.paramDict["phone"] = self.phoneTextField.text;
-        self.paramDict["email"] = self.emailTextField.text;
-        self.paramDict["nickname"] = self.paramDict["username"];
-        self.paramDict["userMessage"] = "";
         
-        AF.request(reqUrl, method: .post, parameters: self.paramDict, encoding: JSONEncoding.default).responseDecodable(of: CreateAccountDto.self) {
+        AF.request(reqUrl, method: .post, parameters: reqBody, encoding: JSONEncoding.default).responseDecodable(of: AccountRecoverPasswordDto.self) {
             (res) in
             guard (res.error == nil) else {
                 self.showHttpErrorPopup(reqApi: reqApi, errMsg: res.error?.localizedDescription);
@@ -213,27 +183,36 @@ class UICreateAccountDetailsVC: UIViewController {
                 return;
             }
             guard (res.value?._metadata.status == true) else {
-                self.showHttpErrorPopup(reqApi: reqApi, errMsg: res.value?._metadata.message);
-                self.resetVerifyProcess();
+                self.showFindPasswordFailurePopup();
                 return;
             }
-            self.showCreateAccountSuccessPopup();
+            self.showFindPasswordSuccessPopup();
         }
     }
     
-    // func showCreateAccountSuccessPopup
+    // func showFindPasswordFailurePopup
     // No Param
     // Return Void
-    // Show popup with create account success message
-    // Unwind to UILoginVC
-    func showCreateAccountSuccessPopup() {
-        let alertController = UIAlertController(title: "회원가입 완료",
-                                                message: "환영합니다. 회원가입이 완료되었으니 로그인 하십시오",
+    // Show failure notice popup when account does not exist or email verification failed
+    func showFindPasswordFailurePopup() {
+        let alertController = UIAlertController(title: "비밀번호 찾기 오류",
+                                                message:"입력하신 아이디로 회원가입된 계정이 없거나 이메일 인증 코드가 틀립니다",
                                                 preferredStyle: .alert);
+        let approveAction = UIAlertAction(title: "확인", style: UIAlertAction.Style.default);
+        alertController.addAction(approveAction);
+        self.present(alertController, animated: true, completion: nil);
+    }
+    
+    // func showFindPasswordSuccessPopup
+    // No Param
+    // Return Void
+    // Show success notice popup when password reset email sent
+    func showFindPasswordSuccessPopup() {
+        let alertController = UIAlertController(title:"비밀번호 찾기", message:"회원님의 이메일 주소로 임시 비밀번호를 발송하였으니, 해당 비밀번호로 로그인 하신 뒤 재설정 하십시오", preferredStyle: .alert);
         let approveAction = UIAlertAction(title: "확인", style: UIAlertAction.Style.default) {
             (action) in
-            self.performSegue(withIdentifier: "CreateAccountDetailsUnwindSegue", sender: action);
-        };
+            self.performSegue(withIdentifier: "FoundAccountPasswordSegue", sender: action);
+        }
         alertController.addAction(approveAction);
         self.present(alertController, animated: true, completion: nil);
     }
@@ -245,6 +224,10 @@ class UICreateAccountDetailsVC: UIViewController {
     // Show error message popup when api call failed
     func showHttpErrorPopup(reqApi: String, errMsg: String?) {
         // TODO: API 요청 에러 핸들링 더 깔끔하게 할 방법 찾아보기
+        // 1. print 하는 부분은 별도 메소드로 분리하고
+        // 2. 얼럿을 띄우는 부분도 별도 메소드로 분리한다
+        // 3. 네트워크 요청 에러가 아닌 정상적으로 요청이 접수되었으나 양식 검증에서 걸리는 등의 경우는 각각의 호출 메소드에서 해당 상황에 맞는 메시지를 팝업창을 띄워 표출 및 처리하도록 하자.
+        // 반영 시점 -> 로그인/회원가입/IDPW찾기까지 다 구현한 다음에 바로 TODO 리팩토링
         print("=================================================");
         print("API Request Failure : \(reqApi)");
         print(errMsg ?? "Unknown Error");
@@ -286,31 +269,26 @@ class UICreateAccountDetailsVC: UIViewController {
         })
     }
     
-    
-    
     // Action Methods
-    @IBAction func phoneTextFieldOnChange(_ sender: UITextField) {
-        if (self.validatePhoneInput()) {
-            self.phoneErrorMsg = "";
+    @IBAction func usernameTextFieldOnChange(_ sender: UITextField) {
+        if (self.validateUsernameInput()) {
+            self.usernameErrorMsg = "";
         } else {
-            self.phoneErrorMsg = "전화번호는 '-'를 포함한 유효한 양식이어야 합니다\n"
+            self.usernameErrorMsg = "아이디는 5~20글자 이내여야 합니다\n";
         }
         self.updateErrorMessage();
-        self.checkRequirementsForVerification();
-        self.checkRequirementsForCreateAccount();
+        self.checkRequirementsForFindPassword();
     }
-    
     @IBAction func emailTextFieldOnChange(_ sender: UITextField) {
         if (self.validateEmailInput()) {
             self.emailErrorMsg = "";
         } else {
-            self.emailErrorMsg = "이메일 양식이 유효하지 않습니다\n"
+            self.emailErrorMsg = "이메일 양식이 유효하지 않습니다\n";
         }
         self.updateErrorMessage();
         self.checkRequirementsForVerification();
-        self.checkRequirementsForCreateAccount();
+        self.checkRequirementsForFindPassword();
     }
-    
     @IBAction func sendCodeBtnOnClick(_ sender: UIButton) {
         if (self.verificationTimer != nil && self.verificationTimer!.isTimerRunning()) {
             self.resetVerifyProcess();
@@ -318,15 +296,13 @@ class UICreateAccountDetailsVC: UIViewController {
         self.startVerifyProcess();
         self.showToast(message: "해당 이메일 주소로 인증 코드를 발송했습니다");
         self.reqHttpSendVerificationEmail();
-        self.checkRequirementsForCreateAccount();
+        self.checkRequirementsForFindPassword();
     }
-    
     @IBAction func changeEmailBtnOnClick(_ sender: UIButton) {
         self.resetVerifyProcess();
     }
-    
-    @IBAction func createAccountBtnOnClick(_ sender: UIBarButtonItem) {
-        self.createAccountBtn.isEnabled = false;
-        self.reqHttpVerifyCode();
+    @IBAction func findAccountPasswordBtnOnClick(_ sender: UIButton) {
+        self.findAccountPasswordBtn.isEnabled = false;
+        self.reqHttpFindAccountPassword();
     }
 }

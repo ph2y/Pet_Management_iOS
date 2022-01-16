@@ -7,7 +7,7 @@
 
 import UIKit
 
-class UICreateAccountCredentialsVC : UIViewController {
+class UICreateAccountCredentialsVC: UIViewController {
     @IBOutlet weak var usernameTextField: UITextField!;
     @IBOutlet weak var passwordTextField: UITextField!;
     @IBOutlet weak var passwordCheckTextField: UITextField!;
