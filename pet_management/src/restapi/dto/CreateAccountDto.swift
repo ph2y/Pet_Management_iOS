@@ -7,8 +7,4 @@
 
 struct CreateAccountDto: Decodable {
     let _metadata: HttpMetaData;
-    
-    private enum CodingKeys: String, CodingKey {
-        case _metadata = "_metadata"
-    }
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class UICreateAccountTermsVC : UIViewController {
+class UICreateAccountTermsVC: UIViewController {
     @IBOutlet weak var agreeAllSwitch: UISwitch!;
     @IBOutlet weak var agreeTermSwitch: UISwitch!;
     @IBOutlet weak var agreePrivacySwitch: UISwitch!;
