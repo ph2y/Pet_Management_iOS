@@ -43,12 +43,9 @@ class UIFindAccountPasswordVC: UIViewController {
             timeoutHandler: {
                 self.resetVerifyProcess();
                 // Notify timeout by opening popup
-                let alertController = UIAlertController(title: "이메일 인증 시간 초과",
-                                                        message: "이메일 인증에 실패하였으니 다시 시도해 주십시오",
-                                                        preferredStyle: .alert);
-                let approveAction = UIAlertAction(title: "확인", style: UIAlertAction.Style.default);
-                alertController.addAction(approveAction);
-                self.present(alertController, animated: true, completion: nil);
+                self.present(UIUtil.makeSimplePopup(title: "이메일 인증 시간 초과",
+                                                         message: "이메일 인증에 실패하였으니 다시 시도해 주십시오",
+                                                         onClose: nil), animated: true);
             }
         );
     }
@@ -151,14 +148,15 @@ class UIFindAccountPasswordVC: UIViewController {
         AF.request(reqUrl, method: .post, parameters: reqBody, encoding: JSONEncoding.default).responseDecodable(of: AccountSendAuthCodeDto.self) {
             (res) in
             guard (res.error == nil) else {
-                self.showHttpErrorPopup(reqApi: reqApi, errMsg: res.error?.localizedDescription);
+                APIBackendUtil.logHttpError(reqApi: reqApi, errMsg: res.error?.localizedDescription);
                 self.resetVerifyProcess();
+                self.present(APIBackendUtil.makeHttpErrorPopup(errMsg: res.error?.localizedDescription), animated: true);
                 return;
             }
             
             guard (res.value?._metadata.status == true) else {
-                self.showHttpErrorPopup(reqApi: reqApi, errMsg: res.value?._metadata.message);
                 self.resetVerifyProcess();
+                self.present(APIBackendUtil.makeHttpErrorPopup(errMsg: res.value?._metadata.message), animated: true);
                 return;
             }
         };
@@ -178,8 +176,9 @@ class UIFindAccountPasswordVC: UIViewController {
         AF.request(reqUrl, method: .post, parameters: reqBody, encoding: JSONEncoding.default).responseDecodable(of: AccountRecoverPasswordDto.self) {
             (res) in
             guard (res.error == nil) else {
-                self.showHttpErrorPopup(reqApi: reqApi, errMsg: res.error?.localizedDescription);
+                APIBackendUtil.logHttpError(reqApi: reqApi, errMsg: res.error?.localizedDescription);
                 self.resetVerifyProcess();
+                self.present(APIBackendUtil.makeHttpErrorPopup(errMsg: res.error?.localizedDescription), animated: true);
                 return;
             }
             guard (res.value?._metadata.status == true) else {
@@ -195,12 +194,9 @@ class UIFindAccountPasswordVC: UIViewController {
     // Return Void
     // Show failure notice popup when account does not exist or email verification failed
     func showFindPasswordFailurePopup() {
-        let alertController = UIAlertController(title: "비밀번호 찾기 오류",
-                                                message:"입력하신 아이디로 회원가입된 계정이 없거나 이메일 인증 코드가 틀립니다",
-                                                preferredStyle: .alert);
-        let approveAction = UIAlertAction(title: "확인", style: UIAlertAction.Style.default);
-        alertController.addAction(approveAction);
-        self.present(alertController, animated: true, completion: nil);
+        self.present(UIUtil.makeSimplePopup(title: "비밀번호 찾기 오류",
+                                                 message:"입력하신 아이디로 회원가입된 계정이 없거나 이메일 인증 코드가 틀립니다",
+                                                 onClose: nil), animated: true);
     }
     
     // func showFindPasswordSuccessPopup
@@ -208,66 +204,14 @@ class UIFindAccountPasswordVC: UIViewController {
     // Return Void
     // Show success notice popup when password reset email sent
     func showFindPasswordSuccessPopup() {
-        let alertController = UIAlertController(title:"비밀번호 찾기", message:"회원님의 이메일 주소로 임시 비밀번호를 발송하였으니, 해당 비밀번호로 로그인 하신 뒤 재설정 하십시오", preferredStyle: .alert);
-        let approveAction = UIAlertAction(title: "확인", style: UIAlertAction.Style.default) {
+        self.present(UIUtil.makeSimplePopup(title:"비밀번호 찾기",
+                                                 message:"회원님의 이메일 주소로 임시 비밀번호를 발송하였으니, 해당 비밀번호로 로그인 하신 뒤 재설정 하십시오"){
             (action) in
             self.performSegue(withIdentifier: "FoundAccountPasswordSegue", sender: action);
-        }
-        alertController.addAction(approveAction);
-        self.present(alertController, animated: true, completion: nil);
+        }, animated: true);
     }
     
-    // func showHttpErrorPopup
-    // Param - reqApi: String - the api method which is failed to process
-    // Param - errMsg: String - the error message sent from backend or HTTP protocol
-    // Return Void
-    // Show error message popup when api call failed
-    func showHttpErrorPopup(reqApi: String, errMsg: String?) {
-        // TODO: API 요청 에러 핸들링 더 깔끔하게 할 방법 찾아보기
-        // 1. print 하는 부분은 별도 메소드로 분리하고
-        // 2. 얼럿을 띄우는 부분도 별도 메소드로 분리한다
-        // 3. 네트워크 요청 에러가 아닌 정상적으로 요청이 접수되었으나 양식 검증에서 걸리는 등의 경우는 각각의 호출 메소드에서 해당 상황에 맞는 메시지를 팝업창을 띄워 표출 및 처리하도록 하자.
-        // 반영 시점 -> 로그인/회원가입/IDPW찾기까지 다 구현한 다음에 바로 TODO 리팩토링
-        print("=================================================");
-        print("API Request Failure : \(reqApi)");
-        print(errMsg ?? "Unknown Error");
-        print("=================================================");
-        let alertController = UIAlertController(title: "네트워크 요청 에러",
-                                                message: errMsg ?? "Unknown Error",
-                                                preferredStyle: .alert);
-        let approveAction = UIAlertAction(title: "확인", style: UIAlertAction.Style.default);
-        alertController.addAction(approveAction);
-        self.present(alertController, animated: true, completion: nil);
-    }
     
-    // func showToast
-    // Param - message: String - the message which is displayed at toast
-    // Return Void
-    // Show toast message with given string
-    func showToast(message : String) {
-        // TODO: 별도의 utility class로 분리하여 커스텀 UI 객체처럼 토스트 알림 라이브러리를 만들어 사용하기
-        // Toast messsage view position setting
-        let width_variable:CGFloat = 10;
-        let toastLabel = UILabel(frame: CGRect(x: width_variable, y: self.view.frame.size.height-100, width: view.frame.size.width-2*width_variable, height: 35));
-        
-        // Toast message style setting
-        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6);
-        toastLabel.textColor = UIColor.white;
-        toastLabel.textAlignment = .center;
-        toastLabel.font = UIFont(name: "Montserrat-Light", size: 10.0)
-        toastLabel.text = message
-        toastLabel.alpha = 1.0
-        toastLabel.layer.cornerRadius = 10;
-        toastLabel.clipsToBounds  =  true
-        
-        // Toast message appear
-        self.view.addSubview(toastLabel)
-        UIView.animate(withDuration: 4.0, delay: 0.1, options: .curveEaseOut, animations: {
-            toastLabel.alpha = 0.0
-        }, completion: {(isCompleted) in
-            toastLabel.removeFromSuperview()
-        })
-    }
     
     // Action Methods
     @IBAction func usernameTextFieldOnChange(_ sender: UITextField) {
@@ -294,7 +238,7 @@ class UIFindAccountPasswordVC: UIViewController {
             self.resetVerifyProcess();
         }
         self.startVerifyProcess();
-        self.showToast(message: "해당 이메일 주소로 인증 코드를 발송했습니다");
+        UIUtil.showToast(view: self.view, message: "해당 이메일 주소로 인증 코드를 발송했습니다");
         self.reqHttpSendVerificationEmail();
         self.checkRequirementsForFindPassword();
     }
