@@ -5,7 +5,8 @@
 //  Created by newcentury99 on 2022/01/14.
 //
 
-import UIKit
+import UIKit;
+import Foundation;
 import Alamofire;
 
 class UILoginVC: UIViewController {
@@ -36,15 +37,56 @@ class UILoginVC: UIViewController {
                 return;
             }
             UserDefaults.standard.set(res.value?.token, forKey: "loginToken");
-            self.performSegue(withIdentifier: "LoginAccountSegue", sender: self);
+            self.reqHttpFetchAccount();
         }
     }
     
+    func reqHttpFetchAccount() {
+        let reqApi = "account/fetch";
+        let reqUrl = APIBackendUtil.getUrl(api: reqApi);
+        let reqBody = Dictionary<String, String>();
+        let reqHeader: HTTPHeaders = [
+            "Authorization": "Bearer \(UserDefaults.standard.string(forKey: "loginToken")!)"
+        ];
+        AF.request(reqUrl, method: .post, parameters: reqBody, encoding: JSONEncoding.default, headers: reqHeader).responseDecodable(of: AccountFetchDto.self) {
+            (res) in
+            guard (res.error == nil) else {
+                APIBackendUtil.logHttpError(reqApi: reqApi, errMsg: res.error?.localizedDescription);
+                self.present(APIBackendUtil.makeHttpErrorPopup(errMsg: res.error?.localizedDescription), animated: true);
+                return;
+            }
+            guard (res.value?._metadata.status == true) else {
+                self.present(APIBackendUtil.makeHttpErrorPopup(errMsg: res.value?._metadata.message), animated: true);
+                return;
+            }
+            
+            let loginAccountDetail: Dictionary<String, Any?> = [
+                "id": res.value?.id,
+                "username": res.value?.username,
+                "email": res.value?.email,
+                "phone": res.value?.phone,
+                "marketing": res.value?.marketing,
+                "nickname": res.value?.nickname,
+                "photoUrl": res.value?.photoUrl,
+                "userMessage": res.value?.userMessage,
+                "representativePetId": res.value?.representativePetId,
+                "fcmRegistrationToken": res.value?.fcmRegistrationToken,
+                "notification": res.value?.notification
+            ];
+            
+            if let data = try? JSONSerialization.data(withJSONObject: loginAccountDetail, options: []) {
+                UserDefaults.standard.set(data, forKey: "loginAccountDetail");
+                UserDefaults.standard.synchronize();
+                self.performSegue(withIdentifier: "LoginAccountSegue", sender: self);
+            }
+        }
+    }
+    
+    // Action Methods
     @IBAction func unwindToLogin(_ segue: UIStoryboardSegue) {
     }
     
     @IBAction func loginBtnOnClick(_ sender: UIButton) {
         self.reqHttpLogin();
     }
-
 }
