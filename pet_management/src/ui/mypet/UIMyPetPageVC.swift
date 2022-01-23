@@ -13,10 +13,15 @@ class UIMyPetPageVC: UIPageViewController, UIPageViewControllerDelegate, UIPageV
     
     override func viewDidLoad() {
         super.viewDidLoad();
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         self.reqHttpFetchMyPetList();
     }
     
     func loadPages() {
+        self.dataSource = nil;
         self.dataSource = self;
         self.delegate = self;
         if let firstVC = self.myPetCardViewList.first{
@@ -50,9 +55,7 @@ class UIMyPetPageVC: UIPageViewController, UIPageViewControllerDelegate, UIPageV
         let reqApi = "pet/fetch";
         let reqUrl = APIBackendUtil.getUrl(api: reqApi);
         let reqBody = Dictionary<String, String>();
-        let reqHeader: HTTPHeaders = [
-            "Authorization": "Bearer \(UserDefaults.standard.string(forKey: "loginToken")!)"
-        ];
+        let reqHeader: HTTPHeaders = APIBackendUtil.getAuthHeader();
         
         AF.request(reqUrl, method: .post, parameters: reqBody, encoding: JSONEncoding.default, headers: reqHeader).responseDecodable(of: PetFetchDto.self) {
             (res) in
@@ -68,7 +71,9 @@ class UIMyPetPageVC: UIPageViewController, UIPageViewControllerDelegate, UIPageV
             }
             
             guard (res.value?.petList != nil && res.value?.petList?.count != 0) else {
+                self.myPetCardViewList = [];
                 self.myPetCardViewList.append(self.initMyPetEmptyVC(isEmpty: true));
+                self.loadPages();
                 return;
             }
             
@@ -91,5 +96,9 @@ class UIMyPetPageVC: UIPageViewController, UIPageViewControllerDelegate, UIPageV
         let myPetEmptyVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MyPetEmptyVC") as! UIMyPetEmptyVC;
         myPetEmptyVC.isMyPetEmpty = isEmpty;
         return myPetEmptyVC;
+    }
+    
+    // Action Methods
+    @IBAction func unwindToPetPage(_ segue: UIStoryboardSegue) {
     }
 }

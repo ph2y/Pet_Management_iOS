@@ -8,6 +8,7 @@
 import UIKit;
 
 class UIMyPetCardVC: UIViewController {
+    @IBOutlet weak var petCardView: UIView!
     @IBOutlet weak var petNameLabel: UILabel!;
     @IBOutlet weak var petBreedLabel: UILabel!;
     @IBOutlet weak var petAgeLabel: UILabel!;
@@ -25,47 +26,39 @@ class UIMyPetCardVC: UIViewController {
     }
     
     override func viewDidLoad() {
+        // Setup user details
+        self.accountDetail = try! JSONSerialization.jsonObject(with: UserDefaults.standard.object(forKey: "loginAccountDetail") as! Data, options: []) as! [String: Any];
+        
+        // Display pet details
         if (self.pet != nil) {
             self.petNameLabel.text = self.pet!.name;
             self.petBreedLabel.text = self.pet!.breed;
-            self.petAgeLabel.text = self.convertAge(birth: self.pet!.birth);
-            self.petGenderLabel.text = self.convertGender(gender: self.pet!.gender);
+            self.petAgeLabel.text = PetUtil.convertAge(birth: self.pet!.birth);
+            self.petGenderLabel.text = PetUtil.convertGender(gender: self.pet!.gender);
             self.petMessageLabel.text = self.pet!.message;
-            self.petImage.image = self.convertImage(photoUrl: self.pet!.photoUrl);
+            self.petImage.image = PetUtil.convertImage(photoUrl: self.pet!.photoUrl);
+            self.showRepresentitiveImage();
         }
         
-        self.accountDetail = try! JSONSerialization.jsonObject(with: UserDefaults.standard.object(forKey: "loginAccountDetail") as! Data, options: []) as! [String: Any];
-        
+        // Setup tap gesture
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(UIMyPetCardVC.showDetailPage(_:)));
+        self.petCardView.addGestureRecognizer(gesture);
+    }
+    
+    @objc func showDetailPage(_ sender: UIGestureRecognizer) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil);
+        let myPetDetailVC = storyboard.instantiateViewController(withIdentifier: "MyPetDetail") as! UIMyPetDetailVC;
+        myPetDetailVC.pet = self.pet;
+        self.navigationController!.pushViewController(myPetDetailVC, animated: true);
+    }
+    
+    func showRepresentitiveImage() {
         if (self.accountDetail!["representativePetId"] != nil) {
-            self.petRepresentitiveImage.isHidden = (self.accountDetail!["representativePetId"] as! Int) != self.pet?.id;
-        }
-    }
-    
-    func convertAge(birth: String) -> String {
-        // extrude year from datestring
-        let birthYear = Int(birth.prefix(4));
-        let dateFormatter = DateFormatter();
-        dateFormatter.dateFormat = "yyyy";
-        let currentYear = Int(dateFormatter.string(from: Date()));
-        let age = currentYear! - birthYear!;
-        return String(age);
-    }
-    
-    func convertGender(gender: Bool) -> String {
-        return gender ? "♀" : "♂";
-    }
-    
-    func convertImage(photoUrl: String?) -> UIImage {
-        if (photoUrl == nil) {
-            return UIImage(named: "ICBaselinePets60WithPadding")!;
-        } else {
-            var imgData: Data;
-            do {
-                imgData = try Data(contentsOf: URL(string: photoUrl!)!);
-            } catch {
-                return UIImage(named: "ICBaselinePets60WithPadding")!;
+            guard (!(self.accountDetail!["representativePetId"]! is NSNull)) else {
+                self.petRepresentitiveImage.isHidden = true;
+                return;
             }
-            return UIImage(data: imgData)!;
+            self.petRepresentitiveImage.isHidden = (self.accountDetail!["representativePetId"] as! Int) != self.pet?.id;
         }
     }
 }
