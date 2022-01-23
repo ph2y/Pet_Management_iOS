@@ -876,29 +876,29 @@
             </objects>
             <point key="canvasLocation" x="1593.8461538461538" y="1574.6445497630332"/>
         </scene>
-        <!--My Pet PageVC-->
+        <!--MyPetPage-->
         <scene sceneID="lK7-De-Qas">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="M62-qs-b2U" customClass="UIMyPetPageVC" customModule="pet_management" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="M62-qs-b2U" userLabel="MyPetPage" customClass="UIMyPetPageVC" customModule="pet_management" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zd3-1g-K53" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2380" y="1575"/>
         </scene>
-        <!--My Pet EmptyVC-->
+        <!--MyPetEmpty-->
         <scene sceneID="mFO-Ze-ti3">
             <objects>
-                <viewController storyboardIdentifier="MyPetEmptyVC" id="ayz-FG-I9l" customClass="UIMyPetEmptyVC" customModule="pet_management" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MyPetEmptyVC" id="ayz-FG-I9l" userLabel="MyPetEmpty" customClass="UIMyPetEmptyVC" customModule="pet_management" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9f2-5z-Oys">
                         <rect key="frame" x="0.0" y="0.0" width="350" height="500"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="등록된 반려동물이 없습니다 반려동물을 추가해주세요" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="200" translatesAutoresizingMaskIntoConstraints="NO" id="iLp-DA-TBZ">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="등록된 반려동물이 없습니다 반려동물을 추가해주세요" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="200" translatesAutoresizingMaskIntoConstraints="NO" id="iLp-DA-TBZ" userLabel="NoPetLabel">
                                 <rect key="frame" x="80.333333333333329" y="279.66666666666669" width="189.66666666666669" height="40.666666666666686"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MPd-Cl-jr5">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MPd-Cl-jr5" userLabel="CreatePetButton">
                                 <rect key="frame" x="125" y="150" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="nyI-x7-qHQ"/>
@@ -909,6 +909,9 @@
                                 <state key="normal" image="plus.circle" catalog="system">
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="50" weight="medium"/>
                                 </state>
+                                <connections>
+                                    <segue destination="a1Z-P7-5mn" kind="show" id="beI-Wf-5ea"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="yvZ-cX-Jid"/>
@@ -927,45 +930,424 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g8R-mb-gPW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3018" y="1575"/>
+            <point key="canvasLocation" x="3652" y="1575"/>
         </scene>
-        <!--My Pet CardVC-->
+        <!--MyPetEditor-->
+        <scene sceneID="ohr-cB-WWk">
+            <objects>
+                <viewController modalPresentationStyle="fullScreen" id="a1Z-P7-5mn" userLabel="MyPetEditor" customClass="UIMyPetEditorVC" customModule="pet_management" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4aJ-5D-kSY">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ICBaselinePets60WithPadding" translatesAutoresizingMaskIntoConstraints="NO" id="BGp-oo-fmS" userLabel="PetImage">
+                                <rect key="frame" x="120" y="69" width="150" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="ewR-M1-3Mt"/>
+                                    <constraint firstAttribute="width" constant="150" id="sTx-8n-dpq"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBound" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.87058823529999996" green="0.49803921569999998" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="75"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R9D-bn-qC1" userLabel="PetImageChangeBtn">
+                                <rect key="frame" x="220" y="169" width="50" height="50"/>
+                                <color key="backgroundColor" red="0.82745098039999998" green="0.3294117647" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="UOo-8d-NN4"/>
+                                    <constraint firstAttribute="width" constant="50" id="UZM-sl-ueB"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="plus" catalog="system"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="changePetImageBtnOnClick:" destination="a1Z-P7-5mn" eventType="touchUpInside" id="JXZ-0l-3AW"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bXU-1A-PoQ" userLabel="PetNameTextField">
+                                <rect key="frame" x="35" y="365" width="200" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="W9W-Z3-OKv"/>
+                                    <constraint firstAttribute="width" constant="200" id="ewo-gO-IzU"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HDk-Qm-xym" userLabel="PetBreedTextField">
+                                <rect key="frame" x="205" y="431" width="150" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="CuB-lV-C9p"/>
+                                    <constraint firstAttribute="width" constant="150" id="K8W-s1-MHg"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="강아지" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gPT-YG-dgf" userLabel="PetSpiciesTextField">
+                                <rect key="frame" x="35" y="431" width="150" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="vJV-lE-UF7"/>
+                                    <constraint firstAttribute="width" constant="150" id="wd9-6N-jsE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="y7W-3A-oNE" userLabel="PetGenderSwitch">
+                                <rect key="frame" x="270.66666666666669" y="366.66666666666669" width="51" height="31"/>
+                            </switch>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="p3e-qp-ZFn" userLabel="PetYearOnlySwitch">
+                                <rect key="frame" x="67.666666666666671" y="656" width="51" height="31"/>
+                            </switch>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="V98-hc-7e2" userLabel="PetBirthPicker">
+                                <rect key="frame" x="35" y="495" width="320" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="Hyl-TI-QbX"/>
+                                    <constraint firstAttribute="height" constant="150" id="IwV-fD-0d3"/>
+                                </constraints>
+                                <date key="minimumDate" timeIntervalSinceReferenceDate="-63190800">
+                                    <!--1998-12-31 15:00:00 +0000-->
+                                </date>
+                                <date key="maximumDate" timeIntervalSinceReferenceDate="1167577199">
+                                    <!--2037-12-31 14:59:59 +0000-->
+                                </date>
+                            </datePicker>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="출생 년도만 알고 있습니다" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v8r-Tc-jh2" userLabel="PetYearOnlyLabel">
+                                <rect key="frame" x="132.66666666666666" y="661" width="174.99999999999997" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="상태 메시지" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="100" translatesAutoresizingMaskIntoConstraints="NO" id="7yq-7a-QgZ" userLabel="PetMessageLabel">
+                                <rect key="frame" x="35" y="260" width="320" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이름" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="duk-VS-Acz" userLabel="PetNameLabel">
+                                <rect key="frame" x="35" y="342" width="200" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="생물학적 종" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QAV-Im-Gja" userLabel="PetSpeciesLabel">
+                                <rect key="frame" x="35" y="408" width="150" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="품종" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jn6-gK-HMT" userLabel="PetBreedLabel">
+                                <rect key="frame" x="205" y="408" width="150" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="성별" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8QG-l1-g5K" userLabel="PetGenderLabel">
+                                <rect key="frame" x="249.66666666666663" y="342" width="91" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="암" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pv2-Hx-hSa" userLabel="PetMaleLabel">
+                                <rect key="frame" x="325.66666666666669" y="371.66666666666669" width="15" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="수" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kJv-JD-z76" userLabel="PetFemaleLabel">
+                                <rect key="frame" x="249.66666666666663" y="371.66666666666669" width="15" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="생년월일" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="osE-JO-0Wu" userLabel="PetBirthLabel">
+                                <rect key="frame" x="35" y="472" width="320" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z1b-m2-BsB" userLabel="PetMessageTextView">
+                                <rect key="frame" x="35" y="283" width="320" height="50"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="B3H-TW-Hb6"/>
+                                    <constraint firstAttribute="height" constant="50" id="ypQ-WF-5J8"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <integer key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="layer.borderUIColor">
+                                        <color key="value" systemColor="systemGray5Color"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" systemColor="systemGray5Color"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6wI-lk-7hU"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="jn6-gK-HMT" firstAttribute="leading" secondItem="HDk-Qm-xym" secondAttribute="leading" id="09R-cL-t9J"/>
+                            <constraint firstItem="y7W-3A-oNE" firstAttribute="leading" secondItem="kJv-JD-z76" secondAttribute="trailing" constant="6" id="1Xx-Mr-v2H"/>
+                            <constraint firstItem="bXU-1A-PoQ" firstAttribute="top" secondItem="Z1b-m2-BsB" secondAttribute="bottom" constant="32" id="20K-2P-0sm"/>
+                            <constraint firstItem="HDk-Qm-xym" firstAttribute="top" secondItem="jn6-gK-HMT" secondAttribute="bottom" constant="2" id="2yb-jd-d9c"/>
+                            <constraint firstItem="gPT-YG-dgf" firstAttribute="top" secondItem="QAV-Im-Gja" secondAttribute="bottom" constant="2" id="5Et-R8-XDc"/>
+                            <constraint firstItem="V98-hc-7e2" firstAttribute="top" secondItem="gPT-YG-dgf" secondAttribute="bottom" constant="32" id="AVN-L9-Tv5"/>
+                            <constraint firstItem="Z1b-m2-BsB" firstAttribute="top" secondItem="BGp-oo-fmS" secondAttribute="bottom" constant="64" id="BFa-FP-fry"/>
+                            <constraint firstItem="duk-VS-Acz" firstAttribute="leading" secondItem="bXU-1A-PoQ" secondAttribute="leading" id="BNx-5P-tlT"/>
+                            <constraint firstItem="8QG-l1-g5K" firstAttribute="centerY" secondItem="duk-VS-Acz" secondAttribute="centerY" id="BOO-eo-lZc"/>
+                            <constraint firstItem="pv2-Hx-hSa" firstAttribute="leading" secondItem="y7W-3A-oNE" secondAttribute="trailing" constant="6" id="Ee0-2l-NsD"/>
+                            <constraint firstItem="8QG-l1-g5K" firstAttribute="trailing" secondItem="pv2-Hx-hSa" secondAttribute="trailing" id="EiT-ii-4TT"/>
+                            <constraint firstItem="v8r-Tc-jh2" firstAttribute="centerY" secondItem="p3e-qp-ZFn" secondAttribute="centerY" id="FLe-rQ-qTm"/>
+                            <constraint firstItem="bXU-1A-PoQ" firstAttribute="top" secondItem="duk-VS-Acz" secondAttribute="bottom" constant="2" id="FXw-6M-Qo1"/>
+                            <constraint firstItem="jn6-gK-HMT" firstAttribute="trailing" secondItem="HDk-Qm-xym" secondAttribute="trailing" id="Fyx-Jv-c9A"/>
+                            <constraint firstItem="osE-JO-0Wu" firstAttribute="trailing" secondItem="V98-hc-7e2" secondAttribute="trailing" id="IJx-q6-2BO"/>
+                            <constraint firstItem="QAV-Im-Gja" firstAttribute="trailing" secondItem="gPT-YG-dgf" secondAttribute="trailing" id="IzP-eE-HdT"/>
+                            <constraint firstItem="R9D-bn-qC1" firstAttribute="leading" secondItem="BGp-oo-fmS" secondAttribute="trailing" constant="-50" id="MPd-uu-K08"/>
+                            <constraint firstItem="HDk-Qm-xym" firstAttribute="top" secondItem="bXU-1A-PoQ" secondAttribute="bottom" constant="32" id="OnF-Y9-mUo"/>
+                            <constraint firstItem="8QG-l1-g5K" firstAttribute="leading" secondItem="kJv-JD-z76" secondAttribute="leading" id="SOr-nW-T8g"/>
+                            <constraint firstItem="duk-VS-Acz" firstAttribute="trailing" secondItem="bXU-1A-PoQ" secondAttribute="trailing" id="TAr-C2-gpK"/>
+                            <constraint firstItem="7yq-7a-QgZ" firstAttribute="leading" secondItem="Z1b-m2-BsB" secondAttribute="leading" id="VgG-pw-jsZ"/>
+                            <constraint firstItem="BGp-oo-fmS" firstAttribute="centerX" secondItem="6wI-lk-7hU" secondAttribute="centerX" id="Wkd-yR-LaF"/>
+                            <constraint firstItem="osE-JO-0Wu" firstAttribute="leading" secondItem="V98-hc-7e2" secondAttribute="leading" id="aT4-ed-gO2"/>
+                            <constraint firstItem="y7W-3A-oNE" firstAttribute="centerX" secondItem="4aJ-5D-kSY" secondAttribute="centerX" constant="100" id="byI-Qo-57R"/>
+                            <constraint firstItem="QAV-Im-Gja" firstAttribute="leading" secondItem="gPT-YG-dgf" secondAttribute="leading" id="cNc-j1-3gV"/>
+                            <constraint firstItem="gPT-YG-dgf" firstAttribute="centerX" secondItem="4aJ-5D-kSY" secondAttribute="centerX" constant="-85" id="cck-zR-qR0"/>
+                            <constraint firstItem="pv2-Hx-hSa" firstAttribute="centerY" secondItem="bXU-1A-PoQ" secondAttribute="centerY" id="dV7-h0-LdO"/>
+                            <constraint firstItem="HDk-Qm-xym" firstAttribute="centerX" secondItem="4aJ-5D-kSY" secondAttribute="centerX" constant="85" id="dlj-Gr-gKR"/>
+                            <constraint firstItem="kJv-JD-z76" firstAttribute="centerY" secondItem="bXU-1A-PoQ" secondAttribute="centerY" id="fTT-xd-L0F"/>
+                            <constraint firstItem="Z1b-m2-BsB" firstAttribute="centerX" secondItem="4aJ-5D-kSY" secondAttribute="centerX" id="g9n-xt-Zaa"/>
+                            <constraint firstItem="BGp-oo-fmS" firstAttribute="top" secondItem="6wI-lk-7hU" secondAttribute="top" constant="25" id="hJ4-cW-4mr"/>
+                            <constraint firstItem="R9D-bn-qC1" firstAttribute="top" secondItem="BGp-oo-fmS" secondAttribute="bottom" constant="-50" id="iel-9t-wIv"/>
+                            <constraint firstItem="V98-hc-7e2" firstAttribute="top" secondItem="osE-JO-0Wu" secondAttribute="bottom" constant="2" id="mUW-Ax-xjo"/>
+                            <constraint firstItem="v8r-Tc-jh2" firstAttribute="leading" secondItem="p3e-qp-ZFn" secondAttribute="trailing" constant="16" id="mUu-jl-87D"/>
+                            <constraint firstItem="v8r-Tc-jh2" firstAttribute="centerX" secondItem="4aJ-5D-kSY" secondAttribute="centerX" constant="25" id="o5N-Vj-78K"/>
+                            <constraint firstItem="y7W-3A-oNE" firstAttribute="centerY" secondItem="bXU-1A-PoQ" secondAttribute="centerY" id="pl8-EV-SGJ"/>
+                            <constraint firstItem="v8r-Tc-jh2" firstAttribute="top" secondItem="V98-hc-7e2" secondAttribute="bottom" constant="16" id="s3b-1M-hW9"/>
+                            <constraint firstItem="V98-hc-7e2" firstAttribute="centerX" secondItem="4aJ-5D-kSY" secondAttribute="centerX" id="s8h-Kg-v3i"/>
+                            <constraint firstItem="Z1b-m2-BsB" firstAttribute="top" secondItem="7yq-7a-QgZ" secondAttribute="bottom" constant="2" id="tcB-X0-7Zb"/>
+                            <constraint firstItem="bXU-1A-PoQ" firstAttribute="centerX" secondItem="4aJ-5D-kSY" secondAttribute="centerX" constant="-60" id="txc-gq-Z89"/>
+                            <constraint firstItem="gPT-YG-dgf" firstAttribute="top" secondItem="bXU-1A-PoQ" secondAttribute="bottom" constant="32" id="wh2-of-dQy"/>
+                            <constraint firstItem="7yq-7a-QgZ" firstAttribute="trailing" secondItem="Z1b-m2-BsB" secondAttribute="trailing" id="zkY-Fw-Rcu"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="펫 수정" id="ZuI-YY-x3T" userLabel="펫 정보 수정">
+                        <rightBarButtonItems>
+                            <barButtonItem title="저장" id="smM-qn-00i" userLabel="SaveBtn">
+                                <connections>
+                                    <action selector="saveBtnOnClick:" destination="a1Z-P7-5mn" id="tzz-Ga-7Mf"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="삭제" id="d9h-m6-PcC" userLabel="DeleteBtn">
+                                <color key="tintColor" systemColor="systemRedColor"/>
+                                <connections>
+                                    <action selector="deleteBtnOnClick:" destination="a1Z-P7-5mn" id="FQd-x2-CSU"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="deletePetBtn" destination="d9h-m6-PcC" id="k2K-uN-bSs"/>
+                        <outlet property="petBirthPicker" destination="V98-hc-7e2" id="oRj-b6-9AR"/>
+                        <outlet property="petBreedTextField" destination="HDk-Qm-xym" id="Ljb-Go-XNl"/>
+                        <outlet property="petGenderSwitch" destination="y7W-3A-oNE" id="Cnm-EE-Po6"/>
+                        <outlet property="petImageView" destination="BGp-oo-fmS" id="3xs-8T-aRb"/>
+                        <outlet property="petMsgTextView" destination="Z1b-m2-BsB" id="TnO-51-J38"/>
+                        <outlet property="petNameTextField" destination="bXU-1A-PoQ" id="9Ly-gV-soq"/>
+                        <outlet property="petSpiciesTextField" destination="gPT-YG-dgf" id="dm7-K4-42t"/>
+                        <outlet property="petYearOnlySwitch" destination="p3e-qp-ZFn" id="BeT-So-295"/>
+                        <segue destination="H6H-Ja-m56" kind="unwind" identifier="FinishUpdatePetUnwindSegue" unwindAction="unwindToMyPetDetail:" id="jbb-UT-BKC"/>
+                        <segue destination="H6H-Ja-m56" kind="unwind" identifier="FinishCreatePetUnwindSegue" unwindAction="unwindToPetPage:" id="nwE-VB-MJv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mw8-uh-Kbt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="H6H-Ja-m56" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="4410.7692307692305" y="840.99526066350711"/>
+        </scene>
+        <!--MyPetDetail-->
+        <scene sceneID="Hg8-RL-bmF">
+            <objects>
+                <viewController storyboardIdentifier="MyPetDetail" id="RT9-iz-lbw" userLabel="MyPetDetail" customClass="UIMyPetDetailVC" customModule="pet_management" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="g5K-VC-Bbj">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ICBaselinePets60WithPadding" translatesAutoresizingMaskIntoConstraints="NO" id="pLK-tB-uML" userLabel="PetImage">
+                                <rect key="frame" x="29" y="59.666666666666657" width="75" height="75"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="75" id="HXu-uw-vwZ"/>
+                                    <constraint firstAttribute="height" constant="75" id="baX-yx-Toi"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBound" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.87058823529999996" green="0.49803921569999998" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="37.5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="반려동물 이름" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="250" translatesAutoresizingMaskIntoConstraints="NO" id="k0r-2P-ryF" userLabel="PetNameLabel">
+                                <rect key="frame" x="120" y="69" width="250" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="F3m-8x-zdI"/>
+                                    <constraint firstAttribute="height" constant="36" id="KMv-s4-y0W"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00살" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="45" translatesAutoresizingMaskIntoConstraints="NO" id="fBb-GJ-u6h" userLabel="PetAgeLabel">
+                                <rect key="frame" x="120" y="107" width="45" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="45" id="JDJ-c0-LJx"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="♂" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="25" translatesAutoresizingMaskIntoConstraints="NO" id="gHR-7P-xsH" userLabel="PetGenderLabel">
+                                <rect key="frame" x="170" y="107" width="25" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="25" id="EYH-aw-KGo"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RCj-mZ-zQh">
+                                <rect key="frame" x="0.0" y="166.66666666666666" width="390" height="50"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="History" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZFI-DR-TDG">
+                                        <rect key="frame" x="16" y="0.0" width="358" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="BuS-f6-ak8"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <color key="textColor" systemColor="systemGrayColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="ZFI-DR-TDG" secondAttribute="trailing" constant="16" id="Ihc-0p-932"/>
+                                    <constraint firstItem="ZFI-DR-TDG" firstAttribute="leading" secondItem="RCj-mZ-zQh" secondAttribute="leading" constant="16" id="UBC-fj-m2E"/>
+                                    <constraint firstAttribute="height" constant="50" id="ljv-AF-t2E"/>
+                                    <constraint firstItem="ZFI-DR-TDG" firstAttribute="centerY" secondItem="RCj-mZ-zQh" secondAttribute="centerY" id="oQD-Wx-dlR"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" systemColor="systemGrayColor"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="T6K-lw-tfx"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="RCj-mZ-zQh" firstAttribute="leading" secondItem="T6K-lw-tfx" secondAttribute="leading" id="3SR-JH-Owl"/>
+                            <constraint firstItem="RCj-mZ-zQh" firstAttribute="top" secondItem="pLK-tB-uML" secondAttribute="bottom" constant="32" id="7sL-5E-HnG"/>
+                            <constraint firstItem="T6K-lw-tfx" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="gHR-7P-xsH" secondAttribute="trailing" constant="20" id="AIn-8R-8jb"/>
+                            <constraint firstItem="gHR-7P-xsH" firstAttribute="leading" secondItem="fBb-GJ-u6h" secondAttribute="trailing" constant="5" id="OFO-tX-IAW"/>
+                            <constraint firstItem="fBb-GJ-u6h" firstAttribute="leading" secondItem="pLK-tB-uML" secondAttribute="trailing" constant="16" id="Rf7-U8-bLZ"/>
+                            <constraint firstItem="k0r-2P-ryF" firstAttribute="top" secondItem="T6K-lw-tfx" secondAttribute="top" constant="25" id="TtV-hp-yUy"/>
+                            <constraint firstItem="k0r-2P-ryF" firstAttribute="leading" secondItem="pLK-tB-uML" secondAttribute="trailing" constant="16" id="fb9-ls-nDZ"/>
+                            <constraint firstItem="k0r-2P-ryF" firstAttribute="centerX" secondItem="g5K-VC-Bbj" secondAttribute="centerX" constant="50" id="hqu-KV-kY1"/>
+                            <constraint firstItem="fBb-GJ-u6h" firstAttribute="top" secondItem="k0r-2P-ryF" secondAttribute="bottom" constant="2" id="hyw-0L-OHR"/>
+                            <constraint firstItem="pLK-tB-uML" firstAttribute="centerY" secondItem="k0r-2P-ryF" secondAttribute="centerY" constant="10" id="l0s-bb-7dg"/>
+                            <constraint firstItem="gHR-7P-xsH" firstAttribute="top" secondItem="k0r-2P-ryF" secondAttribute="bottom" constant="2" id="sOc-tb-JBy"/>
+                            <constraint firstItem="T6K-lw-tfx" firstAttribute="trailing" secondItem="RCj-mZ-zQh" secondAttribute="trailing" id="ziL-ga-VYR"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="펫 정보" id="ID1-BB-XLe" userLabel="펫 프로필">
+                        <barButtonItem key="rightBarButtonItem" title="수정" id="oL3-4R-MUJ" userLabel="EditBtn">
+                            <connections>
+                                <segue destination="a1Z-P7-5mn" kind="show" identifier="MyPetEditSegue" id="ZYl-VA-9Xc"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="petAgeLabel" destination="fBb-GJ-u6h" id="Gkk-Ol-5rz"/>
+                        <outlet property="petGenderLabel" destination="gHR-7P-xsH" id="CSj-zz-9zH"/>
+                        <outlet property="petImage" destination="pLK-tB-uML" id="ytO-ng-xE4"/>
+                        <outlet property="petNameLabel" destination="k0r-2P-ryF" id="mTS-Kl-UjT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yi3-jj-lae" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3686" y="841"/>
+        </scene>
+        <!--MyPetCard-->
         <scene sceneID="z2u-sj-U2K">
             <objects>
-                <viewController storyboardIdentifier="MyPetCardVC" id="cnQ-ZX-ZNl" customClass="UIMyPetCardVC" customModule="pet_management" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MyPetCardVC" id="cnQ-ZX-ZNl" userLabel="MyPetCard" customClass="UIMyPetCardVC" customModule="pet_management" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4Wl-ZX-v15">
                         <rect key="frame" x="0.0" y="0.0" width="350" height="500"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ICBaselinePets60WithPadding" translatesAutoresizingMaskIntoConstraints="NO" id="nMz-eu-du6">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ICBaselinePets60WithPadding" translatesAutoresizingMaskIntoConstraints="NO" id="nMz-eu-du6" userLabel="PetImage">
                                 <rect key="frame" x="100" y="50" width="150" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="CsT-in-dVg"/>
                                     <constraint firstAttribute="width" constant="150" id="o6X-lA-qc8"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="75"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBound" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.87058823529999996" green="0.49803921569999998" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                        <integer key="value" value="2"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="2"/>
                                     </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
-                                        <color key="value" red="0.87058823529411766" green="0.49803921568627452" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="75"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Crown.png" translatesAutoresizingMaskIntoConstraints="NO" id="PKt-wE-lBo">
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Crown.png" translatesAutoresizingMaskIntoConstraints="NO" id="PKt-wE-lBo" userLabel="PetRepresentitiveImage">
                                 <rect key="frame" x="162.66666666666666" y="30" width="25" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="25" id="bdJ-ws-Ylq"/>
                                     <constraint firstAttribute="height" constant="25" id="xHV-o6-7AA"/>
                                 </constraints>
                             </imageView>
-                            <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NaY-d0-RsH">
+                            <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NaY-d0-RsH" userLabel="PetMessage">
                                 <rect key="frame" x="50" y="414" width="250" height="70"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="반려동물 소개 메시지" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="250" translatesAutoresizingMaskIntoConstraints="NO" id="DHO-eo-2F1">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="반려동물 소개 메시지" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="250" translatesAutoresizingMaskIntoConstraints="NO" id="DHO-eo-2F1" userLabel="PetMessageLabel">
                                         <rect key="frame" x="0.0" y="0.0" width="250" height="70"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="70" id="Bhi-RL-ZbK"/>
@@ -996,7 +1378,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="반려동물 이름" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="250" translatesAutoresizingMaskIntoConstraints="NO" id="8CN-OO-qjI">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="반려동물 이름" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="250" translatesAutoresizingMaskIntoConstraints="NO" id="8CN-OO-qjI" userLabel="PetNameLabel">
                                 <rect key="frame" x="50" y="208" width="250" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="XaM-h1-hOy"/>
@@ -1006,7 +1388,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="반려동물 품종" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="250" translatesAutoresizingMaskIntoConstraints="NO" id="GQr-fA-fLn">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="반려동물 품종" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="250" translatesAutoresizingMaskIntoConstraints="NO" id="GQr-fA-fLn" userLabel="PetBreedLabel">
                                 <rect key="frame" x="50" y="252" width="250" height="27"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="27" id="0G3-2z-YOp"/>
@@ -1016,25 +1398,25 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="나이" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Pz-Im-noy">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="나이" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Pz-Im-noy" userLabel="PetAgeTitleLabel">
                                 <rect key="frame" x="111" y="311" width="28" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="성별" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yua-rd-IDO">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="성별" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yua-rd-IDO" userLabel="PetGenderTitleLabel">
                                 <rect key="frame" x="211" y="311" width="28" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="♂" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oD8-9E-aTI">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="♂" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oD8-9E-aTI" userLabel="PetGenderLabel">
                                 <rect key="frame" x="212.66666666666666" y="339" width="25" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00살" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qdf-iX-1FU">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00살" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qdf-iX-1FU" userLabel="PetAgeLabel">
                                 <rect key="frame" x="104" y="339" width="42" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
@@ -1063,11 +1445,23 @@
                             <constraint firstItem="GQr-fA-fLn" firstAttribute="top" secondItem="8CN-OO-qjI" secondAttribute="bottom" constant="8" id="wsB-w2-Uoi"/>
                             <constraint firstItem="NaY-d0-RsH" firstAttribute="centerX" secondItem="4Wl-ZX-v15" secondAttribute="centerX" id="z8N-a5-m37"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="25"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                <integer key="value" value="2"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="layer.borderUIColor">
+                                <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </view>
                     <size key="freeformSize" width="350" height="500"/>
                     <connections>
                         <outlet property="petAgeLabel" destination="Qdf-iX-1FU" id="wkR-FI-NrI"/>
                         <outlet property="petBreedLabel" destination="GQr-fA-fLn" id="bcY-Jh-5FS"/>
+                        <outlet property="petCardView" destination="4Wl-ZX-v15" id="TBp-P0-fAO"/>
                         <outlet property="petGenderLabel" destination="oD8-9E-aTI" id="tsp-rZ-R95"/>
                         <outlet property="petImage" destination="nMz-eu-du6" id="z3b-m0-SpI"/>
                         <outlet property="petMessageLabel" destination="DHO-eo-2F1" id="UUZ-fA-Hln"/>
@@ -1077,7 +1471,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FOI-tJ-M2J" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3653.8461538461538" y="1574.6445497630332"/>
+            <point key="canvasLocation" x="3018" y="1575"/>
         </scene>
         <!--Main-->
         <scene sceneID="p2H-8Z-4ZP">
@@ -1479,6 +1873,9 @@
             <point key="canvasLocation" x="2322" y="841"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="ZYl-VA-9Xc"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="AppIconWithoutBackground.png" width="139" height="128"/>
         <image name="Crown.png" width="169" height="109"/>
@@ -1490,10 +1887,14 @@
         <image name="lock.shield.fill" catalog="system" width="128" height="118"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="phone.fill" catalog="system" width="128" height="114"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
         <image name="plus.circle" catalog="system" width="128" height="121"/>
         <image name="square.and.pencil" catalog="system" width="128" height="115"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray5Color">
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGrayColor">
             <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
