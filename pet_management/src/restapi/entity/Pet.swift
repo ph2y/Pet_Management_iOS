@@ -7,7 +7,7 @@
 
 import UIKit;
 
-struct Pet: Decodable {
+struct Pet: Decodable, Encodable {
     let id: Int;
     var ownername: String;
     var name: String;

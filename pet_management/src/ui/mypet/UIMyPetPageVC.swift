@@ -77,6 +77,11 @@ class UIMyPetPageVC: UIPageViewController, UIPageViewControllerDelegate, UIPageV
                 return;
             }
             
+            // Save MyPetList
+            let propertyListEncoder = try? PropertyListEncoder().encode(res.value!.petList!);
+            UserDefaults.standard.set(propertyListEncoder, forKey: "myPetList");
+            UserDefaults.standard.synchronize();
+            
             self.myPetCardViewList = res.value!.petList?.map() {
                 (pet) in
                 return self.initMyPetCardVC(pet: pet);
