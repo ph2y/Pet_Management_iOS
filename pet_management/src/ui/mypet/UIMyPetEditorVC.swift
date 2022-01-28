@@ -46,6 +46,7 @@ class UIMyPetEditorVC: UIViewController {
             self.petBreedTextField.text = self.pet!.breed;
             self.petMsgTextView.text = self.pet!.message;
             self.petGenderSwitch.isOn = self.pet!.gender;
+            self.petYearOnlySwitch.isOn = self.pet!.yearOnly;
             self.petBirthPicker.date = PetUtil.convertBirthToDate(birth: self.pet!.birth);
         }
     }

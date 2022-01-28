@@ -7,7 +7,7 @@
 
 import Foundation;
 
-struct PetSchedule {
+struct PetSchedule: Decodable, Encodable {
     var id: Int;
     var username: String;
     var petList: [Pet];
