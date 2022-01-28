@@ -13,7 +13,6 @@ class UIMyPetPageVC: UIPageViewController, UIPageViewControllerDelegate, UIPageV
     
     override func viewDidLoad() {
         super.viewDidLoad();
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -25,7 +24,7 @@ class UIMyPetPageVC: UIPageViewController, UIPageViewControllerDelegate, UIPageV
         self.dataSource = self;
         self.delegate = self;
         if let firstVC = self.myPetCardViewList.first{
-            self.setViewControllers([firstVC], direction: .forward, animated: true, completion: nil);
+            self.setViewControllers([firstVC], direction: .forward, animated: false, completion: nil);
         }
     }
     

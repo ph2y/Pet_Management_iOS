@@ -996,41 +996,108 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </button>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7K5-i7-kVn">
-                                <rect key="frame" x="16" y="152" width="358" height="609"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="mws-xl-TDH">
-                                        <rect key="frame" x="0.0" y="0.0" width="358" height="20.333333333333332"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="등록된 반려동물 일정(리마인더)가 없습니다" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6rD-GB-8K9">
-                                                <rect key="frame" x="0.0" y="0.0" width="358" height="20.333333333333332"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="mws-xl-TDH" firstAttribute="top" secondItem="7K5-i7-kVn" secondAttribute="top" id="Aaj-L9-FZ3"/>
-                                    <constraint firstAttribute="trailing" secondItem="mws-xl-TDH" secondAttribute="trailing" id="CNQ-O7-tyw"/>
-                                    <constraint firstAttribute="bottom" secondItem="mws-xl-TDH" secondAttribute="bottom" id="NCJ-RT-ke2"/>
-                                    <constraint firstItem="mws-xl-TDH" firstAttribute="width" secondItem="7K5-i7-kVn" secondAttribute="width" id="psM-K1-xvj"/>
-                                    <constraint firstItem="mws-xl-TDH" firstAttribute="leading" secondItem="7K5-i7-kVn" secondAttribute="leading" id="wbh-dY-LKz"/>
-                                </constraints>
-                            </scrollView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="kZd-NQ-Lg3">
+                                <rect key="frame" x="16" y="144" width="358" height="601"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="petSchedule" rowHeight="100" id="65o-9O-O7J" customClass="UIMyPetScheduleCellVC" customModule="pet_management" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="44.666666030883789" width="358" height="100"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="65o-9O-O7J" id="tA6-Nj-Ujz">
+                                            <rect key="frame" x="0.0" y="0.0" width="358" height="100"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="90" translatesAutoresizingMaskIntoConstraints="NO" id="2Gi-mp-dsP" userLabel="ScheduleTimeLabel">
+                                                    <rect key="frame" x="58.666666666666664" y="31.000000000000004" width="86.666666666666686" height="38.333333333333343"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vSm-Qi-ppG" userLabel="ScheduleEnabledSwitch">
+                                                    <rect key="frame" x="305" y="34.666666666666664" width="51" height="30.999999999999993"/>
+                                                    <connections>
+                                                        <action selector="scheduleEnabledSwitchOnClick:" destination="65o-9O-O7J" eventType="valueChanged" id="lHS-eq-Svk"/>
+                                                    </connections>
+                                                </switch>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="오전" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bQl-wm-YRm" userLabel="ScheduleAmPmLabel">
+                                                    <rect key="frame" x="15.999999999999996" y="43" width="34.666666666666657" height="24"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="리마인더 내용" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Mq-RX-8AR" userLabel="ScheduleMessageLabel">
+                                                    <rect key="frame" x="197" y="53" width="100" height="18"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="soo-lu-XzX"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" systemColor="systemGrayColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="반려동물 이름" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cwq-9P-8yP" userLabel="SchedulePetName">
+                                                    <rect key="frame" x="197" y="29" width="100" height="18"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="EJC-Jm-IYb"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="vSm-Qi-ppG" firstAttribute="leading" secondItem="cwq-9P-8yP" secondAttribute="trailing" constant="8" id="1fn-3i-TXf"/>
+                                                <constraint firstItem="2Gi-mp-dsP" firstAttribute="centerY" secondItem="tA6-Nj-Ujz" secondAttribute="centerY" id="8V0-dX-icI"/>
+                                                <constraint firstItem="cwq-9P-8yP" firstAttribute="leading" secondItem="2Gi-mp-dsP" secondAttribute="trailing" constant="51.666666666666657" id="ExY-hK-dut"/>
+                                                <constraint firstItem="2Gi-mp-dsP" firstAttribute="leading" secondItem="bQl-wm-YRm" secondAttribute="trailing" constant="8" id="Isr-Xp-FaN"/>
+                                                <constraint firstItem="vSm-Qi-ppG" firstAttribute="trailing" secondItem="tA6-Nj-Ujz" secondAttribute="trailingMargin" constant="16" id="ScA-qk-klo"/>
+                                                <constraint firstItem="vSm-Qi-ppG" firstAttribute="leading" secondItem="9Mq-RX-8AR" secondAttribute="trailing" constant="8" id="mrp-yj-Gqk"/>
+                                                <constraint firstItem="bQl-wm-YRm" firstAttribute="leading" secondItem="tA6-Nj-Ujz" secondAttribute="leading" constant="16" id="pAl-rB-8ll"/>
+                                                <constraint firstItem="9Mq-RX-8AR" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="2Gi-mp-dsP" secondAttribute="trailing" constant="8" id="sDg-iu-gLB"/>
+                                                <constraint firstItem="bQl-wm-YRm" firstAttribute="centerY" secondItem="tA6-Nj-Ujz" secondAttribute="centerY" constant="5" id="sXs-ll-DBV"/>
+                                                <constraint firstItem="vSm-Qi-ppG" firstAttribute="centerY" secondItem="tA6-Nj-Ujz" secondAttribute="centerY" id="xM7-QB-MF7"/>
+                                                <constraint firstItem="cwq-9P-8yP" firstAttribute="centerY" secondItem="tA6-Nj-Ujz" secondAttribute="centerY" constant="-12" id="yNZ-5l-mGt"/>
+                                                <constraint firstItem="9Mq-RX-8AR" firstAttribute="centerY" secondItem="tA6-Nj-Ujz" secondAttribute="centerY" constant="12" id="ym5-4R-BaV"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="scheduleAmPmLabel" destination="bQl-wm-YRm" id="cWw-uf-eyl"/>
+                                            <outlet property="scheduleEnabledSwitch" destination="vSm-Qi-ppG" id="lOK-2L-rOx"/>
+                                            <outlet property="scheduleMessageLabel" destination="9Mq-RX-8AR" id="XWN-6t-pSK"/>
+                                            <outlet property="schedulePetNameLabel" destination="cwq-9P-8yP" id="F5U-fT-XCQ"/>
+                                            <outlet property="scheduleTimeLabel" destination="2Gi-mp-dsP" id="CbE-Hu-D8q"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" reuseIdentifier="petScheduleEmpty" textLabel="S8z-k4-hRi" rowHeight="50" style="IBUITableViewCellStyleDefault" id="mcH-Ov-vUZ" userLabel="petScheduleEmpty">
+                                        <rect key="frame" x="0.0" y="144.66666603088379" width="358" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mcH-Ov-vUZ" id="xwB-DB-eed">
+                                            <rect key="frame" x="0.0" y="0.0" width="358" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="등록된 리마인더(일정)이 없습니다" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" id="S8z-k4-hRi">
+                                                    <rect key="frame" x="20" y="0.0" width="318" height="50"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Ej5-RI-ztP"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="7K5-i7-kVn" firstAttribute="top" secondItem="Ej5-RI-ztP" secondAttribute="top" constant="64" id="7Ve-ed-itL"/>
+                            <constraint firstItem="kZd-NQ-Lg3" firstAttribute="top" secondItem="l7g-wc-Y8v" secondAttribute="bottom" constant="16" id="CBs-62-jAN"/>
                             <constraint firstItem="l7g-wc-Y8v" firstAttribute="top" secondItem="Ej5-RI-ztP" secondAttribute="top" constant="10" id="PeG-g6-OES"/>
-                            <constraint firstItem="Ej5-RI-ztP" firstAttribute="trailing" secondItem="7K5-i7-kVn" secondAttribute="trailing" constant="16" id="U8K-JA-Lt3"/>
                             <constraint firstItem="8t5-GL-Cg7" firstAttribute="top" secondItem="Ej5-RI-ztP" secondAttribute="top" constant="10" id="UM3-I5-f5l"/>
-                            <constraint firstItem="Ej5-RI-ztP" firstAttribute="bottom" secondItem="7K5-i7-kVn" secondAttribute="bottom" id="f3G-Gr-V5n"/>
                             <constraint firstItem="8t5-GL-Cg7" firstAttribute="centerX" secondItem="7d7-NQ-g1G" secondAttribute="centerX" constant="65" id="fLB-8u-NWg"/>
+                            <constraint firstItem="kZd-NQ-Lg3" firstAttribute="leading" secondItem="Ej5-RI-ztP" secondAttribute="leading" constant="16" id="gVq-Yw-YZb"/>
                             <constraint firstItem="l7g-wc-Y8v" firstAttribute="centerX" secondItem="7d7-NQ-g1G" secondAttribute="centerX" constant="-65" id="gbp-Bj-8Wa"/>
-                            <constraint firstItem="7K5-i7-kVn" firstAttribute="leading" secondItem="Ej5-RI-ztP" secondAttribute="leading" constant="16" id="jcD-7M-7xb"/>
+                            <constraint firstItem="Ej5-RI-ztP" firstAttribute="bottom" secondItem="kZd-NQ-Lg3" secondAttribute="bottom" constant="16" id="glZ-hS-oNG"/>
+                            <constraint firstItem="Ej5-RI-ztP" firstAttribute="trailing" secondItem="kZd-NQ-Lg3" secondAttribute="trailing" constant="16" id="hFG-Ie-dZt"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="마이펫" id="1mV-a6-dKH">
@@ -1041,6 +1108,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="scheduleListTableView" destination="kZd-NQ-Lg3" id="nMB-U0-uPw"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pPv-w4-ObG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="zwy-lK-tmx" userLabel="Exit" sceneMemberID="exit"/>
@@ -1068,16 +1138,16 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="메모" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EyM-YK-EzB">
-                                <rect key="frame" x="16" y="509" width="358" height="21"/>
+                                <rect key="frame" x="16" y="459" width="358" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="r2I-76-VbX">
-                                <rect key="frame" x="16" y="293" width="358" height="200"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="r2I-76-VbX" userLabel="PetListTableView">
+                                <rect key="frame" x="16" y="293" width="358" height="150"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="TfA-tX-hiz"/>
+                                    <constraint firstAttribute="height" constant="150" id="TfA-tX-hiz"/>
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" reuseIdentifier="petEmpty" textLabel="laa-Jf-lJJ" style="IBUITableViewCellStyleDefault" id="6UH-S5-fi7">
@@ -1118,7 +1188,7 @@
                                 <sections/>
                             </tableView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zqo-fB-LfV" userLabel="PetMessageTextView">
-                                <rect key="frame" x="16" y="532" width="358" height="75"/>
+                                <rect key="frame" x="16" y="482" width="358" height="75"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="75" id="ylG-TE-sQo"/>
@@ -1171,100 +1241,30 @@
                         <rightBarButtonItems>
                             <barButtonItem title="저장" id="eLF-xE-LFF">
                                 <color key="tintColor" red="0.76862752440000004" green="0.36078432199999999" blue="0.1411764771" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <connections>
+                                    <action selector="savePetScheduleBtnOnClick:" destination="nZc-ze-4jg" id="6cf-o8-nE8"/>
+                                </connections>
                             </barButtonItem>
                             <barButtonItem title="삭제" id="3Dt-nt-4ll">
                                 <color key="tintColor" systemColor="systemRedColor"/>
+                                <connections>
+                                    <action selector="deletePetScheduleBtnOnClick:" destination="nZc-ze-4jg" id="iqq-Lx-Z7F"/>
+                                </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="deleteScheduleBtn" destination="3Dt-nt-4ll" id="DR6-VD-JBR"/>
                         <outlet property="scheduleMessageTextView" destination="zqo-fB-LfV" id="bzo-A0-McJ"/>
-                        <outlet property="schedulePetListTableView" destination="r2I-76-VbX" id="TAh-Ot-xxx"/>
+                        <outlet property="schedulePetListTableView" destination="r2I-76-VbX" id="gzr-ke-6hD"/>
                         <outlet property="scheduleTimePicker" destination="BPR-nh-vdD" id="orH-rI-pdM"/>
+                        <segue destination="5yy-ow-lR9" kind="unwind" identifier="PetScheduleUnwindSegue" unwindAction="unwindToPetSchedule:" id="k8p-J6-WO6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HMQ-hp-Mt5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="5yy-ow-lR9" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2321.5384615384614" y="2267.7725118483413"/>
-        </scene>
-        <!--MyPetScheduleCard-->
-        <scene sceneID="D4z-Rv-drr">
-            <objects>
-                <viewController id="Tpe-gS-5Hu" userLabel="MyPetScheduleCard" customClass="UIMyPetScheduleCardVC" customModule="pet_management" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="II4-i0-YcY">
-                        <rect key="frame" x="0.0" y="0.0" width="358" height="100"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="오전" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="40" translatesAutoresizingMaskIntoConstraints="NO" id="4dE-kC-xgm">
-                                <rect key="frame" x="16" y="40.666666666666664" width="40" height="24.999999999999993"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="25" id="Dsh-UL-fCz"/>
-                                    <constraint firstAttribute="width" constant="40" id="hzX-Z2-2AY"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="90" translatesAutoresizingMaskIntoConstraints="NO" id="q6A-YO-N8I">
-                                <rect key="frame" x="56" y="30" width="90" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="iMe-jJ-GfB"/>
-                                    <constraint firstAttribute="width" constant="90" id="qnO-nh-lca"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RPl-ZG-S9w">
-                                <rect key="frame" x="293" y="34.666666666666664" width="51" height="30.999999999999993"/>
-                                <connections>
-                                    <action selector="scheduleSwitchOnClick:" destination="Tpe-gS-5Hu" eventType="valueChanged" id="7fI-LF-qY3"/>
-                                </connections>
-                            </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="리마인더 내용" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vy0-Wc-UkH">
-                                <rect key="frame" x="162" y="51" width="123" height="18"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" systemColor="systemGrayColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="반려동물 이름" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e5A-KX-nQQ">
-                                <rect key="frame" x="162" y="31" width="123" height="18"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="JOJ-yg-8eM"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="4dE-kC-xgm" firstAttribute="leading" secondItem="JOJ-yg-8eM" secondAttribute="leading" constant="16" id="9Qj-oT-Pta"/>
-                            <constraint firstItem="e5A-KX-nQQ" firstAttribute="centerY" secondItem="RPl-ZG-S9w" secondAttribute="centerY" constant="-10" id="R9Q-LN-Wnd"/>
-                            <constraint firstItem="Vy0-Wc-UkH" firstAttribute="leading" secondItem="q6A-YO-N8I" secondAttribute="trailing" constant="16" id="UEX-c5-Si8"/>
-                            <constraint firstItem="RPl-ZG-S9w" firstAttribute="leading" secondItem="Vy0-Wc-UkH" secondAttribute="trailing" constant="8" id="fFJ-yS-dmc"/>
-                            <constraint firstItem="e5A-KX-nQQ" firstAttribute="leading" secondItem="q6A-YO-N8I" secondAttribute="trailing" constant="16" id="hAi-cU-lSW"/>
-                            <constraint firstItem="RPl-ZG-S9w" firstAttribute="centerY" secondItem="II4-i0-YcY" secondAttribute="centerY" id="mgH-Yr-swh"/>
-                            <constraint firstItem="4dE-kC-xgm" firstAttribute="centerY" secondItem="II4-i0-YcY" secondAttribute="centerY" constant="3" id="oTF-58-YTq"/>
-                            <constraint firstItem="q6A-YO-N8I" firstAttribute="leading" secondItem="4dE-kC-xgm" secondAttribute="trailing" id="pcl-lH-2cQ"/>
-                            <constraint firstItem="RPl-ZG-S9w" firstAttribute="leading" secondItem="e5A-KX-nQQ" secondAttribute="trailing" constant="8" id="rJO-1c-gPG"/>
-                            <constraint firstItem="Vy0-Wc-UkH" firstAttribute="centerY" secondItem="RPl-ZG-S9w" secondAttribute="centerY" constant="10" id="sfO-94-vaA"/>
-                            <constraint firstItem="JOJ-yg-8eM" firstAttribute="trailing" secondItem="RPl-ZG-S9w" secondAttribute="trailing" constant="16" id="wxs-SD-Cdw"/>
-                            <constraint firstItem="q6A-YO-N8I" firstAttribute="centerY" secondItem="II4-i0-YcY" secondAttribute="centerY" id="zon-Zk-aJ9"/>
-                        </constraints>
-                    </view>
-                    <size key="freeformSize" width="358" height="100"/>
-                    <connections>
-                        <outlet property="scheduleAmPmLabel" destination="4dE-kC-xgm" id="rG6-hn-pN6"/>
-                        <outlet property="scheduleCardView" destination="II4-i0-YcY" id="AVN-cz-CVd"/>
-                        <outlet property="scheduleMessageLabel" destination="Vy0-Wc-UkH" id="WQV-AJ-ZOp"/>
-                        <outlet property="schedulePetNameLabel" destination="e5A-KX-nQQ" id="haj-1t-c34"/>
-                        <outlet property="scheduleSwitch" destination="RPl-ZG-S9w" id="qiP-8E-YRs"/>
-                        <outlet property="scheduleTimeLabel" destination="q6A-YO-N8I" id="9dh-el-782"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="os2-cI-YYq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2387.6923076923076" y="1867.5355450236966"/>
         </scene>
         <!--MyPetEmpty-->
         <scene sceneID="mFO-Ze-ti3">
@@ -2257,7 +2257,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ZYl-VA-9Xc"/>
+        <segue reference="beI-Wf-5ea"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="AppIconWithoutBackground.png" width="139" height="128"/>
