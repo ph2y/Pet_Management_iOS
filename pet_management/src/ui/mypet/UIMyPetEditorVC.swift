@@ -51,6 +51,10 @@ class UIMyPetEditorVC: UIViewController {
         }
     }
     
+    // func verifyPetDetails
+    // No Params
+    // Return Bool - validity of user input
+    // Verify user input(pet infomation) is valid
     func verifyPetDetails() -> Bool {
         if(self.petNameTextField.text!.count > 0 &&
         self.petNameTextField.text!.count <= 20 &&
@@ -64,6 +68,10 @@ class UIMyPetEditorVC: UIViewController {
         }
     }
     
+    // func reqHttpCreatePet
+    // No Params
+    // Return Void
+    // Request to the server to create new pet entity
     func reqHttpCreatePet() {
         let reqApi = "pet/create";
         let reqUrl = APIBackendUtil.getUrl(api: reqApi);
@@ -96,6 +104,10 @@ class UIMyPetEditorVC: UIViewController {
         }
     }
     
+    // func reqHttpUpdatePet
+    // No Params
+    // Return Void
+    // Request to the server to update pet infomation
     func reqHttpUpdatePet() {
         let reqApi = "pet/update";
         let reqUrl = APIBackendUtil.getUrl(api: reqApi);
@@ -129,6 +141,10 @@ class UIMyPetEditorVC: UIViewController {
         }
     }
     
+    // func reqHttpDeletePet
+    // No Params
+    // Return Void
+    // Request to the server to delete pet entity
     func reqHttpDeletePet() {
         let reqApi = "pet/delete";
         let reqUrl = APIBackendUtil.getUrl(api: reqApi);
@@ -185,7 +201,7 @@ class UIMyPetEditorVC: UIViewController {
     }
 }
 
-// Petphoto image selector extension
+// Extension - Petphoto image selector
 extension UIMyPetEditorVC: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         picker.dismiss(animated: true);

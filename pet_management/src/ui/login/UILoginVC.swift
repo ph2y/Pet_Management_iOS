@@ -15,9 +15,24 @@ class UILoginVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        self.checkPreviousCredentialValidity();
     }
     
+    // func checkPreviousCredentialValidity
+    // No Param
+    // Return Void
+    // Check auth token validity which is already saved at userdefaults
+    func checkPreviousCredentialValidity() {
+        guard (UserDefaults.standard.string(forKey: "loginToken") != nil) else {
+            return;
+        }
+        self.reqHttpFetchAccount(resume: true);
+    }
+    
+    // func reqHttpLogin
+    // No Param
+    // Return Void
+    // Request login to the backend
     func reqHttpLogin() {
         let reqApi = "account/login";
         let reqUrl = APIBackendUtil.getUrl(api: reqApi);
@@ -37,11 +52,15 @@ class UILoginVC: UIViewController {
                 return;
             }
             UserDefaults.standard.set(res.value?.token, forKey: "loginToken");
-            self.reqHttpFetchAccount();
+            self.reqHttpFetchAccount(resume: false);
         }
     }
     
-    func reqHttpFetchAccount() {
+    // func reqHttpFetchAccount
+    // Param resume: Bool - If true, application tries to reuse old auth token
+    // Return Void
+    // Fetch account infomation from backend and save to the userdefaults
+    func reqHttpFetchAccount(resume: Bool) {
         let reqApi = "account/fetch";
         let reqUrl = APIBackendUtil.getUrl(api: reqApi);
         let reqBody = Dictionary<String, String>();
@@ -56,7 +75,9 @@ class UILoginVC: UIViewController {
                 return;
             }
             guard (res.value?._metadata.status == true) else {
-                self.present(APIBackendUtil.makeHttpErrorPopup(errMsg: res.value?._metadata.message), animated: true);
+                if (!resume) {
+                    self.present(APIBackendUtil.makeHttpErrorPopup(errMsg: res.value?._metadata.message), animated: true);
+                }
                 return;
             }
             

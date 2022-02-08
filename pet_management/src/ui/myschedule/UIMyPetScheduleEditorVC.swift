@@ -44,14 +44,23 @@ class UIMyPetScheduleEditorVC: UIViewController {
         }
     }
     
+    // func selectCurrentAppliedPet
+    // No Param
+    // Return Void
+    // Select previously selected pet from the table when editing exist petSchedule entity
     func selectCurrentAppliedPet() {
         for (index, pet) in self.myPetList!.enumerated() {
             if (self.schedule?.petList[index].id == pet.id) {
                 self.schedulePetListTableView.selectRow(at: IndexPath(row: index, section: 0), animated: false, scrollPosition: UITableView.ScrollPosition.none);
+                self.schedulePetListTableView.delegate!.tableView!(self.schedulePetListTableView, didSelectRowAt: IndexPath(row: index, section: 0));
             }
         }
     }
     
+    // func reqHttpCreatePetSchedule
+    // No Param
+    // Return Void
+    // Request to the backend to create new petSchedule entity
     func reqHttpCreatePetSchedule() {
         let reqApi = "pet/schedule/create";
         let reqUrl = APIBackendUtil.getUrl(api: reqApi);
@@ -79,6 +88,10 @@ class UIMyPetScheduleEditorVC: UIViewController {
         }
     }
     
+    // func reqHttpUpdatePetSchedule
+    // No Param
+    // Return Void
+    // Request to the server to update petSchedule infomation
     func reqHttpUpdatePetSchedule() {
         let reqApi = "pet/schedule/update";
         let reqUrl = APIBackendUtil.getUrl(api: reqApi);
@@ -108,6 +121,10 @@ class UIMyPetScheduleEditorVC: UIViewController {
         }
     }
     
+    // func reqHttpDeletePetSchedule
+    // No Param
+    // Return Void
+    // Request to the server to delete petSchedule entity
     func reqHttpDeletePetSchedule() {
         let reqApi = "pet/schedule/delete";
         let reqUrl = APIBackendUtil.getUrl(api: reqApi);
