@@ -21,6 +21,10 @@ class UIMyPetScheduleVC: UIViewController {
         self.reqHttpFetchPetSchedule();
     }
     
+    // func reqHttpFetchPetSchedule
+    // No Param
+    // Return Void
+    // Request to the server to fetch pet schedule list
     func reqHttpFetchPetSchedule() {
         let reqApi = "pet/schedule/fetch";
         let reqUrl = APIBackendUtil.getUrl(api: reqApi);
@@ -41,21 +45,15 @@ class UIMyPetScheduleVC: UIViewController {
             }
             
             self.scheduleList = res.value?.petScheduleList ?? [];
-            self.loadPetScheduleList();
+            self.scheduleListTableView.delegate = self;
+            self.scheduleListTableView.dataSource = nil;
+            self.scheduleListTableView.dataSource = self;
         }
-    }
-
-    func loadPetScheduleList() {
-        guard (self.scheduleList.count != 0) else {
-            return;
-        }
-        self.scheduleListTableView.delegate = self;
-        self.scheduleListTableView.dataSource = self;
     }
     
     // Action Methods
     @IBAction func unwindToPetSchedule(_ segue: UIStoryboardSegue) {
-        
+        self.reqHttpFetchPetSchedule();
     }
 }
 
@@ -88,6 +86,7 @@ extension UIMyPetScheduleVC: UITableViewDelegate, UITableViewDataSource {
         let myPetScheduleDetailVC = storyboard.instantiateViewController(withIdentifier: "MyPetScheduleEditor") as! UIMyPetScheduleEditorVC;
         myPetScheduleDetailVC.schedule = self.scheduleList[indexPath.row];
         myPetScheduleDetailVC.isNewSchedule = false;
+        tableView.deselectRow(at: indexPath, animated: true);
         self.navigationController!.pushViewController(myPetScheduleDetailVC, animated: true);
     }
 }

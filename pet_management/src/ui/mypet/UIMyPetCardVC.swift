@@ -45,6 +45,10 @@ class UIMyPetCardVC: UIViewController {
         self.petCardView.addGestureRecognizer(gesture);
     }
     
+    // objc func showDetailPage
+    // No Params
+    // Return Void
+    // Open pet detail page when user clicked pet card
     @objc func showDetailPage(_ sender: UIGestureRecognizer) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil);
         let myPetDetailVC = storyboard.instantiateViewController(withIdentifier: "MyPetDetail") as! UIMyPetDetailVC;
@@ -52,6 +56,10 @@ class UIMyPetCardVC: UIViewController {
         self.navigationController!.pushViewController(myPetDetailVC, animated: true);
     }
     
+    // func showRepresentitiveImage
+    // No Params
+    // Return Void
+    // Show crown image on top of the pet photo container when pet entity is representitive
     func showRepresentitiveImage() {
         if (self.accountDetail!["representativePetId"] != nil) {
             guard (!(self.accountDetail!["representativePetId"]! is NSNull)) else {

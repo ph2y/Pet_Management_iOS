@@ -8,7 +8,7 @@
 import UIKit;
 import Alamofire;
 
-class UIMyPetPageVC: UIPageViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource {
+class UIMyPetPageVC: UIPageViewController {
     var myPetCardViewList: [UIViewController] = [];
     
     override func viewDidLoad() {
@@ -19,6 +19,10 @@ class UIMyPetPageVC: UIPageViewController, UIPageViewControllerDelegate, UIPageV
         self.reqHttpFetchMyPetList();
     }
     
+    // func loadPages
+    // No Params
+    // Return Void
+    // Load pet cards to the UICardView
     func loadPages() {
         self.dataSource = nil;
         self.dataSource = self;
@@ -28,28 +32,10 @@ class UIMyPetPageVC: UIPageViewController, UIPageViewControllerDelegate, UIPageV
         }
     }
     
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        guard let index = self.myPetCardViewList.firstIndex(of: viewController) else {
-            return nil;
-        }
-        let previousIndex = index - 1;
-        if previousIndex < 0 {
-            return nil;
-        }
-        return self.myPetCardViewList[previousIndex];
-    }
-    
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        guard let index = self.myPetCardViewList.firstIndex(of: viewController) else {
-            return nil;
-        }
-        let nextIndex = index + 1;
-        if nextIndex >= self.myPetCardViewList.count {
-            return nil;
-        }
-        return self.myPetCardViewList[nextIndex];
-    }
-    
+    // func reqHttpFetchMyPetList
+    // No Params
+    // Return Void
+    // Fetch pet infomation from the server & save pet info to the userdefaults
     func reqHttpFetchMyPetList() {
         let reqApi = "pet/fetch";
         let reqUrl = APIBackendUtil.getUrl(api: reqApi);
@@ -90,12 +76,20 @@ class UIMyPetPageVC: UIPageViewController, UIPageViewControllerDelegate, UIPageV
         }
     }
     
+    // func initMyPetCardVC
+    // Param pet - Pet: pet entity which will be displayed to the card
+    // Return UIViewController - UIViewController which will be inserted to the pageview
+    // Initiate new pet card viewcontroller for append page to the pageview
     func initMyPetCardVC(pet: Pet) -> UIViewController {
         let newMyPetCardVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MyPetCardVC") as! UIMyPetCardVC;
         newMyPetCardVC.pet = pet;
         return newMyPetCardVC;
     }
     
+    // func initMyPetEmptyVC
+    // Param isEmpty - Bool: true if pet entity list is empty
+    // Return UIViewController - UIViewController which will be inserted to the pageview when pet doesn't exist
+    // Initiate alternative card view for empty pet entity list
     func initMyPetEmptyVC(isEmpty: Bool) -> UIViewController {
         let myPetEmptyVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MyPetEmptyVC") as! UIMyPetEmptyVC;
         myPetEmptyVC.isMyPetEmpty = isEmpty;
@@ -104,5 +98,29 @@ class UIMyPetPageVC: UIPageViewController, UIPageViewControllerDelegate, UIPageV
     
     // Action Methods
     @IBAction func unwindToPetPage(_ segue: UIStoryboardSegue) {
+    }
+}
+
+extension UIMyPetPageVC: UIPageViewControllerDelegate, UIPageViewControllerDataSource {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        guard let index = self.myPetCardViewList.firstIndex(of: viewController) else {
+            return nil;
+        }
+        let previousIndex = index - 1;
+        if previousIndex < 0 {
+            return nil;
+        }
+        return self.myPetCardViewList[previousIndex];
+    }
+    
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        guard let index = self.myPetCardViewList.firstIndex(of: viewController) else {
+            return nil;
+        }
+        let nextIndex = index + 1;
+        if nextIndex >= self.myPetCardViewList.count {
+            return nil;
+        }
+        return self.myPetCardViewList[nextIndex];
     }
 }

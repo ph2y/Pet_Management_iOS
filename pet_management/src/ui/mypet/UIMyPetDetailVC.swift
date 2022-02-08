@@ -22,6 +22,21 @@ class UIMyPetDetailVC: UIViewController {
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "MyPetEditSegue") {
+            let destVC = segue.destination;
+            guard let myPetEditorVC = destVC as? UIMyPetEditorVC else {
+                return;
+            }
+            myPetEditorVC.pet = self.pet;
+            myPetEditorVC.isNewPet = false;
+        }
+    }
+    
+    // func showPetDetails
+    // No Params
+    // Return Void
+    // Display pet infomation to the card view
     func showPetDetails() {
         self.petNameLabel.text = self.pet!.name;
         self.petAgeLabel.text = "\(PetUtil.convertAge(birth: self.pet!.birth))살";
@@ -29,6 +44,10 @@ class UIMyPetDetailVC: UIViewController {
         self.petImage.image = PetUtil.convertImage(photoUrl: self.pet!.photoUrl);
     }
     
+    // func renewPetDetails
+    // No Params
+    // Return Void
+    // Renew pet infomation when card list view is appeared
     func renewPetDetails() {
         let reqApi = "pet/fetch";
         let reqUrl = APIBackendUtil.getUrl(api: reqApi);
@@ -51,17 +70,6 @@ class UIMyPetDetailVC: UIViewController {
             
             self.pet = res.value?.petList?[0];
             self.showPetDetails();
-        }
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "MyPetEditSegue") {
-            let destVC = segue.destination;
-            guard let myPetEditorVC = destVC as? UIMyPetEditorVC else {
-                return;
-            }
-            myPetEditorVC.pet = self.pet;
-            myPetEditorVC.isNewPet = false;
         }
     }
     

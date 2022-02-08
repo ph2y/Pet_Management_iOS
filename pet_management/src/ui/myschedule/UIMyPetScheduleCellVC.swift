@@ -18,8 +18,12 @@ class UIMyPetScheduleCellVC: UITableViewCell {
     
     var schedule: PetSchedule?;
     
+    // func reqHttpEnablePetSchedule
+    // No Param
+    // Return Void
+    // Request to the server to enable pet schedule
     func reqHttpEnablePetSchedule() {
-        let reqApi = "pet/schedule/create";
+        let reqApi = "pet/schedule/update";
         let reqUrl = APIBackendUtil.getUrl(api: reqApi);
         var reqBody = Dictionary<String, String>();
         let reqHeader: HTTPHeaders = APIBackendUtil.getAuthHeader();
@@ -29,7 +33,7 @@ class UIMyPetScheduleCellVC: UITableViewCell {
         reqBody["memo"] = self.schedule!.memo;
         reqBody["enabled"] = String(self.scheduleEnabledSwitch.isOn);
         
-        AF.request(reqUrl, method: .post, parameters: reqBody, encoding: JSONEncoding.default, headers: reqHeader).responseDecodable(of: PetScheduleCreateDto.self) {
+        AF.request(reqUrl, method: .post, parameters: reqBody, encoding: JSONEncoding.default, headers: reqHeader).responseDecodable(of: PetScheduleUpdateDto.self) {
             (res) in
             guard (res.error == nil) else {
                 APIBackendUtil.logHttpError(reqApi: reqApi, errMsg: res.error?.localizedDescription);
