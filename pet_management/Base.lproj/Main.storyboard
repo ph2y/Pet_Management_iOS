@@ -1648,7 +1648,7 @@
                                 <rect key="frame" x="0.0" y="205.66666666666669" width="390" height="604.33333333333326"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="postWithImage" rowHeight="520" id="rJX-j1-2u6">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="petPostWithImage" rowHeight="520" id="rJX-j1-2u6" customClass="UIPetPostWithImageCellVC" customModule="pet_management" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.666666030883789" width="390" height="520"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rJX-j1-2u6" id="T14-bd-3Kn">
@@ -1765,7 +1765,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="post" rowHeight="320" id="oMk-sO-wT2">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="petPost" rowHeight="320" id="oMk-sO-wT2" customClass="UIPetPostCellVC" customModule="pet_management" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="564.66666603088379" width="390" height="320"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oMk-sO-wT2" id="eWf-C8-2gl">
@@ -1824,6 +1824,9 @@
                                                     <state key="normal" title="첨부파일 0개">
                                                         <color key="titleColor" red="0.76862752440000004" green="0.36078432199999999" blue="0.1411764771" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="attachementFileBtnOnClick:" destination="oMk-sO-wT2" eventType="touchUpInside" id="3Od-yE-iOY"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WMs-6W-5ax">
                                                     <rect key="frame" x="321" y="292" width="53" height="20"/>
@@ -1834,6 +1837,9 @@
                                                     <state key="normal" title="댓글 0개">
                                                         <color key="titleColor" red="0.76862752440000004" green="0.36078432199999999" blue="0.1411764771" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="commentBtnOnClick:" destination="oMk-sO-wT2" eventType="touchUpInside" id="7Ig-m6-x1U"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vH3-dL-A9A">
                                                     <rect key="frame" x="16" y="292" width="66" height="20"/>
@@ -1844,6 +1850,9 @@
                                                     <state key="normal" title="좋아요 0개">
                                                         <color key="titleColor" red="0.76862752440000004" green="0.36078432199999999" blue="0.1411764771" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="likeBtnOnClick:" destination="oMk-sO-wT2" eventType="touchUpInside" id="AEO-up-w3b"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -1870,6 +1879,32 @@
                                                 <constraint firstItem="DWm-6w-gq8" firstAttribute="leading" secondItem="eWf-C8-2gl" secondAttribute="leading" constant="16" id="v0Y-tU-aPR"/>
                                                 <constraint firstItem="vH3-dL-A9A" firstAttribute="leading" secondItem="eWf-C8-2gl" secondAttribute="leading" constant="16" id="ykB-R6-KZ5"/>
                                             </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="attachmentFileBtn" destination="ZKm-uk-iWu" id="pC7-Ph-LnH"/>
+                                            <outlet property="authorAndPetNameLabel" destination="KYs-Hb-Iyk" id="dX1-2K-OaL"/>
+                                            <outlet property="commentBtn" destination="WMs-6W-5ax" id="rGX-7d-ytx"/>
+                                            <outlet property="contentTextView" destination="fva-5q-6cQ" id="z2o-1e-FId"/>
+                                            <outlet property="likeBtn" destination="vH3-dL-A9A" id="npC-tI-VLX"/>
+                                            <outlet property="petImage" destination="DWm-6w-gq8" id="vEK-fQ-aeY"/>
+                                            <outlet property="postTagLabel" destination="Yn9-xN-xhG" id="9jn-ud-sVA"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="petPostEmpty" id="UpR-Vu-wV2">
+                                        <rect key="frame" x="0.0" y="884.66666603088379" width="390" height="43.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UpR-Vu-wV2" id="id9-HX-m7H">
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="등록된 포스트가 없습니다" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" id="Ljq-dC-VaF">
+                                                    <rect key="frame" x="36" y="-0.66666603088378906" width="318" height="43.666667938232422"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
@@ -1911,6 +1946,7 @@
                         <outlet property="petGenderLabel" destination="gHR-7P-xsH" id="CSj-zz-9zH"/>
                         <outlet property="petImage" destination="pLK-tB-uML" id="ytO-ng-xE4"/>
                         <outlet property="petNameLabel" destination="k0r-2P-ryF" id="mTS-Kl-UjT"/>
+                        <outlet property="petPostTableView" destination="Uop-PN-RWk" id="SuB-Db-RvR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yi3-jj-lae" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

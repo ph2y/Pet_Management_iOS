@@ -36,3 +36,12 @@ class APIBackendUtil {
         return UIUtil.makeSimplePopup(title: "네트워크 요청 에러", message: errMsg ?? "알 수 없는 오류", onClose: nil);
     }
 }
+
+extension String {
+    func parseJSON() -> Any? {
+        guard let data = self.data(using: .utf8, allowLossyConversion: false) else {
+            return nil;
+        }
+        return try? JSONSerialization.jsonObject(with: data, options: .mutableContainers);
+    }
+}
