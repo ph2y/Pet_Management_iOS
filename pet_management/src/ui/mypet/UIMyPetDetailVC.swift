@@ -8,7 +8,7 @@
 import UIKit;
 import Alamofire;
 
-class UIMyPetDetailVC: UIViewController {
+class UIMyPetDetailVC: UIViewController, UIPetPostCellDelegate {
     @IBOutlet weak var petNameLabel: UILabel!;
     @IBOutlet weak var petAgeLabel: UILabel!;
     @IBOutlet weak var petGenderLabel: UILabel!;
@@ -23,6 +23,7 @@ class UIMyPetDetailVC: UIViewController {
         if (self.pet != nil) {
             self.showPetDetails();
         }
+        self.reqHttpFetchPetPosts();
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -47,11 +48,11 @@ class UIMyPetDetailVC: UIViewController {
         self.petImage.image = PetUtil.convertImage(photoUrl: self.pet!.photoUrl);
     }
     
-    // func renewPetDetails
+    // func reqHTTPFetchPetDetails
     // No Params
     // Return Void
     // Renew pet infomation when card list view is appeared
-    func renewPetDetails() {
+    func reqHTTPFetchPetDetails() {
         let reqApi = "pet/fetch";
         let reqUrl = APIBackendUtil.getUrl(api: reqApi);
         var reqBody = Dictionary<String, String>();
@@ -106,12 +107,15 @@ class UIMyPetDetailVC: UIViewController {
             self.petPostTableView.dataSource = nil;
             self.petPostTableView.dataSource = self;
         }
-        
+    }
+    
+    func presentPopup(alert: UIAlertController) {
+        self.present(alert, animated: true);
     }
     
     // Action Methods
     @IBAction func unwindToMyPetDetail(_ segue: UIStoryboardSegue) {
-        self.renewPetDetails();
+        self.reqHTTPFetchPetDetails();
     }
 }
 
@@ -120,15 +124,26 @@ extension UIMyPetDetailVC: UITableViewDelegate, UITableViewDataSource {
         return self.petPostList.count;
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let decoder = JSONDecoder();
         let post = self.petPostList[indexPath.row];
-        let imageAttachementList = try! JSONSerialization.jsonObject(with: post.imageAttachments!.data(using: .utf8)!, options: .allowFragments) as! [Dictionary<String,String>];
-        let videoAttachmentList = try! JSONSerialization.jsonObject(with: post.videoAttachments!.data(using: .utf8)!, options: .allowFragments) as! [Dictionary<String,String>];
-        let fileAttachmentList = try! JSONSerialization.jsonObject(with: post.fileAttachments!.data(using: .utf8)!, options: .allowFragments) as! [Dictionary<String,String>];
+        var imageAttachementList: [Attachment] = [];
+        var videoAttachmentList: [Attachment] = [];
+        var fileAttachmentList: [Attachment] = [];
+        if (post.imageAttachments?.data(using: .utf8) != nil) {
+            imageAttachementList = try! decoder.decode([Attachment].self, from: post.imageAttachments!.data(using: .utf8)!);
+        }
+        if (post.videoAttachments?.data(using: .utf8) != nil) {
+            videoAttachmentList = try! decoder.decode([Attachment].self, from: post.videoAttachments!.data(using: .utf8)!);
+        }
+        if (post.fileAttachments?.data(using: .utf8) != nil) {
+            fileAttachmentList = try! decoder.decode([Attachment].self, from: post.fileAttachments!.data(using: .utf8)!);
+        }
         
         if (self.petPostList.count == 0) {
             return tableView.dequeueReusableCell(withIdentifier: "petPostEmpty")!;
         } else if (imageAttachementList.count == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "petPost") as! UIPetPostCellVC;
+            cell.post = post;
             if (post.pet.photoUrl != nil) {
                 let imageData = try! Data(contentsOf: URL(string: post.pet.photoUrl!)!);
                 cell.petImage.image = UIImage(data: imageData);
@@ -137,23 +152,23 @@ extension UIMyPetDetailVC: UITableViewDelegate, UITableViewDataSource {
             cell.contentTextView.text = post.contents;
             cell.postTagLabel.text = post.serializedHashTags;
             cell.attachmentFileBtn.setTitle( "첨부파일\(fileAttachmentList.count)개", for: .normal);
-            cell.likeBtn.setTitle("좋아요 X개", for: .normal);
+            cell.reqHTTPFetchLike();
             cell.commentBtn.setTitle("댓글 X개", for: .normal);
-            cell.post = post;
             return cell;
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "petPostWithImage") as! UIPetPostWithImageCellVC;
+            cell.post = post;
             if (post.pet.photoUrl != nil) {
                 let imageData = try! Data(contentsOf: URL(string: post.pet.photoUrl!)!);
                 cell.petImage.image = UIImage(data: imageData);
             }
+            cell.postImageView.image = UIImage(data: try! Data(contentsOf: URL(string: imageAttachementList[0].url)!));
             cell.authorAndPetNameLabel.text = "\(post.author.nickname) 님의 \(post.pet.name)";
             cell.contentTextView.text = post.contents;
             cell.postTagLabel.text = post.serializedHashTags;
             cell.attachmentFileBtn.setTitle( "첨부파일\(fileAttachmentList.count)개", for: .normal);
-            cell.likeBtn.setTitle("좋아요 X개", for: .normal);
+            cell.reqHTTPFetchLike();
             cell.commentBtn.setTitle("댓글 X개", for: .normal);
-            cell.post = post;
             return cell;
         }
     }

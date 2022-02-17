@@ -10,5 +10,6 @@ import Foundation
 struct PetPostFetchDto: Decodable {
     let _metadata: HttpMetaData;
     var postList: [Post]?;
+    let pageable: Pageable;
     let isLast: Bool;
 }
