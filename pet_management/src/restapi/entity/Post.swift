@@ -15,7 +15,7 @@ struct Post: Decodable, Encodable {
     var timestamp: String;
     var edited: Bool;
     var serializedHashTags: String;
-    var desclosure: String;
+    var disclosure: String;
     var geoTagLat: Float;
     var geoTagLong: Float;
     var imageAttachments: String?;

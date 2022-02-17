@@ -12,9 +12,13 @@ struct Account: Decodable, Encodable {
     var username: String;
     var email: String;
     var phone: String;
-    var password: String;
+    var password: String?;
     var marketing: Bool;
     var nickname: String;
     var photoUrl: String?;
     var userMessage: String?;
+    var representativePetId: Int?;
+    var fcmRegistrationToken: String?;
+    var notification: Bool;
+    var mapSearchRadius: Float;
 }
