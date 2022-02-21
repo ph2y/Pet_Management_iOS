@@ -2536,6 +2536,16 @@
             </objects>
             <point key="canvasLocation" x="2322" y="841"/>
         </scene>
+        <!--Page View Controller-->
+        <scene sceneID="aSQ-qr-qYX">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="iLS-i5-xu6" sceneMemberID="viewController">
+                    <size key="freeformSize" width="390" height="844"/>
+                </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rhE-H9-tMa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2959" y="792"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="ZYl-VA-9Xc"/>
