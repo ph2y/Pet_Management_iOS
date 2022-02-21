@@ -162,7 +162,7 @@ extension UIMyPetDetailVC: UITableViewDelegate, UITableViewDataSource {
                 let imageData = try! Data(contentsOf: URL(string: post.pet.photoUrl!)!);
                 cell.petImage.image = UIImage(data: imageData);
             }
-            cell.postImageView.image = UIImage(data: try! Data(contentsOf: URL(string: imageAttachementList[0].url)!));
+            self.reqHttpFetchPostImage(cell: cell, cellIndex: indexPath, postId: post.id, imageIndex: 0);
             cell.authorAndPetNameLabel.text = "\(post.author.nickname) 님의 \(post.pet.name)";
             cell.contentTextView.text = post.contents;
             cell.postTagLabel.text = post.serializedHashTags;
@@ -170,6 +170,31 @@ extension UIMyPetDetailVC: UITableViewDelegate, UITableViewDataSource {
             cell.reqHTTPFetchLike();
             cell.commentBtn.setTitle("댓글 X개", for: .normal);
             return cell;
+        }
+    }
+    
+    func reqHttpFetchPostImage(cell: UIPetPostWithImageCellVC, cellIndex: IndexPath, postId: Int, imageIndex: Int) {
+        let reqApi = "post/image/fetch";
+        let reqUrl = APIBackendUtil.getUrl(api: reqApi);
+        var reqBody = Dictionary<String, String>();
+        let reqHeader: HTTPHeaders = APIBackendUtil.getAuthHeader();
+        reqBody["id"] = String(postId);
+        reqBody["index"] = String(imageIndex);
+        reqBody["imageType"] = "1";
+        
+        AF.request(reqUrl, method: .post, parameters: reqBody, encoding: JSONEncoding.default, headers: reqHeader).responseData() {
+            (res) in
+            guard (res.error == nil) else {
+                APIBackendUtil.logHttpError(reqApi: reqApi, errMsg: res.error?.localizedDescription);
+                self.present(APIBackendUtil.makeHttpErrorPopup(errMsg: res.error?.localizedDescription), animated: true);
+                return;
+            }
+            guard (res.data != nil) else {
+                return;
+            }
+            var reloadIndexPathList: [IndexPath] = [];
+            reloadIndexPathList.append(cellIndex);
+            cell.postImageView.image = UIImage(data: res.data!);
         }
     }
 }
