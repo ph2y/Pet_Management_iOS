@@ -20,11 +20,12 @@ class UIPetPostCellVC: UITableViewCell {
     @IBOutlet open weak var attachmentFileBtn: UIButton!;
     @IBOutlet open weak var commentBtn: UIButton!;
     @IBOutlet open weak var likeBtn: UIButton!;
-    
+
+    var indexPath: IndexPath?;
     var post: Post?;
     weak var delegate: UIPetPostCellDelegate?;
     
-    func reqHTTPFetchLike() {
+    func reqHttpFetchLike() {
         let reqApi = "like/fetch";
         let reqUrl = APIBackendUtil.getUrl(api: reqApi);
         var reqBody = Dictionary<String, String>();
@@ -40,7 +41,7 @@ class UIPetPostCellVC: UITableViewCell {
             }
             guard (res.value?._metadata.status == true) else {
                 self.delegate?.presentPopup(alert: APIBackendUtil.makeHttpErrorPopup(errMsg: res.value?._metadata.message));
-                self.reqHTTPUnLike();
+                self.reqHttpUnLike();
                 return;
             }
             
@@ -48,7 +49,7 @@ class UIPetPostCellVC: UITableViewCell {
         }
     }
     
-    func reqHTTPLike() {
+    func reqHttpLike() {
         let reqApi = "like/create";
         let reqUrl = APIBackendUtil.getUrl(api: reqApi);
         var reqBody = Dictionary<String, String>();
@@ -65,14 +66,14 @@ class UIPetPostCellVC: UITableViewCell {
             
             guard (res.value?._metadata.status == true) else {
                 self.delegate?.presentPopup(alert: APIBackendUtil.makeHttpErrorPopup(errMsg: res.value?._metadata.message));
-                self.reqHTTPUnLike();
+                self.reqHttpUnLike();
                 return;
             }
-            self.reqHTTPFetchLike();
+            self.reqHttpFetchLike();
         }
     }
     
-    func reqHTTPUnLike() {
+    func reqHttpUnLike() {
         let reqApi = "like/delete";
         let reqUrl = APIBackendUtil.getUrl(api: reqApi);
         var reqBody = Dictionary<String, String>();
@@ -91,10 +92,9 @@ class UIPetPostCellVC: UITableViewCell {
                 self.delegate?.presentPopup(alert: APIBackendUtil.makeHttpErrorPopup(errMsg: res.value?._metadata.message));
                 return;
             }
-            self.reqHTTPFetchLike();
+            self.reqHttpFetchLike();
         }
     }
-    
     
     // Action Methods
     @IBAction open func attachementFileBtnOnClick(_ sender: UIButton) {
@@ -102,6 +102,6 @@ class UIPetPostCellVC: UITableViewCell {
     @IBAction open func commentBtnOnClick(_ sender: UIButton) {
     }
     @IBAction open func likeBtnOnClick(_ sender: UIButton) {
-        self.reqHTTPLike();
+        self.reqHttpLike();
     }
 }
