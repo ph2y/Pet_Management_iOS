@@ -22,10 +22,13 @@ class UIMyPetDetailVC: UIViewController, UIPetPostCellDelegate {
     var isLoading: Bool = true;
     
     override func viewDidLoad() {
+        self.petPostTableView.delegate = self;
+        self.petPostTableView.dataSource = self;
         if (self.pet != nil) {
             self.showPetDetails();
             self.reqHttpFetchPetPosts();
         }
+        self.initPullToRefresh();
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -37,6 +40,28 @@ class UIMyPetDetailVC: UIViewController, UIPetPostCellDelegate {
             myPetEditorVC.pet = self.pet;
             myPetEditorVC.isNewPet = false;
         }
+    }
+    
+    // func initRefresh
+    // No Params
+    // Return Void
+    // Init pull-to-refresh cell
+    func initPullToRefresh() {
+        let refresh = UIRefreshControl();
+        refresh.addTarget(self, action: #selector(self.refreshPostFeed(refresh:)), for: .valueChanged);
+        refresh.attributedTitle = NSAttributedString(string: "새로운 게시물을 로드합니다...");
+        self.petPostTableView.refreshControl = refresh;
+    }
+    
+    // objc func refreshPostFeed
+    @objc func refreshPostFeed(refresh: UIRefreshControl) {
+        self.petPostList = [];
+        self.loadedPageCnt = 0;
+        self.isLastPage = false;
+        self.isLoading = true;
+        self.petPostTableView.reloadData();
+        self.reqHttpFetchPetPosts();
+        refresh.endRefreshing();
     }
     
     // func showPetDetails
@@ -105,12 +130,7 @@ class UIMyPetDetailVC: UIViewController, UIPetPostCellDelegate {
             }
             
             self.petPostList.append(contentsOf: res.value?.postList ?? []);
-            if (self.loadedPageCnt == 0) {
-                self.petPostTableView.delegate = self;
-                self.petPostTableView.dataSource = self;
-            } else {
-                self.petPostTableView.reloadData();
-            }
+            self.petPostTableView.reloadData();
             self.loadedPageCnt += 1;
             self.isLastPage = res.value!.isLast;
             self.isLoading = false;
