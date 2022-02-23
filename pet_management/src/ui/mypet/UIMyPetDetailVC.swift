@@ -17,13 +17,15 @@ class UIMyPetDetailVC: UIViewController, UIPetPostCellDelegate {
     
     var pet: Pet?;
     var petPostList: [Post] = [];
-    var lastPageIndex: Int = 0;
+    var loadedPageCnt: Int = 0;
+    var isLastPage: Bool = false;
+    var isLoading: Bool = true;
     
     override func viewDidLoad() {
         if (self.pet != nil) {
             self.showPetDetails();
+            self.reqHttpFetchPetPosts();
         }
-        self.reqHttpFetchPetPosts();
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -86,7 +88,7 @@ class UIMyPetDetailVC: UIViewController, UIPetPostCellDelegate {
         let reqUrl = APIBackendUtil.getUrl(api: reqApi);
         var reqBody = Dictionary<String, String>();
         let reqHeader: HTTPHeaders = APIBackendUtil.getAuthHeader();
-        reqBody["pageIndex"] = String(self.lastPageIndex);
+        reqBody["pageIndex"] = String(self.loadedPageCnt);
         reqBody["petId"] = String(self.pet!.id);
         
         AF.request(reqUrl, method: .post, parameters: reqBody, encoding: JSONEncoding.default, headers: reqHeader).responseDecodable(of: PetPostFetchDto.self) {
@@ -102,10 +104,16 @@ class UIMyPetDetailVC: UIViewController, UIPetPostCellDelegate {
                 return;
             }
             
-            self.petPostList = res.value?.postList ?? [];
-            self.petPostTableView.delegate = self;
-            self.petPostTableView.dataSource = nil;
-            self.petPostTableView.dataSource = self;
+            self.petPostList.append(contentsOf: res.value?.postList ?? []);
+            if (self.loadedPageCnt == 0) {
+                self.petPostTableView.delegate = self;
+                self.petPostTableView.dataSource = self;
+            } else {
+                self.petPostTableView.reloadData();
+            }
+            self.loadedPageCnt += 1;
+            self.isLastPage = res.value!.isLast;
+            self.isLoading = false;
         }
     }
     
@@ -194,8 +202,9 @@ extension UIMyPetDetailVC: UITableViewDelegate, UITableViewDataSource {
 
 extension UIMyPetDetailVC: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if (self.petPostTableView.contentOffset.y > self.petPostTableView.contentSize.height - self.petPostTableView.bounds.size.height) {
-            self.petPostTableView.reloadData();
+        if (self.petPostTableView.contentOffset.y > self.petPostTableView.contentSize.height - self.petPostTableView.bounds.size.height && !self.isLastPage && !self.isLoading) {
+            self.isLoading = true;
+            self.reqHttpFetchPetPosts();
         }
     }
 }
