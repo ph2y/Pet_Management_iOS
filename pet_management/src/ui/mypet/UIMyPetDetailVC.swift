@@ -48,11 +48,11 @@ class UIMyPetDetailVC: UIViewController, UIPetPostCellDelegate {
         self.petImage.image = PetUtil.convertImage(photoUrl: self.pet!.photoUrl);
     }
     
-    // func reqHTTPFetchPetDetails
+    // func reqHttpFetchPetDetails
     // No Params
     // Return Void
     // Renew pet infomation when card list view is appeared
-    func reqHTTPFetchPetDetails() {
+    func reqHttpFetchPetDetails() {
         let reqApi = "pet/fetch";
         let reqUrl = APIBackendUtil.getUrl(api: reqApi);
         var reqBody = Dictionary<String, String>();
@@ -115,7 +115,7 @@ class UIMyPetDetailVC: UIViewController, UIPetPostCellDelegate {
     
     // Action Methods
     @IBAction func unwindToMyPetDetail(_ segue: UIStoryboardSegue) {
-        self.reqHTTPFetchPetDetails();
+        self.reqHttpFetchPetDetails();
     }
 }
 
@@ -152,49 +152,50 @@ extension UIMyPetDetailVC: UITableViewDelegate, UITableViewDataSource {
             cell.contentTextView.text = post.contents;
             cell.postTagLabel.text = post.serializedHashTags;
             cell.attachmentFileBtn.setTitle( "첨부파일\(fileAttachmentList.count)개", for: .normal);
-            cell.reqHTTPFetchLike();
+            cell.reqHttpFetchLike();
             cell.commentBtn.setTitle("댓글 X개", for: .normal);
             return cell;
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "petPostWithImage") as! UIPetPostWithImageCellVC;
+            cell.indexPath = indexPath;
             cell.post = post;
             if (post.pet.photoUrl != nil) {
                 let imageData = try! Data(contentsOf: URL(string: post.pet.photoUrl!)!);
                 cell.petImage.image = UIImage(data: imageData);
             }
-            self.reqHttpFetchPostImage(cell: cell, cellIndex: indexPath, postId: post.id, imageIndex: 0);
+            
+            let swipeLeft = UISwipeGestureRecognizer(target: cell, action: #selector(cell.swipeForNextImage(_:)));
+            swipeLeft.direction = UISwipeGestureRecognizer.Direction.left;
+            let swipeRight = UISwipeGestureRecognizer(target: cell, action: #selector(cell.swipeForPrevImage(_:)));
+            swipeRight.direction = UISwipeGestureRecognizer.Direction.right;
+            cell.postImageView.addGestureRecognizer(swipeLeft);
+            cell.postImageView.addGestureRecognizer(swipeRight);
+            
+            cell.pageControl.numberOfPages = imageAttachementList.count + videoAttachmentList.count;
+            cell.pageControl.currentPage = 0;
+            cell.pageControl.pageIndicatorTintColor = UIColor.lightGray;
+            cell.pageControl.currentPageIndicatorTintColor = UIColor.black;
+            cell.reqHttpFetchPostImage(cell: cell, cellIndex: indexPath, postId: post.id, imageIndex: 0);
             cell.authorAndPetNameLabel.text = "\(post.author.nickname) 님의 \(post.pet.name)";
+            cell.contentTextView.isScrollEnabled = false;
             cell.contentTextView.text = post.contents;
+            cell.contentTextView.sizeToFit();
             cell.postTagLabel.text = post.serializedHashTags;
             cell.attachmentFileBtn.setTitle( "첨부파일\(fileAttachmentList.count)개", for: .normal);
-            cell.reqHTTPFetchLike();
+            cell.reqHttpFetchLike();
             cell.commentBtn.setTitle("댓글 X개", for: .normal);
             return cell;
         }
     }
-    
-    func reqHttpFetchPostImage(cell: UIPetPostWithImageCellVC, cellIndex: IndexPath, postId: Int, imageIndex: Int) {
-        let reqApi = "post/image/fetch";
-        let reqUrl = APIBackendUtil.getUrl(api: reqApi);
-        var reqBody = Dictionary<String, String>();
-        let reqHeader: HTTPHeaders = APIBackendUtil.getAuthHeader();
-        reqBody["id"] = String(postId);
-        reqBody["index"] = String(imageIndex);
-        reqBody["imageType"] = "1";
-        
-        AF.request(reqUrl, method: .post, parameters: reqBody, encoding: JSONEncoding.default, headers: reqHeader).responseData() {
-            (res) in
-            guard (res.error == nil) else {
-                APIBackendUtil.logHttpError(reqApi: reqApi, errMsg: res.error?.localizedDescription);
-                self.present(APIBackendUtil.makeHttpErrorPopup(errMsg: res.error?.localizedDescription), animated: true);
-                return;
-            }
-            guard (res.data != nil) else {
-                return;
-            }
-            var reloadIndexPathList: [IndexPath] = [];
-            reloadIndexPathList.append(cellIndex);
-            cell.postImageView.image = UIImage(data: res.data!);
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension;
+    }
+}
+
+extension UIMyPetDetailVC: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if (self.petPostTableView.contentOffset.y > self.petPostTableView.contentSize.height - self.petPostTableView.bounds.size.height) {
+            self.petPostTableView.reloadData();
         }
     }
 }
