@@ -6,6 +6,7 @@
 //
 
 import UIKit;
+import Alamofire;
 
 struct Pet: Decodable, Encodable {
     let id: Int;
@@ -47,17 +48,25 @@ class PetUtil {
         return gender ? "♀" : "♂";
     }
     
-    static func convertImage(photoUrl: String?) -> UIImage {
-        if (photoUrl == nil) {
-            return UIImage(named: "ICBaselinePets60WithPadding")!;
-        } else {
-            var imgData: Data;
-            do {
-                imgData = try Data(contentsOf: URL(string: photoUrl!)!);
-            } catch {
-                return UIImage(named: "ICBaselinePets60WithPadding")!;
+    // static func reqHttpFetchPetPhoto
+    // petId: Int - Pet entity id
+    // Return Void
+    // Download pet photo
+    static func reqHttpFetchPetPhoto(petId: Int, sender: UIViewController, handler: @escaping (_ petPhoto: UIImage) -> Void) {
+        let reqApi = "pet/photo/fetch";
+        let reqUrl = APIBackendUtil.getUrl(api: reqApi);
+        var reqBody = Dictionary<String, String>();
+        let reqHeader: HTTPHeaders = APIBackendUtil.getAuthHeader();
+        reqBody["id"] = String(petId);
+        
+        AF.request(reqUrl, method: .post, parameters: reqBody, encoding: JSONEncoding.default, headers: reqHeader).responseData() {
+            (res) in
+            guard (res.error == nil) else {
+                APIBackendUtil.logHttpError(reqApi: reqApi, errMsg: res.error?.localizedDescription);
+                sender.present(APIBackendUtil.makeHttpErrorPopup(errMsg: res.error?.localizedDescription), animated: true);
+                return;
             }
-            return UIImage(data: imgData)!;
+            handler(UIImage(data: res.data!) ?? UIImage(named: "ICBaselinePets60WithPadding")!);
         }
     }
 }

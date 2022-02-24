@@ -54,14 +54,25 @@ class UIMyPetDetailVC: UIViewController, UIPetPostCellDelegate {
     }
     
     // objc func refreshPostFeed
+    // refresh: UIRefreshControl - The controller class of UIRefresh
+    // Return Void
+    // Call PetPostListTableView & Show refresh animation
     @objc func refreshPostFeed(refresh: UIRefreshControl) {
+        self.refreshPostFeed();
+        refresh.endRefreshing();
+    }
+    
+    // func refreshPostFeed
+    // No Params
+    // Return Void
+    // Reset PetPostListTableView
+    func refreshPostFeed() {
         self.petPostList = [];
         self.loadedPageCnt = 0;
         self.isLastPage = false;
         self.isLoading = true;
         self.petPostTableView.reloadData();
         self.reqHttpFetchPetPosts();
-        refresh.endRefreshing();
     }
     
     // func showPetDetails
@@ -72,7 +83,14 @@ class UIMyPetDetailVC: UIViewController, UIPetPostCellDelegate {
         self.petNameLabel.text = self.pet!.name;
         self.petAgeLabel.text = "\(PetUtil.convertAge(birth: self.pet!.birth))살";
         self.petGenderLabel.text = PetUtil.convertGender(gender: self.pet!.gender);
-        self.petImage.image = PetUtil.convertImage(photoUrl: self.pet!.photoUrl);
+        if (self.pet!.photoUrl == nil) {
+            self.petImage.image = UIImage(named: "ICBaselinePets60WithPadding");
+        } else {
+            PetUtil.reqHttpFetchPetPhoto(petId: self.pet!.id, sender: self) {
+                (petPhoto) in
+                self.petImage.image = petPhoto;
+            }
+        }
     }
     
     // func reqHttpFetchPetDetails
@@ -144,6 +162,7 @@ class UIMyPetDetailVC: UIViewController, UIPetPostCellDelegate {
     // Action Methods
     @IBAction func unwindToMyPetDetail(_ segue: UIStoryboardSegue) {
         self.reqHttpFetchPetDetails();
+        self.refreshPostFeed();
     }
 }
 
@@ -173,8 +192,12 @@ extension UIMyPetDetailVC: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "petPost") as! UIPetPostCellVC;
             cell.post = post;
             if (post.pet.photoUrl != nil) {
-                let imageData = try! Data(contentsOf: URL(string: post.pet.photoUrl!)!);
-                cell.petImage.image = UIImage(data: imageData);
+                PetUtil.reqHttpFetchPetPhoto(petId: post.pet.id, sender: self) {
+                    (petPhoto) in
+                    cell.petImage.image = petPhoto;
+                };
+            } else {
+                cell.petImage.image = UIImage(named: "ICBaselinePets60WithPadding")!;
             }
             cell.authorAndPetNameLabel.text = "\(post.author.nickname) 님의 \(post.pet.name)";
             cell.contentTextView.text = post.contents;
@@ -188,8 +211,12 @@ extension UIMyPetDetailVC: UITableViewDelegate, UITableViewDataSource {
             cell.indexPath = indexPath;
             cell.post = post;
             if (post.pet.photoUrl != nil) {
-                let imageData = try! Data(contentsOf: URL(string: post.pet.photoUrl!)!);
-                cell.petImage.image = UIImage(data: imageData);
+                PetUtil.reqHttpFetchPetPhoto(petId: self.pet!.id, sender: self) {
+                    (petPhoto) in
+                    cell.petImage.image = petPhoto;
+                }
+            } else {
+                cell.petImage.image = UIImage(named: "ICBaselinePets60WithPadding")!;
             }
             
             let swipeLeft = UISwipeGestureRecognizer(target: cell, action: #selector(cell.swipeForNextImage(_:)));

@@ -33,6 +33,8 @@
 		8F82F34327BE2D9A00571697 /* LikeFetchDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F82F34227BE2D9A00571697 /* LikeFetchDto.swift */; };
 		8F9564F62798011000AE577B /* AccountLoginDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9564F52798011000AE577B /* AccountLoginDto.swift */; };
 		8F9564F9279802CA00AE577B /* UIUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9564F8279802CA00AE577B /* UIUtil.swift */; };
+		8F95BB6627C7343200ED7630 /* PetPhotoFetchDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F95BB6527C7343200ED7630 /* PetPhotoFetchDto.swift */; };
+		8F95BB6827C745E600ED7630 /* PetPhotoDeleteDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F95BB6727C745E600ED7630 /* PetPhotoDeleteDto.swift */; };
 		8F9C743427A3F0E3004B1B79 /* PetScheduleDeleteDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9C743327A3F0E3004B1B79 /* PetScheduleDeleteDto.swift */; };
 		8F9C743627A3F805004B1B79 /* PetScheduleCreateDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9C743527A3F805004B1B79 /* PetScheduleCreateDto.swift */; };
 		8F9C743827A3F9E1004B1B79 /* UIMyPetScheduleCellVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9C743727A3F9E1004B1B79 /* UIMyPetScheduleCellVC.swift */; };
@@ -130,6 +132,8 @@
 		8F82F34227BE2D9A00571697 /* LikeFetchDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeFetchDto.swift; sourceTree = "<group>"; };
 		8F9564F52798011000AE577B /* AccountLoginDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountLoginDto.swift; sourceTree = "<group>"; };
 		8F9564F8279802CA00AE577B /* UIUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIUtil.swift; sourceTree = "<group>"; };
+		8F95BB6527C7343200ED7630 /* PetPhotoFetchDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetPhotoFetchDto.swift; sourceTree = "<group>"; };
+		8F95BB6727C745E600ED7630 /* PetPhotoDeleteDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetPhotoDeleteDto.swift; sourceTree = "<group>"; };
 		8F9C743327A3F0E3004B1B79 /* PetScheduleDeleteDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetScheduleDeleteDto.swift; sourceTree = "<group>"; };
 		8F9C743527A3F805004B1B79 /* PetScheduleCreateDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetScheduleCreateDto.swift; sourceTree = "<group>"; };
 		8F9C743727A3F9E1004B1B79 /* UIMyPetScheduleCellVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIMyPetScheduleCellVC.swift; sourceTree = "<group>"; };
@@ -298,6 +302,8 @@
 				8FAA0E3B279D873200E400F3 /* PetUpdateDto.swift */,
 				8FAA0E3D279D87A200E400F3 /* PetPhotoUpdateDto.swift */,
 				8FAA0E41279D960200E400F3 /* PetDeleteDto.swift */,
+				8F95BB6527C7343200ED7630 /* PetPhotoFetchDto.swift */,
+				8F95BB6727C745E600ED7630 /* PetPhotoDeleteDto.swift */,
 			);
 			path = pet;
 			sourceTree = "<group>";
@@ -686,6 +692,7 @@
 				8F25E7D1279289D7005070D6 /* UICreateAccountCredentialsVC.swift in Sources */,
 				8F25E7DC2792D51B005070D6 /* AccountSendAuthCodeDto.swift in Sources */,
 				8F37F788279AACE40004394D /* UIMyPetCardVC.swift in Sources */,
+				8F95BB6827C745E600ED7630 /* PetPhotoDeleteDto.swift in Sources */,
 				8F25E7D32792B103005070D6 /* UICreateAccountDetailsVC.swift in Sources */,
 				8F2016B1279FA307007B34B9 /* PetScheduleFetchDto.swift in Sources */,
 				8FFCCF612791739800911F3C /* UICreateAccountTermsVC.swift in Sources */,
@@ -711,6 +718,7 @@
 				8F25E7DF2792D5C9005070D6 /* HttpMetaData.swift in Sources */,
 				8FA426A927BA4EE6008FBD43 /* PetPostFetchDto.swift in Sources */,
 				8FCEAFD5279411B300CD8DA6 /* AccountRecoverUsernameDto.swift in Sources */,
+				8F95BB6627C7343200ED7630 /* PetPhotoFetchDto.swift in Sources */,
 				8FA58B3A279AEE0900B83D00 /* AccountFetchDto.swift in Sources */,
 				8F82F34327BE2D9A00571697 /* LikeFetchDto.swift in Sources */,
 				8F82F34127BE284800571697 /* LikeDeleteDto.swift in Sources */,
