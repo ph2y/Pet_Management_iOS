@@ -17,6 +17,7 @@ class UIMyPetScheduleCellVC: UITableViewCell {
     @IBOutlet weak var scheduleEnabledSwitch: UISwitch!;
     
     var schedule: PetSchedule?;
+    var delegate: UIMyPetScheduleDelegate?;
     
     // func reqHttpEnablePetSchedule
     // No Param
@@ -43,6 +44,7 @@ class UIMyPetScheduleCellVC: UITableViewCell {
             guard (res.value?._metadata.status == true) else {
                 return;
             }
+            self.delegate!.scheduleStateChanged();
         }
     }
     
