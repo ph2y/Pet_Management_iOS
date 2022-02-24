@@ -20,12 +20,17 @@ class UIMyPetEditorVC: UIViewController {
     @IBOutlet weak var petBirthPicker: UIDatePicker!;
     @IBOutlet weak var petYearOnlySwitch: UISwitch!;
     @IBOutlet weak var deletePetBtn: UIBarButtonItem!;
+    @IBOutlet weak var savePetBtn: UIBarButtonItem!;
+    @IBOutlet weak var changePetImageBtn: UIButton!;
     
     var imagePickerConf = PHPickerConfiguration();
     var imagePicker: PHPickerViewController?;
     
     var pet: Pet?;
+    var newPetId: Int?;
     var isNewPet: Bool = true;
+    var uploadPetImage: Bool = false;
+    var deletePetImage: Bool = false;
     
     override func viewDidLoad() {
         // Setup image picker
@@ -48,7 +53,53 @@ class UIMyPetEditorVC: UIViewController {
             self.petGenderSwitch.isOn = self.pet!.gender;
             self.petYearOnlySwitch.isOn = self.pet!.yearOnly;
             self.petBirthPicker.date = PetUtil.convertBirthToDate(birth: self.pet!.birth);
+            if (self.pet!.photoUrl == nil) {
+                self.petImageView.image = UIImage(named: "ICBaselinePets60WithPadding")!;
+            } else {
+                PetUtil.reqHttpFetchPetPhoto(petId: self.pet!.id, sender: self) {
+                    (petPhoto) in
+                    self.petImageView.image = petPhoto;
+                }
+            }
         }
+    }
+    
+    // func lockEditor
+    // No Parmas
+    // Return Void
+    // Lock editor to prevent duplicate request while uploading photo
+    func lockEditor() {
+        self.petMsgTextView.isEditable = false;
+        self.petNameTextField.isEnabled = false;
+        self.petGenderSwitch.isEnabled = false;
+        self.petSpiciesTextField.isEnabled = false;
+        self.petBreedTextField.isEnabled = false;
+        self.petBirthPicker.isEnabled = false;
+        self.petYearOnlySwitch.isEnabled = false;
+        if(!self.isNewPet) {
+            self.deletePetBtn.isEnabled = false;
+        }
+        self.changePetImageBtn.isEnabled = false;
+        self.savePetBtn.isEnabled = false;
+    }
+    
+    // func unlockEditor
+    // No Parmas
+    // Return Void
+    // Unlock editor after photo upload is finished or failed
+    func unlockEditor() {
+        self.petMsgTextView.isEditable = true;
+        self.petNameTextField.isEnabled = true;
+        self.petGenderSwitch.isEnabled = true;
+        self.petSpiciesTextField.isEnabled = true;
+        self.petBreedTextField.isEnabled = true;
+        self.petBirthPicker.isEnabled = true;
+        self.petYearOnlySwitch.isEnabled = true;
+        if(!self.isNewPet) {
+            self.deletePetBtn.isEnabled = true;
+        }
+        self.changePetImageBtn.isEnabled = true;
+        self.savePetBtn.isEnabled = true;
     }
     
     // func verifyPetDetails
@@ -98,9 +149,15 @@ class UIMyPetEditorVC: UIViewController {
                 self.present(APIBackendUtil.makeHttpErrorPopup(errMsg: res.value?._metadata.message), animated: true);
                 return;
             }
-            // self.reqHttpUpdatePetPhoto();
-            
-            self.performSegue(withIdentifier: "FinishCreatePetUnwindSegue", sender: self);
+            self.newPetId = res.value!.id;
+            if (self.uploadPetImage) {
+                self.lockEditor();
+                self.reqHttpUpdatePetPhoto();
+            } else if (self.deletePetImage) {
+                self.reqHttpDeletePetPhoto();
+            } else {
+                self.performSegue(withIdentifier: "FinishCreatePetUnwindSegue", sender: self);
+            }
         }
     }
     
@@ -123,7 +180,7 @@ class UIMyPetEditorVC: UIViewController {
         reqBody["gender"] = String(self.petGenderSwitch.isOn);
         reqBody["message"] = self.petMsgTextView.text;
         
-        AF.request(reqUrl, method: .post, parameters: reqBody, encoding: JSONEncoding.default, headers: reqHeader).responseDecodable(of: PetCreateDto.self) {
+        AF.request(reqUrl, method: .post, parameters: reqBody, encoding: JSONEncoding.default, headers: reqHeader).responseDecodable(of: PetUpdateDto.self) {
             (res) in
             guard (res.error == nil) else {
                 APIBackendUtil.logHttpError(reqApi: reqApi, errMsg: res.error?.localizedDescription);
@@ -135,9 +192,15 @@ class UIMyPetEditorVC: UIViewController {
                 self.present(APIBackendUtil.makeHttpErrorPopup(errMsg: res.value?._metadata.message), animated: true);
                 return;
             }
-            // self.reqHttpUpdatePetPhoto();
             
-            self.performSegue(withIdentifier: "FinishUpdatePetUnwindSegue", sender: self);
+            if (self.uploadPetImage) {
+                self.lockEditor();
+                self.reqHttpUpdatePetPhoto();
+            } else if (self.deletePetImage) {
+                self.reqHttpDeletePetPhoto();
+            } else {
+                self.performSegue(withIdentifier: "FinishUpdatePetUnwindSegue", sender: self);
+            }
         }
     }
     
@@ -167,6 +230,72 @@ class UIMyPetEditorVC: UIViewController {
             }
             
             self.performSegue(withIdentifier: "FinishCreatePetUnwindSegue", sender: self);
+        }
+    }
+    
+    // func reqHttpUpdatePetPhoto
+    // No Params
+    // Return Void
+    // Upload pet photo that user select to the server
+    func reqHttpUpdatePetPhoto() {
+        let reqApi = "pet/photo/update";
+        let reqUrl = APIBackendUtil.getUrl(api: reqApi);
+        let reqHeader: HTTPHeaders = APIBackendUtil.getAuthHeader();
+        
+        AF.upload(multipartFormData: {
+            (formdata) in
+            formdata.append(String(self.pet?.id ?? self.newPetId!).data(using: .utf8)!, withName: "id");
+            formdata.append(self.petImageView.image!.pngData()!, withName: "file", fileName: "swift_new_pet_photo.png", mimeType: "image/jpeg");
+        }, to: reqUrl, headers: reqHeader).responseDecodable(of: PetPhotoUpdateDto.self) {
+            (res) in
+            guard (res.error == nil) else {
+                APIBackendUtil.logHttpError(reqApi: reqApi, errMsg: res.error?.localizedDescription);
+                self.present(APIBackendUtil.makeHttpErrorPopup(errMsg: res.error?.localizedDescription), animated: true);
+                return;
+            }
+
+            guard (res.value?._metadata.status == true) else {
+                self.present(APIBackendUtil.makeHttpErrorPopup(errMsg: res.value?._metadata.message), animated: true);
+                return;
+            }
+
+            self.unlockEditor();
+            if (self.isNewPet) {
+                self.performSegue(withIdentifier: "FinishCreatePetUnwindSegue", sender: self);
+            } else {
+                self.performSegue(withIdentifier: "FinishUpdatePetUnwindSegue", sender: self);
+            }
+        }
+    }
+    
+    // func reqHttpDeletePetPhoto
+    // No Params
+    // Return Void
+    // Delete pet photo from the server
+    func reqHttpDeletePetPhoto() {
+        let reqApi = "pet/photo/delete";
+        let reqUrl = APIBackendUtil.getUrl(api: reqApi);
+        var reqBody = Dictionary<String, String>();
+        let reqHeader: HTTPHeaders = APIBackendUtil.getAuthHeader();
+        reqBody["id"] = String(self.pet!.id);
+        
+        AF.request(reqUrl, method: .post, parameters: reqBody, encoding: JSONEncoding.default, headers: reqHeader).responseDecodable(of: PetPhotoDeleteDto.self) {
+            (res) in
+            guard (res.error == nil) else {
+                APIBackendUtil.logHttpError(reqApi: reqApi, errMsg: res.error?.localizedDescription);
+                self.present(APIBackendUtil.makeHttpErrorPopup(errMsg: res.error?.localizedDescription), animated: true);
+                return;
+            }
+            guard (res.value?._metadata.status == true) else {
+                self.present(APIBackendUtil.makeHttpErrorPopup(errMsg: res.value?._metadata.message), animated: true);
+                return;
+            }
+        }
+        
+        if (self.isNewPet) {
+            self.performSegue(withIdentifier: "FinishCreatePetUnwindSegue", sender: self);
+        } else {
+            self.performSegue(withIdentifier: "FinishUpdatePetUnwindSegue", sender: self);
         }
     }
     
@@ -211,11 +340,17 @@ extension UIMyPetEditorVC: PHPickerViewControllerDelegate {
                 (image, error) in
                 DispatchQueue.main.async {
                     self.petImageView.image = image as? UIImage;
+                    self.deletePetImage = false;
+                    self.uploadPetImage = true;
                 }
             }
         } else {
             // If user select nothing or load photo from gallery operation failure
             self.petImageView.image = UIImage(named: "ICBaselinePets60WithPadding")!;
+            if (self.pet!.photoUrl != nil) {
+                self.uploadPetImage = false;
+                self.deletePetImage = true;
+            }
         }
     }
 }

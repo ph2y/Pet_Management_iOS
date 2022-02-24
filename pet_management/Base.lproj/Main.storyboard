@@ -1325,7 +1325,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ICBaselinePets60WithPadding" translatesAutoresizingMaskIntoConstraints="NO" id="BGp-oo-fmS" userLabel="PetImage">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ICBaselinePets60WithPadding" translatesAutoresizingMaskIntoConstraints="NO" id="BGp-oo-fmS" userLabel="PetImage">
                                 <rect key="frame" x="120" y="69" width="150" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="ewR-M1-3Mt"/>
@@ -1558,6 +1558,7 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="changePetImageBtn" destination="R9D-bn-qC1" id="ZeV-3U-rc1"/>
                         <outlet property="deletePetBtn" destination="d9h-m6-PcC" id="k2K-uN-bSs"/>
                         <outlet property="petBirthPicker" destination="V98-hc-7e2" id="oRj-b6-9AR"/>
                         <outlet property="petBreedTextField" destination="HDk-Qm-xym" id="Ljb-Go-XNl"/>
@@ -1567,6 +1568,7 @@
                         <outlet property="petNameTextField" destination="bXU-1A-PoQ" id="9Ly-gV-soq"/>
                         <outlet property="petSpiciesTextField" destination="gPT-YG-dgf" id="dm7-K4-42t"/>
                         <outlet property="petYearOnlySwitch" destination="p3e-qp-ZFn" id="BeT-So-295"/>
+                        <outlet property="savePetBtn" destination="smM-qn-00i" id="TZH-3F-AdV"/>
                         <segue destination="H6H-Ja-m56" kind="unwind" identifier="FinishUpdatePetUnwindSegue" unwindAction="unwindToMyPetDetail:" id="jbb-UT-BKC"/>
                         <segue destination="H6H-Ja-m56" kind="unwind" identifier="FinishCreatePetUnwindSegue" unwindAction="unwindToPetPage:" id="nwE-VB-MJv"/>
                     </connections>
@@ -1584,7 +1586,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ICBaselinePets60WithPadding" translatesAutoresizingMaskIntoConstraints="NO" id="pLK-tB-uML" userLabel="PetImage">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ICBaselinePets60WithPadding" translatesAutoresizingMaskIntoConstraints="NO" id="pLK-tB-uML" userLabel="PetImage">
                                 <rect key="frame" x="29" y="59.666666666666657" width="75" height="75"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="75" id="HXu-uw-vwZ"/>
@@ -1740,7 +1742,7 @@
                                                         <action selector="likeBtnOnClick:" destination="rJX-j1-2u6" eventType="touchUpInside" id="r8k-4g-wf2"/>
                                                     </connections>
                                                 </button>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lmo-Tk-lfd">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lmo-Tk-lfd">
                                                     <rect key="frame" x="16" y="8.3333333333333357" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="Cbm-Bm-smH"/>
@@ -1803,7 +1805,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="177"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DWm-6w-gq8">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DWm-6w-gq8">
                                                     <rect key="frame" x="16" y="8.3333333333333357" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="Lhu-1T-D0a"/>
@@ -1928,7 +1930,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="등록된 포스트가 없습니다" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" id="Ljq-dC-VaF">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="등록된 포스트가 없습니다" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" id="Ljq-dC-VaF">
                                                     <rect key="frame" x="36" y="-0.66666603088378906" width="318" height="43.666667938232422"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1992,7 +1994,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="350" height="500"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ICBaselinePets60WithPadding" translatesAutoresizingMaskIntoConstraints="NO" id="nMz-eu-du6" userLabel="PetImage">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ICBaselinePets60WithPadding" translatesAutoresizingMaskIntoConstraints="NO" id="nMz-eu-du6" userLabel="PetImage">
                                 <rect key="frame" x="100" y="50" width="150" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="CsT-in-dVg"/>

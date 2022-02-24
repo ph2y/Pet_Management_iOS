@@ -7,5 +7,5 @@
 
 struct PetCreateDto: Decodable {
     let _metadata: HttpMetaData;
-    let id: Int?;
+    let id: Int;
 }

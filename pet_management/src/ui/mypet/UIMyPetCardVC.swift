@@ -36,7 +36,14 @@ class UIMyPetCardVC: UIViewController {
             self.petAgeLabel.text = PetUtil.convertAge(birth: self.pet!.birth);
             self.petGenderLabel.text = PetUtil.convertGender(gender: self.pet!.gender);
             self.petMessageLabel.text = self.pet!.message;
-            self.petImage.image = PetUtil.convertImage(photoUrl: self.pet!.photoUrl);
+            if (self.pet!.photoUrl == nil) {
+                self.petImage.image = UIImage(named: "ICBaselinePets60WithPadding")!;
+            } else {
+                PetUtil.reqHttpFetchPetPhoto(petId: self.pet!.id, sender: self) {
+                    (petPhoto) in
+                    self.petImage.image = petPhoto;
+                }
+            }
             self.showRepresentitiveImage();
         }
         

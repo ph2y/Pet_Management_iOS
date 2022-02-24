@@ -5,6 +5,6 @@
 //  Created by newcentury99 on 2022/01/23.
 //
 
-struct PetUpdateDto {
+struct PetUpdateDto: Decodable {
     let _metadata: HttpMetaData;
 }
