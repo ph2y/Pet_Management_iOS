@@ -21,9 +21,48 @@ class UIPetPostCellVC: UITableViewCell {
     @IBOutlet open weak var commentBtn: UIButton!;
     @IBOutlet open weak var likeBtn: UIButton!;
 
+    let decoder = JSONDecoder();
+    weak var delegate: UIPetPostCellDelegate?;
+    
+    var senderVC: UIViewController?;
     var indexPath: IndexPath?;
     var post: Post?;
-    weak var delegate: UIPetPostCellDelegate?;
+    var fileAttachmentList: [Attachment] = [];
+    
+    
+    func initCell() {
+        self.decodeFileMetadata();
+        self.displayPetImage();
+        self.displayPostContents();
+    }
+    
+    func decodeFileMetadata() {
+        if (self.post?.fileAttachments?.data(using: .utf8) != nil) {
+            self.fileAttachmentList = try! decoder.decode([Attachment].self, from: self.post!.fileAttachments!.data(using: .utf8)!);
+        }
+    }
+    
+    func displayPetImage() {
+        if (post!.pet.photoUrl != nil) {
+            PetUtil.reqHttpFetchPetPhoto(petId: post!.pet.id, sender: self.senderVC!) {
+                (petPhoto) in
+                self.petImage.image = petPhoto;
+            };
+        } else {
+            self.petImage.image = UIImage(named: "ICBaselinePets60WithPadding")!;
+        }
+    }
+    
+    func displayPostContents() {
+        self.authorAndPetNameLabel.text = "\(post!.author.nickname) 님의 \(self.post!.pet.name)";
+        self.contentTextView.isScrollEnabled = false;
+        self.contentTextView.text = self.post!.contents;
+        self.contentTextView.sizeToFit();
+        self.postTagLabel.text = self.post!.serializedHashTags;
+        self.attachmentFileBtn.setTitle("첨부파일\(self.fileAttachmentList.count)개", for: .normal);
+        self.reqHttpFetchLike();
+        self.commentBtn.setTitle("댓글 X개", for: .normal);
+    }
     
     func reqHttpFetchLike() {
         let reqApi = "like/fetch";

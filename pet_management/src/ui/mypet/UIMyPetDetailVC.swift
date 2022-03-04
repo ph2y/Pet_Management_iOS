@@ -26,7 +26,7 @@ class UIMyPetDetailVC: UIViewController, UIPetPostCellDelegate {
         self.petPostTableView.dataSource = self;
         if (self.pet != nil) {
             self.showPetDetails();
-            self.reqHttpFetchPetPosts();
+            PostUtil.reqHttpFetchPetPosts(petId: self.pet!.id, pageIdx: self.loadedPageCnt, sender: self, resHandler: self.petPostFetch);
         }
         self.initPullToRefresh();
     }
@@ -72,7 +72,7 @@ class UIMyPetDetailVC: UIViewController, UIPetPostCellDelegate {
         self.isLastPage = false;
         self.isLoading = true;
         self.petPostTableView.reloadData();
-        self.reqHttpFetchPetPosts();
+        PostUtil.reqHttpFetchPetPosts(petId: self.pet!.id, pageIdx: self.loadedPageCnt, sender: self, resHandler: self.petPostFetch);
     }
     
     // func showPetDetails
@@ -122,39 +122,22 @@ class UIMyPetDetailVC: UIViewController, UIPetPostCellDelegate {
         }
     }
     
-    // func repHttpFetchPetPosts
-    // No Params
+    // func petPostFetch
+    // Param res: DataResponse<PetPostFetchDto, AFError> - http response/error
     // Return Void
-    // Request to the server to get pet posts data
-    func reqHttpFetchPetPosts() {
-        let reqApi = "post/fetch";
-        let reqUrl = APIBackendUtil.getUrl(api: reqApi);
-        var reqBody = Dictionary<String, String>();
-        let reqHeader: HTTPHeaders = APIBackendUtil.getAuthHeader();
-        reqBody["pageIndex"] = String(self.loadedPageCnt);
-        reqBody["petId"] = String(self.pet!.id);
-        
-        AF.request(reqUrl, method: .post, parameters: reqBody, encoding: JSONEncoding.default, headers: reqHeader).responseDecodable(of: PetPostFetchDto.self) {
-            (res) in
-            guard (res.error == nil) else {
-                APIBackendUtil.logHttpError(reqApi: reqApi, errMsg: res.error?.localizedDescription);
-                self.present(APIBackendUtil.makeHttpErrorPopup(errMsg: res.error?.localizedDescription), animated: true);
-                return;
-            }
-            
-            guard (res.value?._metadata.status == true) else {
-                self.present(APIBackendUtil.makeHttpErrorPopup(errMsg: res.value?._metadata.message), animated: true);
-                return;
-            }
-            
-            self.petPostList.append(contentsOf: res.value?.postList ?? []);
-            self.petPostTableView.reloadData();
-            self.loadedPageCnt += 1;
-            self.isLastPage = res.value!.isLast;
-            self.isLoading = false;
-        }
+    // Append post to feed that loaded from server
+    func petPostFetch(res: DataResponse<PetPostFetchDto, AFError>) {
+        self.petPostList.append(contentsOf: res.value?.postList ?? []);
+        self.petPostTableView.reloadData();
+        self.loadedPageCnt += 1;
+        self.isLastPage = res.value!.isLast;
+        self.isLoading = false;
     }
-    
+
+    // func presentPopup
+    // Param alert: UIAlertController - UIController for alert popup
+    // Return Void
+    // Show error popup on current UIView
     func presentPopup(alert: UIAlertController) {
         self.present(alert, animated: true);
     }
@@ -171,74 +154,23 @@ extension UIMyPetDetailVC: UITableViewDelegate, UITableViewDataSource {
         return self.petPostList.count;
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let decoder = JSONDecoder();
         let post = self.petPostList[indexPath.row];
-        var imageAttachementList: [Attachment] = [];
-        var videoAttachmentList: [Attachment] = [];
-        var fileAttachmentList: [Attachment] = [];
-        if (post.imageAttachments?.data(using: .utf8) != nil) {
-            imageAttachementList = try! decoder.decode([Attachment].self, from: post.imageAttachments!.data(using: .utf8)!);
-        }
-        if (post.videoAttachments?.data(using: .utf8) != nil) {
-            videoAttachmentList = try! decoder.decode([Attachment].self, from: post.videoAttachments!.data(using: .utf8)!);
-        }
-        if (post.fileAttachments?.data(using: .utf8) != nil) {
-            fileAttachmentList = try! decoder.decode([Attachment].self, from: post.fileAttachments!.data(using: .utf8)!);
-        }
         
         if (self.petPostList.count == 0) {
             return tableView.dequeueReusableCell(withIdentifier: "petPostEmpty")!;
-        } else if (imageAttachementList.count == 0) {
+        } else if (post.imageAttachments == nil || post.imageAttachments!.count == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "petPost") as! UIPetPostCellVC;
             cell.post = post;
-            if (post.pet.photoUrl != nil) {
-                PetUtil.reqHttpFetchPetPhoto(petId: post.pet.id, sender: self) {
-                    (petPhoto) in
-                    cell.petImage.image = petPhoto;
-                };
-            } else {
-                cell.petImage.image = UIImage(named: "ICBaselinePets60WithPadding")!;
-            }
-            cell.authorAndPetNameLabel.text = "\(post.author.nickname) 님의 \(post.pet.name)";
-            cell.contentTextView.text = post.contents;
-            cell.postTagLabel.text = post.serializedHashTags;
-            cell.attachmentFileBtn.setTitle( "첨부파일\(fileAttachmentList.count)개", for: .normal);
-            cell.reqHttpFetchLike();
-            cell.commentBtn.setTitle("댓글 X개", for: .normal);
+            cell.indexPath = indexPath;
+            cell.senderVC = self;
+            cell.initCell();
             return cell;
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "petPostWithImage") as! UIPetPostWithImageCellVC;
-            cell.indexPath = indexPath;
             cell.post = post;
-            if (post.pet.photoUrl != nil) {
-                PetUtil.reqHttpFetchPetPhoto(petId: self.pet!.id, sender: self) {
-                    (petPhoto) in
-                    cell.petImage.image = petPhoto;
-                }
-            } else {
-                cell.petImage.image = UIImage(named: "ICBaselinePets60WithPadding")!;
-            }
-            
-            let swipeLeft = UISwipeGestureRecognizer(target: cell, action: #selector(cell.swipeForNextImage(_:)));
-            swipeLeft.direction = UISwipeGestureRecognizer.Direction.left;
-            let swipeRight = UISwipeGestureRecognizer(target: cell, action: #selector(cell.swipeForPrevImage(_:)));
-            swipeRight.direction = UISwipeGestureRecognizer.Direction.right;
-            cell.postImageView.addGestureRecognizer(swipeLeft);
-            cell.postImageView.addGestureRecognizer(swipeRight);
-            
-            cell.pageControl.numberOfPages = imageAttachementList.count + videoAttachmentList.count;
-            cell.pageControl.currentPage = 0;
-            cell.pageControl.pageIndicatorTintColor = UIColor.lightGray;
-            cell.pageControl.currentPageIndicatorTintColor = UIColor.black;
-            cell.reqHttpFetchPostImage(cell: cell, cellIndex: indexPath, postId: post.id, imageIndex: 0);
-            cell.authorAndPetNameLabel.text = "\(post.author.nickname) 님의 \(post.pet.name)";
-            cell.contentTextView.isScrollEnabled = false;
-            cell.contentTextView.text = post.contents;
-            cell.contentTextView.sizeToFit();
-            cell.postTagLabel.text = post.serializedHashTags;
-            cell.attachmentFileBtn.setTitle( "첨부파일\(fileAttachmentList.count)개", for: .normal);
-            cell.reqHttpFetchLike();
-            cell.commentBtn.setTitle("댓글 X개", for: .normal);
+            cell.indexPath = indexPath;
+            cell.senderVC = self;
+            cell.initCell();
             return cell;
         }
     }
@@ -251,7 +183,7 @@ extension UIMyPetDetailVC: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if (self.petPostTableView.contentOffset.y > self.petPostTableView.contentSize.height - self.petPostTableView.bounds.size.height && !self.isLastPage && !self.isLoading) {
             self.isLoading = true;
-            self.reqHttpFetchPetPosts();
+            PostUtil.reqHttpFetchPetPosts(petId: self.pet!.id, pageIdx: self.loadedPageCnt, sender: self, resHandler: self.petPostFetch);
         }
     }
 }
