@@ -12,6 +12,48 @@ class UIPetPostWithImageCellVC: UIPetPostCellVC {
     @IBOutlet weak var pageControl: UIPageControl!;
     @IBOutlet weak var postImageView: UIImageView!;
     
+    var imageAttachementList: [Attachment] = [];
+    var videoAttachmentList: [Attachment] = [];
+    
+    override func initCell() {
+        self.decodePhotoMetadata();
+        self.decodeVideoMetadata();
+        self.decodeFileMetadata();
+        self.setupImageViewGesture();
+        self.setupImagePagerControl();
+        self.displayPetImage();
+        self.displayPostContents();
+        self.reqHttpFetchPostImage(cell: self, cellIndex: self.indexPath!, postId: self.post!.id, imageIndex: 0);
+    }
+    
+    func decodePhotoMetadata() {
+        if (self.post?.imageAttachments?.data(using: .utf8) != nil) {
+            self.imageAttachementList = try! decoder.decode([Attachment].self, from: self.post!.imageAttachments!.data(using: .utf8)!);
+        }
+    }
+    
+    func decodeVideoMetadata() {
+        if (self.post?.videoAttachments?.data(using: .utf8) != nil) {
+            self.videoAttachmentList = try! decoder.decode([Attachment].self, from: self.post!.videoAttachments!.data(using: .utf8)!);
+        }
+    }
+    
+    func setupImageViewGesture() {
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeForNextImage(_:)));
+        swipeLeft.direction = UISwipeGestureRecognizer.Direction.left;
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeForPrevImage(_:)));
+        swipeRight.direction = UISwipeGestureRecognizer.Direction.right;
+        self.postImageView.addGestureRecognizer(swipeLeft);
+        self.postImageView.addGestureRecognizer(swipeRight);
+    }
+    
+    func setupImagePagerControl() {
+        self.pageControl.numberOfPages = imageAttachementList.count + videoAttachmentList.count;
+        self.pageControl.currentPage = 0;
+        self.pageControl.pageIndicatorTintColor = UIColor.lightGray;
+        self.pageControl.currentPageIndicatorTintColor = UIColor.black;
+    }
+    
     // TODO: 나중에 복수개의 이미지/동영상 불러오는 로직 짜면서 코드 정리 및 범용화할것
     func reqHttpFetchPostImage(cell: UIPetPostWithImageCellVC, cellIndex: IndexPath, postId: Int, imageIndex: Int) {
         let reqApi = "post/image/fetch";
