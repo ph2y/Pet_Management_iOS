@@ -28,6 +28,7 @@ class UIPetPostCellVC: UITableViewCell {
     var indexPath: IndexPath?;
     var post: Post?;
     var fileAttachmentList: [Attachment] = [];
+    var isLikedPost = false;
     
     
     func initCell() {
@@ -60,79 +61,14 @@ class UIPetPostCellVC: UITableViewCell {
         self.contentTextView.sizeToFit();
         self.postTagLabel.text = self.post!.serializedHashTags;
         self.attachmentFileBtn.setTitle("첨부파일\(self.fileAttachmentList.count)개", for: .normal);
-        self.reqHttpFetchLike();
+        PostUtil.reqHttpFetchLike(postId: self.post!.id, sender: self.senderVC!, resHandler: self.displayPostLikes);
         self.commentBtn.setTitle("댓글 X개", for: .normal);
     }
     
-    func reqHttpFetchLike() {
-        let reqApi = "like/fetch";
-        let reqUrl = APIBackendUtil.getUrl(api: reqApi);
-        var reqBody = Dictionary<String, String>();
-        let reqHeader: HTTPHeaders = APIBackendUtil.getAuthHeader();
-        reqBody["postId"] = String(self.post!.id);
-        
-        AF.request(reqUrl, method: .post, parameters: reqBody, encoding: JSONEncoding.default, headers: reqHeader).responseDecodable(of: LikeFetchDto.self) {
-            (res) in
-            guard (res.error == nil) else {
-                APIBackendUtil.logHttpError(reqApi: reqApi, errMsg: res.error?.localizedDescription);
-                self.delegate?.presentPopup(alert: APIBackendUtil.makeHttpErrorPopup(errMsg: res.error?.localizedDescription));
-                return;
-            }
-            guard (res.value?._metadata.status == true) else {
-                self.delegate?.presentPopup(alert: APIBackendUtil.makeHttpErrorPopup(errMsg: res.value?._metadata.message));
-                self.reqHttpUnLike();
-                return;
-            }
-            
-            self.likeBtn.setTitle("좋아요 \(res.value!.likedCount)개", for: .normal);
-        }
-    }
-    
-    func reqHttpLike() {
-        let reqApi = "like/create";
-        let reqUrl = APIBackendUtil.getUrl(api: reqApi);
-        var reqBody = Dictionary<String, String>();
-        let reqHeader: HTTPHeaders = APIBackendUtil.getAuthHeader();
-        reqBody["postId"] = String(self.post!.id);
-        
-        AF.request(reqUrl, method: .post, parameters: reqBody, encoding: JSONEncoding.default, headers: reqHeader).responseDecodable(of: LikeCreateDto.self) {
-            (res) in
-            guard (res.error == nil) else {
-                APIBackendUtil.logHttpError(reqApi: reqApi, errMsg: res.error?.localizedDescription);
-                self.delegate?.presentPopup(alert: APIBackendUtil.makeHttpErrorPopup(errMsg: res.error?.localizedDescription));
-                return;
-            }
-            
-            guard (res.value?._metadata.status == true) else {
-                self.delegate?.presentPopup(alert: APIBackendUtil.makeHttpErrorPopup(errMsg: res.value?._metadata.message));
-                self.reqHttpUnLike();
-                return;
-            }
-            self.reqHttpFetchLike();
-        }
-    }
-    
-    func reqHttpUnLike() {
-        let reqApi = "like/delete";
-        let reqUrl = APIBackendUtil.getUrl(api: reqApi);
-        var reqBody = Dictionary<String, String>();
-        let reqHeader: HTTPHeaders = APIBackendUtil.getAuthHeader();
-        reqBody["postId"] = String(self.post!.id);
-        
-        AF.request(reqUrl, method: .post, parameters: reqBody, encoding: JSONEncoding.default, headers: reqHeader).responseDecodable(of: LikeDeleteDto.self) {
-            (res) in
-            guard (res.error == nil) else {
-                APIBackendUtil.logHttpError(reqApi: reqApi, errMsg: res.error?.localizedDescription);
-                self.delegate?.presentPopup(alert: APIBackendUtil.makeHttpErrorPopup(errMsg: res.error?.localizedDescription));
-                return;
-            }
-            
-            guard (res.value?._metadata.status == true) else {
-                self.delegate?.presentPopup(alert: APIBackendUtil.makeHttpErrorPopup(errMsg: res.value?._metadata.message));
-                return;
-            }
-            self.reqHttpFetchLike();
-        }
+    func displayPostLikes(res: DataResponse<LikeFetchDto, AFError>) {
+        let loginUserDetail =  try! JSONSerialization.jsonObject(with: UserDefaults.standard.object(forKey: "loginAccountDetail") as! Data, options: []) as! [String: Any];
+        self.likeBtn.setTitle("좋아요 \(res.value!.likedCount)개", for: .normal);
+        self.isLikedPost = res.value!.likedAccountIdList.contains(loginUserDetail["id"] as! Int);
     }
     
     // Action Methods
@@ -141,6 +77,16 @@ class UIPetPostCellVC: UITableViewCell {
     @IBAction open func commentBtnOnClick(_ sender: UIButton) {
     }
     @IBAction open func likeBtnOnClick(_ sender: UIButton) {
-        self.reqHttpLike();
+        if (self.isLikedPost) {
+            PostUtil.reqHttpUnLike(postId: self.post!.id, sender: self.senderVC!) {
+                (res) in
+                PostUtil.reqHttpFetchLike(postId: self.post!.id, sender: self.senderVC!, resHandler: self.displayPostLikes);
+            }
+        } else {
+            PostUtil.reqHttpLike(postId: self.post!.id, sender: self.senderVC!) {
+                (res) in
+                PostUtil.reqHttpFetchLike(postId: self.post!.id, sender: self.senderVC!, resHandler: self.displayPostLikes);
+            }
+        }
     }
 }
