@@ -53,6 +53,33 @@ class PostUtil {
         }
     }
     
+    // func reqHttpFetchPosts
+    // No Params
+    // Return Void
+    // Request to the server to get post feed data
+    static func reqHttpFetchPosts(pageIdx: Int, sender: UIViewController, resHandler: @escaping (DataResponse<PetPostFetchDto, AFError>) -> Void) {
+        let reqApi = "post/fetch";
+        let reqUrl = APIBackendUtil.getUrl(api: reqApi);
+        var reqBody = Dictionary<String, String>();
+        let reqHeader: HTTPHeaders = APIBackendUtil.getAuthHeader();
+        reqBody["pageIndex"] = String(pageIdx);
+        
+        AF.request(reqUrl, method: .post, parameters: reqBody, encoding: JSONEncoding.default, headers: reqHeader).responseDecodable(of: PetPostFetchDto.self) {
+            (res) in
+            guard (res.error == nil) else {
+                APIBackendUtil.logHttpError(reqApi: reqApi, errMsg: res.error?.localizedDescription);
+                sender.present(APIBackendUtil.makeHttpErrorPopup(errMsg: res.error?.localizedDescription), animated: true);
+                return;
+            }
+            
+            guard (res.value?._metadata.status == true) else {
+                sender.present(APIBackendUtil.makeHttpErrorPopup(errMsg: res.value?._metadata.message), animated: true);
+                return;
+            }
+            resHandler(res);
+        }
+    }
+    
     // func reqHttpFetchLike
     // No Params
     // Return Void

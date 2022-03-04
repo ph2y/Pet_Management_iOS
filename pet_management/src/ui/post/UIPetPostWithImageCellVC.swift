@@ -27,15 +27,19 @@ class UIPetPostWithImageCellVC: UIPetPostCellVC {
     }
     
     func decodePhotoMetadata() {
-        if (self.post?.imageAttachments?.data(using: .utf8) != nil) {
-            self.imageAttachementList = try! decoder.decode([Attachment].self, from: self.post!.imageAttachments!.data(using: .utf8)!);
+        guard(self.post?.imageAttachments?.data(using: .utf8) != nil) else {
+            self.imageAttachementList = [];
+            return;
         }
+        self.imageAttachementList = try! decoder.decode([Attachment].self, from: self.post!.imageAttachments!.data(using: .utf8)!);
     }
     
     func decodeVideoMetadata() {
-        if (self.post?.videoAttachments?.data(using: .utf8) != nil) {
-            self.videoAttachmentList = try! decoder.decode([Attachment].self, from: self.post!.videoAttachments!.data(using: .utf8)!);
+        guard(self.post?.videoAttachments?.data(using: .utf8) != nil) else {
+            self.videoAttachmentList = [];
+            return;
         }
+        self.videoAttachmentList = try! decoder.decode([Attachment].self, from: self.post!.videoAttachments!.data(using: .utf8)!);
     }
     
     func setupImageViewGesture() {

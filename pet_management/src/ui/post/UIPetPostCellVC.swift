@@ -55,7 +55,7 @@ class UIPetPostCellVC: UITableViewCell {
     }
     
     func displayPostContents() {
-        self.authorAndPetNameLabel.text = "\(post!.author.nickname) 님의 \(self.post!.pet.name)";
+        self.authorAndPetNameLabel.text = "\(self.post!.author.nickname) 님의 \(self.post!.pet.name)";
         self.contentTextView.isScrollEnabled = false;
         self.contentTextView.text = self.post!.contents;
         self.contentTextView.sizeToFit();
