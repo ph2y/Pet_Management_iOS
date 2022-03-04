@@ -592,7 +592,7 @@
         <!--Community-->
         <scene sceneID="WVF-fe-2zH">
             <objects>
-                <viewController id="AZF-q0-ULb" userLabel="Community" sceneMemberID="viewController">
+                <viewController id="AZF-q0-ULb" userLabel="Community" customClass="UICommunityFeedVC" customModule="pet_management" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Wqm-dx-uZV">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -660,6 +660,9 @@
                                                     <state key="normal" title="첨부파일 0개">
                                                         <color key="titleColor" red="0.76862752440000004" green="0.36078432199999999" blue="0.1411764771" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="attachementFileBtnOnClick:" destination="Sy8-zo-HuH" eventType="touchUpInside" id="JdB-MX-ieE"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nfd-bL-GSe">
                                                     <rect key="frame" x="321" y="372.33333333333331" width="53" height="20"/>
@@ -670,6 +673,9 @@
                                                     <state key="normal" title="댓글 0개">
                                                         <color key="titleColor" red="0.76862752440000004" green="0.36078432199999999" blue="0.1411764771" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="commentBtnOnClick:" destination="Sy8-zo-HuH" eventType="touchUpInside" id="X21-xn-K5h"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J27-oh-40S">
                                                     <rect key="frame" x="16" y="372.33333333333331" width="66" height="20"/>
@@ -680,6 +686,9 @@
                                                     <state key="normal" title="좋아요 0개">
                                                         <color key="titleColor" red="0.76862752440000004" green="0.36078432199999999" blue="0.1411764771" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="likeBtnOnClick:" destination="Sy8-zo-HuH" eventType="touchUpInside" id="NWh-vt-lHH"/>
+                                                    </connections>
                                                 </button>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="O1t-BR-5oS">
                                                     <rect key="frame" x="16" y="8.3333333333333357" width="20" height="20"/>
@@ -690,6 +699,9 @@
                                                 </imageView>
                                                 <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="JXS-ri-1bO">
                                                     <rect key="frame" x="138.66666666666666" y="261.33333333333331" width="113" height="25"/>
+                                                    <connections>
+                                                        <action selector="pageChanged:" destination="Sy8-zo-HuH" eventType="valueChanged" id="40H-lv-rFS"/>
+                                                    </connections>
                                                 </pageControl>
                                             </subviews>
                                             <constraints>
@@ -722,6 +734,17 @@
                                                 <constraint firstItem="dVn-LP-RAi" firstAttribute="top" secondItem="oBC-3A-1Im" secondAttribute="top" constant="8" id="zCa-fR-HJe"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="attachmentFileBtn" destination="DhE-4L-0F4" id="CRL-gB-71B"/>
+                                            <outlet property="authorAndPetNameLabel" destination="dVn-LP-RAi" id="ZMd-Jv-VRX"/>
+                                            <outlet property="commentBtn" destination="nfd-bL-GSe" id="aol-Rx-sld"/>
+                                            <outlet property="contentTextView" destination="eUi-iy-EKW" id="7mK-Wi-ygh"/>
+                                            <outlet property="likeBtn" destination="J27-oh-40S" id="u04-ek-vQe"/>
+                                            <outlet property="pageControl" destination="JXS-ri-1bO" id="3IO-vm-W4n"/>
+                                            <outlet property="petImage" destination="O1t-BR-5oS" id="myE-1c-eQt"/>
+                                            <outlet property="postImageView" destination="mUB-1o-033" id="YSl-aU-SpS"/>
+                                            <outlet property="postTagLabel" destination="Iv5-lb-rlw" id="Drj-rB-MQI"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="petPost" rowHeight="177" id="xaB-pc-AK5" customClass="UIPetPostCellVC" customModule="pet_management" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="448.66666603088379" width="390" height="177"/>
@@ -782,6 +805,9 @@
                                                     <state key="normal" title="첨부파일 0개">
                                                         <color key="titleColor" red="0.76862752440000004" green="0.36078432199999999" blue="0.1411764771" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="attachementFileBtnOnClick:" destination="xaB-pc-AK5" eventType="touchUpInside" id="ufi-kt-Cex"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rvM-m3-Vb4">
                                                     <rect key="frame" x="321" y="144.33333333333334" width="53" height="20"/>
@@ -792,6 +818,9 @@
                                                     <state key="normal" title="댓글 0개">
                                                         <color key="titleColor" red="0.76862752440000004" green="0.36078432199999999" blue="0.1411764771" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="commentBtnOnClick:" destination="xaB-pc-AK5" eventType="touchUpInside" id="Wlr-pR-6Lq"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ht5-Fo-7oc">
                                                     <rect key="frame" x="16" y="144.33333333333334" width="66" height="20"/>
@@ -802,6 +831,9 @@
                                                     <state key="normal" title="좋아요 0개">
                                                         <color key="titleColor" red="0.76862752440000004" green="0.36078432199999999" blue="0.1411764771" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="likeBtnOnClick:" destination="xaB-pc-AK5" eventType="touchUpInside" id="ktn-VR-VRQ"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -829,6 +861,15 @@
                                                 <constraint firstItem="sVs-GI-jok" firstAttribute="top" secondItem="hNk-9i-c1e" secondAttribute="top" constant="8" id="yM3-8v-FRx"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="attachmentFileBtn" destination="yBf-fS-nNg" id="gzF-NV-shr"/>
+                                            <outlet property="authorAndPetNameLabel" destination="sVs-GI-jok" id="1LX-xu-lez"/>
+                                            <outlet property="commentBtn" destination="rvM-m3-Vb4" id="Ej3-Hv-5Yg"/>
+                                            <outlet property="contentTextView" destination="ZJo-BH-wHC" id="7zD-kd-noG"/>
+                                            <outlet property="likeBtn" destination="ht5-Fo-7oc" id="ezg-QD-s3W"/>
+                                            <outlet property="petImage" destination="KRj-Nb-yWY" id="6g8-27-sBr"/>
+                                            <outlet property="postTagLabel" destination="pI8-Tv-EqR" id="8TQ-Xu-aaY"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="petPostEmpty" id="QlF-c0-hNu">
                                         <rect key="frame" x="0.0" y="625.66666603088379" width="390" height="43.666667938232422"/>
@@ -861,6 +902,9 @@
                     </view>
                     <navigationItem key="navigationItem" title="커뮤니티" id="T0x-ty-OyQ"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="postFeedTableView" destination="7bd-ur-wnL" id="f7O-Rk-CbM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TU3-Ka-pBd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

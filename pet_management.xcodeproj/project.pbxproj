@@ -52,6 +52,7 @@
 		8FAA0E3E279D87A200E400F3 /* PetPhotoUpdateDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAA0E3D279D87A200E400F3 /* PetPhotoUpdateDto.swift */; };
 		8FAA0E42279D960200E400F3 /* PetDeleteDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAA0E41279D960200E400F3 /* PetDeleteDto.swift */; };
 		8FAC8C4227BCEB120082AAC0 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAC8C4127BCEB120082AAC0 /* Attachment.swift */; };
+		8FB493CB27D1EC19007EFEFA /* UICommunityFeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB493CA27D1EC19007EFEFA /* UICommunityFeedVC.swift */; };
 		8FCEAFCF2794007D00CD8DA6 /* UIFindAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCEAFCE2794007D00CD8DA6 /* UIFindAccountVC.swift */; };
 		8FCEAFD12794009000CD8DA6 /* UIFindAccountUsernameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCEAFD02794009000CD8DA6 /* UIFindAccountUsernameVC.swift */; };
 		8FCEAFD32794009A00CD8DA6 /* UIFindAccountPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCEAFD22794009A00CD8DA6 /* UIFindAccountPasswordVC.swift */; };
@@ -151,6 +152,7 @@
 		8FAA0E3D279D87A200E400F3 /* PetPhotoUpdateDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetPhotoUpdateDto.swift; sourceTree = "<group>"; };
 		8FAA0E41279D960200E400F3 /* PetDeleteDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetDeleteDto.swift; sourceTree = "<group>"; };
 		8FAC8C4127BCEB120082AAC0 /* Attachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
+		8FB493CA27D1EC19007EFEFA /* UICommunityFeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICommunityFeedVC.swift; sourceTree = "<group>"; };
 		8FCEAFCE2794007D00CD8DA6 /* UIFindAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFindAccountVC.swift; sourceTree = "<group>"; };
 		8FCEAFD02794009000CD8DA6 /* UIFindAccountUsernameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFindAccountUsernameVC.swift; sourceTree = "<group>"; };
 		8FCEAFD22794009A00CD8DA6 /* UIFindAccountPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFindAccountPasswordVC.swift; sourceTree = "<group>"; };
@@ -383,6 +385,14 @@
 			path = post;
 			sourceTree = "<group>";
 		};
+		8FB493C927D1EBD3007EFEFA /* community */ = {
+			isa = PBXGroup;
+			children = (
+				8FB493CA27D1EC19007EFEFA /* UICommunityFeedVC.swift */,
+			);
+			path = community;
+			sourceTree = "<group>";
+		};
 		8FCEAFCD2794007100CD8DA6 /* findAccount */ = {
 			isa = PBXGroup;
 			children = (
@@ -486,6 +496,7 @@
 		8FFCCF5727915B2800911F3C /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				8FB493C927D1EBD3007EFEFA /* community */,
 				8FA8AAA827BCE7D6009F5561 /* post */,
 				8F37F784279AACB00004394D /* myschedule */,
 				8F37F783279AACA30004394D /* mypet */,
@@ -708,6 +719,7 @@
 				8FAC8C4227BCEB120082AAC0 /* Attachment.swift in Sources */,
 				8FAA0E34279D6CEF00E400F3 /* UIBorderView.swift in Sources */,
 				8F25E7E12792E017005070D6 /* AccountVerifyAuthCodeDto.swift in Sources */,
+				8FB493CB27D1EC19007EFEFA /* UICommunityFeedVC.swift in Sources */,
 				8FA8AAAC27BCE806009F5561 /* UIPetPostCellVC.swift in Sources */,
 				8F25E7E32792E39F005070D6 /* AccountCreateDto.swift in Sources */,
 				8F9564F9279802CA00AE577B /* UIUtil.swift in Sources */,
