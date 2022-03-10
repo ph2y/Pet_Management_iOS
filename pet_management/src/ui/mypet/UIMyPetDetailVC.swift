@@ -123,10 +123,10 @@ class UIMyPetDetailVC: UIViewController, UIPetPostCellDelegate {
     }
     
     // func petPostFetch
-    // Param res: DataResponse<PetPostFetchDto, AFError> - http response/error
+    // Param res: DataResponse<PostFetchDto, AFError> - http response/error
     // Return Void
     // Append post to feed that loaded from server
-    func petPostFetch(res: DataResponse<PetPostFetchDto, AFError>) {
+    func petPostFetch(res: DataResponse<PostFetchDto, AFError>) {
         self.petPostList.append(contentsOf: res.value?.postList ?? []);
         self.petPostTableView.reloadData();
         self.loadedPageCnt += 1;

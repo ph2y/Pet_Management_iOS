@@ -21,7 +21,7 @@ class UIMyPetScheduleEditorVC: UIViewController {
     
     override func viewDidLoad() {
         // Load pet list data
-        if UserDefaults.standard.object(forKey: "myPetList") != nil {
+        if (UserDefaults.standard.object(forKey: "myPetList") != nil) {
             let data = UserDefaults.standard.value(forKey: "myPetList") as! Data;
             self.myPetList = try! PropertyListDecoder().decode([Pet].self, from: data);
         }
