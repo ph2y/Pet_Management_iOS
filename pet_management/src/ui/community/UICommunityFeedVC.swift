@@ -59,15 +59,20 @@ class UICommunityFeedVC: UIViewController {
     }
     
     // func petPostFetch
-    // Param res: DataResponse<PetPostFetchDto, AFError> - http response/error
+    // Param res: DataResponse<PostFetchDto, AFError> - http response/error
     // Return Void
     // Append post to feed that loaded from server
-    func postFetch(res: DataResponse<PetPostFetchDto, AFError>) {
+    func postFetch(res: DataResponse<PostFetchDto, AFError>) {
         self.postList.append(contentsOf: res.value?.postList ?? []);
         self.postFeedTableView.reloadData();
         self.loadedPageCnt += 1;
         self.isLastPage = res.value!.isLast;
         self.isLoading = false;
+    }
+    
+    // Action Methods
+    @IBAction func unwindToCommunityFeed(_ segue: UIStoryboardSegue) {
+        self.refreshPostFeed();
     }
 }
 

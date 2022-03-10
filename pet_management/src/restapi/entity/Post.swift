@@ -25,11 +25,36 @@ struct Post: Decodable, Encodable {
 }
 
 class PostUtil {
-    // func repHttpFetchPetPosts
+    // func reqHttpCreatePost
+    // No Params
+    // Return post: Post - Post content & data
+    // Request to the server to get pet posts data
+    static func reqHttpCreatePost(postContent: PostCreateParam, sender: UIViewController, resHandler: @escaping (DataResponse<PostCreateDto, AFError>) -> Void) {
+        let reqApi = "post/create";
+        let reqUrl = APIBackendUtil.getUrl(api: reqApi);
+        let reqHeader: HTTPHeaders = APIBackendUtil.getAuthHeader();
+        
+        AF.request(reqUrl, method: .post, parameters: postContent, encoder: JSONParameterEncoder.default, headers: reqHeader).responseDecodable(of: PostCreateDto.self) {
+            (res) in
+            guard (res.error == nil) else {
+                APIBackendUtil.logHttpError(reqApi: reqApi, errMsg: res.error?.localizedDescription);
+                sender.present(APIBackendUtil.makeHttpErrorPopup(errMsg: res.error?.localizedDescription), animated: true);
+                return;
+            }
+            
+            guard (res.value?._metadata.status == true) else {
+                sender.present(APIBackendUtil.makeHttpErrorPopup(errMsg: res.value?._metadata.message), animated: true);
+                return;
+            }
+            resHandler(res);
+        }
+    }
+    
+    // func reqHttpFetchPetPosts
     // No Params
     // Return Void
     // Request to the server to get pet posts data
-    static func reqHttpFetchPetPosts(petId: Int, pageIdx: Int, sender: UIViewController, resHandler: @escaping (DataResponse<PetPostFetchDto, AFError>) -> Void) {
+    static func reqHttpFetchPetPosts(petId: Int, pageIdx: Int, sender: UIViewController, resHandler: @escaping (DataResponse<PostFetchDto, AFError>) -> Void) {
         let reqApi = "post/fetch";
         let reqUrl = APIBackendUtil.getUrl(api: reqApi);
         var reqBody = Dictionary<String, String>();
@@ -37,7 +62,7 @@ class PostUtil {
         reqBody["pageIndex"] = String(pageIdx);
         reqBody["petId"] = String(petId);
         
-        AF.request(reqUrl, method: .post, parameters: reqBody, encoding: JSONEncoding.default, headers: reqHeader).responseDecodable(of: PetPostFetchDto.self) {
+        AF.request(reqUrl, method: .post, parameters: reqBody, encoding: JSONEncoding.default, headers: reqHeader).responseDecodable(of: PostFetchDto.self) {
             (res) in
             guard (res.error == nil) else {
                 APIBackendUtil.logHttpError(reqApi: reqApi, errMsg: res.error?.localizedDescription);
@@ -57,14 +82,14 @@ class PostUtil {
     // No Params
     // Return Void
     // Request to the server to get post feed data
-    static func reqHttpFetchPosts(pageIdx: Int, sender: UIViewController, resHandler: @escaping (DataResponse<PetPostFetchDto, AFError>) -> Void) {
+    static func reqHttpFetchPosts(pageIdx: Int, sender: UIViewController, resHandler: @escaping (DataResponse<PostFetchDto, AFError>) -> Void) {
         let reqApi = "post/fetch";
         let reqUrl = APIBackendUtil.getUrl(api: reqApi);
         var reqBody = Dictionary<String, String>();
         let reqHeader: HTTPHeaders = APIBackendUtil.getAuthHeader();
         reqBody["pageIndex"] = String(pageIdx);
         
-        AF.request(reqUrl, method: .post, parameters: reqBody, encoding: JSONEncoding.default, headers: reqHeader).responseDecodable(of: PetPostFetchDto.self) {
+        AF.request(reqUrl, method: .post, parameters: reqBody, encoding: JSONEncoding.default, headers: reqHeader).responseDecodable(of: PostFetchDto.self) {
             (res) in
             guard (res.error == nil) else {
                 APIBackendUtil.logHttpError(reqApi: reqApi, errMsg: res.error?.localizedDescription);
