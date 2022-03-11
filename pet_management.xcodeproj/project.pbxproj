@@ -11,6 +11,8 @@
 		8F038FAA279E764000283867 /* UIMyPetScheduleEditorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F038FA9279E764000283867 /* UIMyPetScheduleEditorVC.swift */; };
 		8F038FAE279E803700283867 /* PetSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F038FAD279E803700283867 /* PetSchedule.swift */; };
 		8F038FB0279E8D8B00283867 /* PetScheduleUpdateDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F038FAF279E8D8B00283867 /* PetScheduleUpdateDto.swift */; };
+		8F084A1E27D9E6C2003E3F5C /* BSImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = 8F084A1D27D9E6C2003E3F5C /* BSImagePicker */; };
+		8F084A2027D9F137003E3F5C /* UIPostEditorThumbnailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F084A1F27D9F137003E3F5C /* UIPostEditorThumbnailVC.swift */; };
 		8F1D0985279418E2000CBC26 /* EmailVerificationTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1D0984279418E2000CBC26 /* EmailVerificationTimer.swift */; };
 		8F1D0987279426F1000CBC26 /* AccountRecoverPasswordDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1D0986279426F1000CBC26 /* AccountRecoverPasswordDto.swift */; };
 		8F2016B1279FA307007B34B9 /* PetScheduleFetchDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2016B0279FA307007B34B9 /* PetScheduleFetchDto.swift */; };
@@ -44,6 +46,7 @@
 		8FA58B3A279AEE0900B83D00 /* AccountFetchDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA58B39279AEE0900B83D00 /* AccountFetchDto.swift */; };
 		8FA8AAAC27BCE806009F5561 /* UIPetPostCellVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA8AAAB27BCE806009F5561 /* UIPetPostCellVC.swift */; };
 		8FA8AAAE27BCE80E009F5561 /* UIPetPostWithImageCellVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA8AAAD27BCE80E009F5561 /* UIPetPostWithImageCellVC.swift */; };
+		8FA8FCED27DB325A00F937A4 /* UIPostEditorFileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA8FCEC27DB325A00F937A4 /* UIPostEditorFileVC.swift */; };
 		8FAA0E34279D6CEF00E400F3 /* UIBorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAA0E33279D6CEF00E400F3 /* UIBorderView.swift */; };
 		8FAA0E36279D748600E400F3 /* UIMyPetEditorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAA0E35279D748600E400F3 /* UIMyPetEditorVC.swift */; };
 		8FAA0E38279D749100E400F3 /* UIMyPetDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAA0E37279D749100E400F3 /* UIMyPetDetailVC.swift */; };
@@ -114,6 +117,7 @@
 		8F038FA9279E764000283867 /* UIMyPetScheduleEditorVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIMyPetScheduleEditorVC.swift; sourceTree = "<group>"; };
 		8F038FAD279E803700283867 /* PetSchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetSchedule.swift; sourceTree = "<group>"; };
 		8F038FAF279E8D8B00283867 /* PetScheduleUpdateDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetScheduleUpdateDto.swift; sourceTree = "<group>"; };
+		8F084A1F27D9F137003E3F5C /* UIPostEditorThumbnailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPostEditorThumbnailVC.swift; sourceTree = "<group>"; };
 		8F1D0984279418E2000CBC26 /* EmailVerificationTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationTimer.swift; sourceTree = "<group>"; };
 		8F1D0986279426F1000CBC26 /* AccountRecoverPasswordDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRecoverPasswordDto.swift; sourceTree = "<group>"; };
 		8F2016B0279FA307007B34B9 /* PetScheduleFetchDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetScheduleFetchDto.swift; sourceTree = "<group>"; };
@@ -146,6 +150,7 @@
 		8FA58B39279AEE0900B83D00 /* AccountFetchDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountFetchDto.swift; sourceTree = "<group>"; };
 		8FA8AAAB27BCE806009F5561 /* UIPetPostCellVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPetPostCellVC.swift; sourceTree = "<group>"; };
 		8FA8AAAD27BCE80E009F5561 /* UIPetPostWithImageCellVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPetPostWithImageCellVC.swift; sourceTree = "<group>"; };
+		8FA8FCEC27DB325A00F937A4 /* UIPostEditorFileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPostEditorFileVC.swift; sourceTree = "<group>"; };
 		8FAA0E33279D6CEF00E400F3 /* UIBorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBorderView.swift; sourceTree = "<group>"; };
 		8FAA0E35279D748600E400F3 /* UIMyPetEditorVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIMyPetEditorVC.swift; sourceTree = "<group>"; };
 		8FAA0E37279D749100E400F3 /* UIMyPetDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIMyPetDetailVC.swift; sourceTree = "<group>"; };
@@ -204,6 +209,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F25E7D92792D280005070D6 /* Alamofire in Frameworks */,
+				8F084A1E27D9E6C2003E3F5C /* BSImagePicker in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,6 +394,8 @@
 				8FA8AAAD27BCE80E009F5561 /* UIPetPostWithImageCellVC.swift */,
 				8FB493CA27D1EC19007EFEFA /* UICommunityFeedVC.swift */,
 				8FE4F96927D99EE500B6333D /* UIPostEditorVC.swift */,
+				8F084A1F27D9F137003E3F5C /* UIPostEditorThumbnailVC.swift */,
+				8FA8FCEC27DB325A00F937A4 /* UIPostEditorFileVC.swift */,
 			);
 			path = community;
 			sourceTree = "<group>";
@@ -542,6 +550,7 @@
 			name = pet_management;
 			packageProductDependencies = (
 				8F25E7D82792D280005070D6 /* Alamofire */,
+				8F084A1D27D9E6C2003E3F5C /* BSImagePicker */,
 			);
 			productName = pet_management;
 			productReference = 8FF00FF127901B8D0087913B /* pet_management.app */;
@@ -617,6 +626,7 @@
 			mainGroup = 8FF00FE827901B8D0087913B;
 			packageReferences = (
 				8F25E7D72792D280005070D6 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				8F084A1C27D9E6C2003E3F5C /* XCRemoteSwiftPackageReference "BSImagePicker" */,
 			);
 			productRefGroup = 8FF00FF227901B8D0087913B /* Products */;
 			projectDirPath = "";
@@ -703,6 +713,7 @@
 				8F25E7DC2792D51B005070D6 /* AccountSendAuthCodeDto.swift in Sources */,
 				8F37F788279AACE40004394D /* UIMyPetCardVC.swift in Sources */,
 				8F95BB6827C745E600ED7630 /* PetPhotoDeleteDto.swift in Sources */,
+				8F084A2027D9F137003E3F5C /* UIPostEditorThumbnailVC.swift in Sources */,
 				8F25E7D32792B103005070D6 /* UICreateAccountDetailsVC.swift in Sources */,
 				8F2016B1279FA307007B34B9 /* PetScheduleFetchDto.swift in Sources */,
 				8FFCCF612791739800911F3C /* UICreateAccountTermsVC.swift in Sources */,
@@ -734,6 +745,7 @@
 				8FA58B3A279AEE0900B83D00 /* AccountFetchDto.swift in Sources */,
 				8F82F34327BE2D9A00571697 /* LikeFetchDto.swift in Sources */,
 				8F82F34127BE284800571697 /* LikeDeleteDto.swift in Sources */,
+				8FA8FCED27DB325A00F937A4 /* UIPostEditorFileVC.swift in Sources */,
 				8FF00FF727901B8D0087913B /* SceneDelegate.swift in Sources */,
 				8F038FB0279E8D8B00283867 /* PetScheduleUpdateDto.swift in Sources */,
 				8FA426A627BA4CF5008FBD43 /* Account.swift in Sources */,
@@ -1084,6 +1096,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		8F084A1C27D9E6C2003E3F5C /* XCRemoteSwiftPackageReference "BSImagePicker" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mikaoj/BSImagePicker.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 		8F25E7D72792D280005070D6 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -1095,6 +1115,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		8F084A1D27D9E6C2003E3F5C /* BSImagePicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8F084A1C27D9E6C2003E3F5C /* XCRemoteSwiftPackageReference "BSImagePicker" */;
+			productName = BSImagePicker;
+		};
 		8F25E7D82792D280005070D6 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8F25E7D72792D280005070D6 /* XCRemoteSwiftPackageReference "Alamofire" */;
