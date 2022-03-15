@@ -6,6 +6,7 @@
 //
 
 import UIKit;
+import AVKit;
 import BSImagePicker;
 import Photos;
 
@@ -232,6 +233,82 @@ class UIPostEditorVC: UIViewController, UIPostEditorDelegate {
             self.attachedFileScrollView.contentSize.height = recordHeight;
         }
     }
+    
+    func uploadPhotoList(postId: Int) {
+        let imageManager = PHImageManager.default();
+        let option = PHImageRequestOptions();
+        option.isSynchronous = true;
+        
+        PostUtil.reqHttpUpdatePostFile(postId: postId, fileType: "IMAGE_FILE", fileList: self.uploadAttachPhoto.map({
+            (asset) in
+            var photo = UIImage();
+            imageManager.requestImage(for: asset, targetSize: CGSize(width: 1000, height: 1000), contentMode: .aspectFit, options: option) {
+                (result, info) in
+                photo = result!;
+            }
+            return photo.jpegData(compressionQuality: 0.7)!;
+        }), sender: self) {
+            (res) in
+            if (self.fromMyPetFeed) {
+                self.performSegue(withIdentifier: "publishPostFromMyPetSegue", sender: self);
+            } else {
+                self.performSegue(withIdentifier: "publishPostFromFeedSegue", sender: self);
+            }
+        }
+    }
+    
+    func uploadVideoList(postId: Int) {
+        let semaphore = DispatchSemaphore(value: 0);
+        let videoManager = PHImageManager();
+        let option = PHVideoRequestOptions();
+        option.version = .original;
+        
+        var uploadVideoDataList: [Data] = [];
+        
+        for asset in self.uploadAttachVideo {
+            videoManager.requestAVAsset(forVideo: asset, options: option) {
+                (asset: AVAsset?, audioMix: AVAudioMix?, info: [AnyHashable : Any]?) in
+                let videoUrl = asset as? AVURLAsset;
+                guard (videoUrl != nil) else {
+                    return;
+                }
+                guard let videoData = try? Data(contentsOf: videoUrl!.url) else {
+                    return;
+                }
+                uploadVideoDataList.append(videoData);
+                semaphore.signal();
+            }
+            semaphore.wait();
+        }
+        
+        PostUtil.reqHttpUpdatePostFile(postId: postId, fileType: "VIDEO_FILE", fileList: uploadVideoDataList, sender: self) {
+            (res) in
+            if (self.fromMyPetFeed) {
+                self.performSegue(withIdentifier: "publishPostFromMyPetSegue", sender: self);
+            } else {
+                self.performSegue(withIdentifier: "publishPostFromFeedSegue", sender: self);
+            }
+        }
+    }
+    
+    func uploadFileList(postId: Int) {
+        var uploadFileDataList: [Data] = [];
+        for url in self.uploadAttachFile {
+            guard let fileData = try? Data(contentsOf: url) else {
+                return;
+            }
+            uploadFileDataList.append(fileData);
+        }
+        
+        PostUtil.reqHttpUpdatePostFile(postId: postId, fileType: "GENERAL_FILE", fileList: uploadFileDataList, sender: self) {
+            (res) in
+            if (self.fromMyPetFeed) {
+                self.performSegue(withIdentifier: "publishPostFromMyPetSegue", sender: self);
+            } else {
+                self.performSegue(withIdentifier: "publishPostFromFeedSegue", sender: self);
+            }
+        }
+    }
 
     
     // Action Methods
@@ -270,6 +347,7 @@ class UIPostEditorVC: UIViewController, UIPostEditorDelegate {
             1: "FRIEND",
             2: "PRIVATE"
         ];
+        
         self.newPost.contents = self.postContentTextView.text;
         self.newPost.hashTags = self.postTagTextField.text!.components(separatedBy: ",");
         self.newPost.disclosure = disclosureString[self.postDisclosureSegmentedControl.selectedSegmentIndex] ?? "PUBLIC";
@@ -280,10 +358,21 @@ class UIPostEditorVC: UIViewController, UIPostEditorDelegate {
         
         PostUtil.reqHttpCreatePost(postContent: self.newPost, sender: self) {
             (res) in
-            if (self.fromMyPetFeed) {
-                self.performSegue(withIdentifier: "publishPostFromMyPetSegue", sender: self);
-            } else {
-                self.performSegue(withIdentifier: "publishPostFromFeedSegue", sender: self);
+            if (self.uploadAttachPhoto.isEmpty && self.uploadAttachVideo.isEmpty && self.uploadAttachFile.isEmpty) {
+                if (self.fromMyPetFeed) {
+                    self.performSegue(withIdentifier: "publishPostFromMyPetSegue", sender: self);
+                } else {
+                    self.performSegue(withIdentifier: "publishPostFromFeedSegue", sender: self);
+                }
+            }
+            if (!self.uploadAttachPhoto.isEmpty) {
+                self.uploadPhotoList(postId: res.value!.id);
+            }
+            if (!self.uploadAttachVideo.isEmpty) {
+                self.uploadVideoList(postId: res.value!.id);
+            }
+            if (!self.uploadAttachFile.isEmpty) {
+                self.uploadFileList(postId: res.value!.id);
             }
         }
     }
@@ -314,7 +403,6 @@ extension UIPostEditorVC: UITextViewDelegate {
 
 // Extension - UIDocumentPickerDelegate delegate
 extension UIPostEditorVC: UIDocumentPickerDelegate {
-    
     public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         // TODO: 장래 애플 API 업데이트시 한꺼번에 다중 선택이 가능하도록 개선
         // API 문제로 multipleSelect 옵션이 작동하지 않아 1개씩 추가만 가능 (파일 1개를 선택하면 창이 닫힘)
