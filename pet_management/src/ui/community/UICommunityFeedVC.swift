@@ -89,6 +89,7 @@ extension UICommunityFeedVC: UITableViewDelegate, UITableViewDataSource {
         } else if (post.imageAttachments == nil || post.imageAttachments!.count == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "petPost") as! UIPetPostCellVC;
             cell.post = post;
+            cell.fileAttachmentList = PostUtil.decodeFileMetadata(post: post);
             cell.indexPath = indexPath;
             cell.senderVC = self;
             cell.delegate = self;
@@ -97,6 +98,7 @@ extension UICommunityFeedVC: UITableViewDelegate, UITableViewDataSource {
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "petPostWithImage") as! UIPetPostWithImageCellVC;
             cell.post = post;
+            cell.fileAttachmentList = PostUtil.decodeFileMetadata(post: post);
             cell.indexPath = indexPath;
             cell.senderVC = self;
             cell.delegate = self;
