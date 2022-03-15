@@ -1442,11 +1442,11 @@
             <objects>
                 <viewController id="pa4-Hn-xHM" userLabel="Comment" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Wn3-wo-SoP">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="SUf-zp-6lf">
-                                <rect key="frame" x="0.0" y="88" width="390" height="622"/>
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="705"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PostCommentCell" rowHeight="110" id="V3w-i8-CEr">
@@ -1542,7 +1542,7 @@
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9wg-j2-C1Q">
-                                <rect key="frame" x="339" y="718" width="35" height="35"/>
+                                <rect key="frame" x="339" y="713" width="35" height="35"/>
                                 <color key="backgroundColor" red="0.76862752440000004" green="0.36078432199999999" blue="0.1411764771" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="35" id="21U-bk-Nmi"/>
@@ -1558,7 +1558,7 @@
                                 </userDefinedRuntimeAttributes>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nZy-eg-fRU">
-                                <rect key="frame" x="16" y="719" width="307" height="34"/>
+                                <rect key="frame" x="16" y="714" width="307" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="g7X-Jn-xAt"/>
                                 </constraints>

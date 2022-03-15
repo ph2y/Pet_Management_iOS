@@ -105,6 +105,44 @@ class PostUtil {
         }
     }
     
+    // func reqHttpUpdatePostFile
+    static func reqHttpUpdatePostFile(postId: Int, fileType: String, fileList: [Data], sender: UIViewController, resHandler: @escaping (DataResponse<PostUpdateFileDto, AFError>) -> Void) {
+        let reqApi = "post/file/update";
+        let reqUrl = APIBackendUtil.getUrl(api: reqApi);
+        let reqHeader: HTTPHeaders = APIBackendUtil.getAuthHeader();
+        
+        AF.upload(multipartFormData: {
+            (formdata) in
+            formdata.append(String(postId).data(using: .utf8)!, withName: "id");
+            formdata.append(fileType.data(using: .utf8)!, withName: "fileType");
+            for (index, file) in fileList.enumerated() {
+                if (fileType == "IMAGE_FILE") {
+                    formdata.append(file, withName: "fileList[\(index)]", fileName: "swift_new_post\(postId)_photo_\(index).jpg");
+                }
+                if (fileType == "VIDEO_FILE") {
+                    formdata.append(file, withName: "fileList[\(index)]", fileName: "swift_new_post\(postId)_video_\(index).mp4");
+                }
+                if (fileType == "GENERAL_FILE") {
+                    formdata.append(file, withName: "fileList[\(index)]", fileName: "swift_new_post\(postId)_general_\(index)");
+                }
+            }
+        }, to: reqUrl, headers: reqHeader).responseDecodable(of: PostUpdateFileDto.self) {
+            (res) in
+            guard (res.error == nil) else {
+                APIBackendUtil.logHttpError(reqApi: reqApi, errMsg: res.error?.localizedDescription);
+                sender.present(APIBackendUtil.makeHttpErrorPopup(errMsg: res.error?.localizedDescription), animated: true);
+                return;
+            }
+
+            guard (res.value?._metadata.status == true) else {
+                sender.present(APIBackendUtil.makeHttpErrorPopup(errMsg: res.value?._metadata.message), animated: true);
+                return;
+            }
+            
+            resHandler(res);
+        }
+    }
+    
     // func reqHttpFetchLike
     // No Params
     // Return Void
