@@ -163,6 +163,7 @@ extension UIMyPetDetailVC: UITableViewDelegate, UITableViewDataSource {
             cell.post = post;
             cell.indexPath = indexPath;
             cell.senderVC = self;
+            cell.delegate = self;
             cell.initCell();
             return cell;
         } else {
@@ -170,6 +171,7 @@ extension UIMyPetDetailVC: UITableViewDelegate, UITableViewDataSource {
             cell.post = post;
             cell.indexPath = indexPath;
             cell.senderVC = self;
+            cell.delegate = self;
             cell.initCell();
             return cell;
         }

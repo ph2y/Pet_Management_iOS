@@ -632,6 +632,9 @@
                                                     <color key="tintColor" red="0.76862752440000004" green="0.36078432199999999" blue="0.1411764771" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                     <state key="normal" image="list.bullet" catalog="system"/>
+                                                    <connections>
+                                                        <action selector="postMenuBtnOnClick:" destination="Sy8-zo-HuH" eventType="touchUpInside" id="y06-s5-XlF"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#태그1, #태그2, #태그3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iv5-lb-rlw">
                                                     <rect key="frame" x="16" y="344.66666666666669" width="164" height="20"/>
@@ -778,6 +781,9 @@
                                                     <color key="tintColor" red="0.76862752440000004" green="0.36078432199999999" blue="0.1411764771" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                     <state key="normal" image="list.bullet" catalog="system"/>
+                                                    <connections>
+                                                        <action selector="postMenuBtnOnClick:" destination="xaB-pc-AK5" eventType="touchUpInside" id="2cf-sr-PWu"/>
+                                                    </connections>
                                                 </button>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="500" verticalCompressionResistancePriority="100" scrollEnabled="NO" editable="NO" text="글 내용" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZJo-BH-wHC">
                                                     <rect key="frame" x="16" y="33.666666666666657" width="358" height="75"/>
@@ -1442,11 +1448,11 @@
             <objects>
                 <viewController id="pa4-Hn-xHM" userLabel="Comment" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Wn3-wo-SoP">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="SUf-zp-6lf">
-                                <rect key="frame" x="0.0" y="0.0" width="390" height="705"/>
+                                <rect key="frame" x="0.0" y="88" width="390" height="622"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PostCommentCell" rowHeight="110" id="V3w-i8-CEr">
@@ -1542,7 +1548,7 @@
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9wg-j2-C1Q">
-                                <rect key="frame" x="339" y="713" width="35" height="35"/>
+                                <rect key="frame" x="339" y="718" width="35" height="35"/>
                                 <color key="backgroundColor" red="0.76862752440000004" green="0.36078432199999999" blue="0.1411764771" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="35" id="21U-bk-Nmi"/>
@@ -1558,7 +1564,7 @@
                                 </userDefinedRuntimeAttributes>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nZy-eg-fRU">
-                                <rect key="frame" x="16" y="714" width="307" height="34"/>
+                                <rect key="frame" x="16" y="719" width="307" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="g7X-Jn-xAt"/>
                                 </constraints>
@@ -2628,6 +2634,9 @@
                                                     <color key="tintColor" red="0.76862752440000004" green="0.36078432199999999" blue="0.1411764771" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                     <state key="normal" image="list.bullet" catalog="system"/>
+                                                    <connections>
+                                                        <action selector="postMenuBtnOnClick:" destination="rJX-j1-2u6" eventType="touchUpInside" id="fr3-Gu-8Zf"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#태그1, #태그2, #태그3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L4M-g4-Bg5">
                                                     <rect key="frame" x="16" y="344.66666666666669" width="164" height="20"/>
@@ -2774,6 +2783,9 @@
                                                     <color key="tintColor" red="0.76862752440000004" green="0.36078432199999999" blue="0.1411764771" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                     <state key="normal" image="list.bullet" catalog="system"/>
+                                                    <connections>
+                                                        <action selector="postMenuBtnOnClick:" destination="oMk-sO-wT2" eventType="touchUpInside" id="t4I-Ud-Jek"/>
+                                                    </connections>
                                                 </button>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="500" verticalCompressionResistancePriority="100" scrollEnabled="NO" editable="NO" text="글 내용" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fva-5q-6cQ">
                                                     <rect key="frame" x="16" y="33.666666666666657" width="358" height="75"/>
@@ -3499,7 +3511,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="ZYl-VA-9Xc"/>
-        <segue reference="phL-mf-GgB"/>
+        <segue reference="1Xi-ok-rkT"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="AppIconWithoutBackground.png" width="139" height="128"/>
