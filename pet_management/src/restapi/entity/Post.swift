@@ -25,6 +25,18 @@ struct Post: Decodable, Encodable {
 }
 
 class PostUtil {
+    // func decodeFileMetadata
+    static func decodeFileMetadata(post: Post) -> [Attachment] {
+        let decoder = JSONDecoder();
+        guard (post.fileAttachments != nil) else {
+            return [];
+        }
+        if (post.fileAttachments!.data(using: .utf8) != nil) {
+            return try! decoder.decode([Attachment].self, from: post.fileAttachments!.data(using: .utf8)!);
+        }
+        return [];
+    }
+    
     // func reqHttpCreatePost
     // No Params
     // Return post: Post - Post content & data

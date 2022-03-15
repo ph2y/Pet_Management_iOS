@@ -20,27 +20,17 @@ class UIPetPostCellVC: UITableViewCell {
     @IBOutlet open weak var attachmentFileBtn: UIButton!;
     @IBOutlet open weak var commentBtn: UIButton!;
     @IBOutlet open weak var likeBtn: UIButton!;
-
-    let decoder = JSONDecoder();
-    weak var delegate: UIPetPostCellDelegate?;
     
+    weak var delegate: UIPetPostCellDelegate?;
     var senderVC: UIViewController?;
     var indexPath: IndexPath?;
     var post: Post?;
     var fileAttachmentList: [Attachment] = [];
     var isLikedPost = false;
     
-    
     func initCell() {
-        self.decodeFileMetadata();
         self.displayPetImage();
         self.displayPostContents();
-    }
-    
-    func decodeFileMetadata() {
-        if (self.post?.fileAttachments?.data(using: .utf8) != nil) {
-            self.fileAttachmentList = try! decoder.decode([Attachment].self, from: self.post!.fileAttachments!.data(using: .utf8)!);
-        }
     }
     
     func displayPetImage() {

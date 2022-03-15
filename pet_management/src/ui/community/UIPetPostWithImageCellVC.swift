@@ -14,11 +14,11 @@ class UIPetPostWithImageCellVC: UIPetPostCellVC {
     
     var imageAttachementList: [Attachment] = [];
     var videoAttachmentList: [Attachment] = [];
+    let decoder = JSONDecoder();
     
     override func initCell() {
         self.decodePhotoMetadata();
         self.decodeVideoMetadata();
-        self.decodeFileMetadata();
         self.setupImageViewGesture();
         self.setupImagePagerControl();
         self.displayPetImage();

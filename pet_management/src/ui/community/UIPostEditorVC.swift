@@ -302,6 +302,17 @@ class UIPostEditorVC: UIViewController, UIPostEditorDelegate {
             syncronizer.leave();
         }
     }
+    
+    func lockEditor() {
+        let alert = UIAlertController(title: nil, message: "게시물 데이터 및 첨부파일을 업로드 하는 중입니다", preferredStyle: .alert);
+        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50));
+        loadingIndicator.hidesWhenStopped = true;
+        loadingIndicator.style = UIActivityIndicatorView.Style.medium;
+        loadingIndicator.startAnimating();
+
+        alert.view.addSubview(loadingIndicator);
+        present(alert, animated: true, completion: nil);
+    }
 
     
     // Action Methods
@@ -353,6 +364,7 @@ class UIPostEditorVC: UIViewController, UIPostEditorDelegate {
             (res) in
             let attachmentSyncronizer = DispatchGroup();
             
+            self.lockEditor();
             if (!self.uploadAttachPhoto.isEmpty) {
                 self.uploadPhotoList(postId: res.value!.id, syncronizer: attachmentSyncronizer);
             }
@@ -364,10 +376,12 @@ class UIPostEditorVC: UIViewController, UIPostEditorDelegate {
             }
             
             attachmentSyncronizer.notify(queue: .main) {
-                if (self.fromMyPetFeed) {
-                    self.performSegue(withIdentifier: "publishPostFromMyPetSegue", sender: self);
-                } else {
-                    self.performSegue(withIdentifier: "publishPostFromFeedSegue", sender: self);
+                self.dismiss(animated: false) {
+                    if (self.fromMyPetFeed) {
+                        self.performSegue(withIdentifier: "publishPostFromMyPetSegue", sender: self);
+                    } else {
+                        self.performSegue(withIdentifier: "publishPostFromFeedSegue", sender: self);
+                    }
                 }
             }
         }
