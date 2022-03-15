@@ -206,6 +206,7 @@ class UIPostEditorVC: UIViewController, UIPostEditorDelegate {
         self.addChild(recordVC);
         self.attachedFileScrollView.addSubview(recordVC.view);
         self.resizeAttachedFileScrollViewHeight();
+        self.postAttachFileButton.setTitle("(\(self.uploadAttachFile.count)/10)", for: .normal);
     }
     
     func removeAttachedFileAsset(sender: UIPostEditorFileVC) {
@@ -234,11 +235,12 @@ class UIPostEditorVC: UIViewController, UIPostEditorDelegate {
         }
     }
     
-    func uploadPhotoList(postId: Int) {
+    func uploadPhotoList(postId: Int, syncronizer: DispatchGroup) {
         let imageManager = PHImageManager.default();
         let option = PHImageRequestOptions();
         option.isSynchronous = true;
         
+        syncronizer.enter();
         PostUtil.reqHttpUpdatePostFile(postId: postId, fileType: "IMAGE_FILE", fileList: self.uploadAttachPhoto.map({
             (asset) in
             var photo = UIImage();
@@ -249,20 +251,15 @@ class UIPostEditorVC: UIViewController, UIPostEditorDelegate {
             return photo.jpegData(compressionQuality: 0.7)!;
         }), sender: self) {
             (res) in
-            if (self.fromMyPetFeed) {
-                self.performSegue(withIdentifier: "publishPostFromMyPetSegue", sender: self);
-            } else {
-                self.performSegue(withIdentifier: "publishPostFromFeedSegue", sender: self);
-            }
+            syncronizer.leave();
         }
     }
     
-    func uploadVideoList(postId: Int) {
-        let semaphore = DispatchSemaphore(value: 0);
+    func uploadVideoList(postId: Int, syncronizer: DispatchGroup) {
+        let videoConvertSyncSemaphore = DispatchSemaphore(value: 0);
         let videoManager = PHImageManager();
         let option = PHVideoRequestOptions();
         option.version = .original;
-        
         var uploadVideoDataList: [Data] = [];
         
         for asset in self.uploadAttachVideo {
@@ -276,37 +273,33 @@ class UIPostEditorVC: UIViewController, UIPostEditorDelegate {
                     return;
                 }
                 uploadVideoDataList.append(videoData);
-                semaphore.signal();
+                videoConvertSyncSemaphore.signal();
             }
-            semaphore.wait();
+            videoConvertSyncSemaphore.wait();
         }
         
+        syncronizer.enter();
         PostUtil.reqHttpUpdatePostFile(postId: postId, fileType: "VIDEO_FILE", fileList: uploadVideoDataList, sender: self) {
             (res) in
-            if (self.fromMyPetFeed) {
-                self.performSegue(withIdentifier: "publishPostFromMyPetSegue", sender: self);
-            } else {
-                self.performSegue(withIdentifier: "publishPostFromFeedSegue", sender: self);
-            }
+            syncronizer.leave();
         }
     }
     
-    func uploadFileList(postId: Int) {
+    func uploadFileList(postId: Int, syncronizer: DispatchGroup) {
         var uploadFileDataList: [Data] = [];
+        var uploadFileNameList: [String] = [];
         for url in self.uploadAttachFile {
             guard let fileData = try? Data(contentsOf: url) else {
                 return;
             }
             uploadFileDataList.append(fileData);
+            uploadFileNameList.append(url.lastPathComponent);
         }
         
-        PostUtil.reqHttpUpdatePostFile(postId: postId, fileType: "GENERAL_FILE", fileList: uploadFileDataList, sender: self) {
+        syncronizer.enter();
+        PostUtil.reqHttpUpdatePostFile(postId: postId, fileType: "GENERAL_FILE", fileList: uploadFileDataList, fileNameList: uploadFileNameList, sender: self) {
             (res) in
-            if (self.fromMyPetFeed) {
-                self.performSegue(withIdentifier: "publishPostFromMyPetSegue", sender: self);
-            } else {
-                self.performSegue(withIdentifier: "publishPostFromFeedSegue", sender: self);
-            }
+            syncronizer.leave();
         }
     }
 
@@ -358,21 +351,24 @@ class UIPostEditorVC: UIViewController, UIPostEditorDelegate {
         
         PostUtil.reqHttpCreatePost(postContent: self.newPost, sender: self) {
             (res) in
-            if (self.uploadAttachPhoto.isEmpty && self.uploadAttachVideo.isEmpty && self.uploadAttachFile.isEmpty) {
+            let attachmentSyncronizer = DispatchGroup();
+            
+            if (!self.uploadAttachPhoto.isEmpty) {
+                self.uploadPhotoList(postId: res.value!.id, syncronizer: attachmentSyncronizer);
+            }
+            if (!self.uploadAttachVideo.isEmpty) {
+                self.uploadVideoList(postId: res.value!.id, syncronizer: attachmentSyncronizer);
+            }
+            if (!self.uploadAttachFile.isEmpty) {
+                self.uploadFileList(postId: res.value!.id, syncronizer: attachmentSyncronizer);
+            }
+            
+            attachmentSyncronizer.notify(queue: .main) {
                 if (self.fromMyPetFeed) {
                     self.performSegue(withIdentifier: "publishPostFromMyPetSegue", sender: self);
                 } else {
                     self.performSegue(withIdentifier: "publishPostFromFeedSegue", sender: self);
                 }
-            }
-            if (!self.uploadAttachPhoto.isEmpty) {
-                self.uploadPhotoList(postId: res.value!.id);
-            }
-            if (!self.uploadAttachVideo.isEmpty) {
-                self.uploadVideoList(postId: res.value!.id);
-            }
-            if (!self.uploadAttachFile.isEmpty) {
-                self.uploadFileList(postId: res.value!.id);
             }
         }
     }
