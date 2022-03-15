@@ -35,6 +35,7 @@ class UIPetPostCellVC: UITableViewCell {
         self.decodeFileMetadata();
         self.displayPetImage();
         self.displayPostContents();
+        print(self.fileAttachmentList);
     }
     
     func decodeFileMetadata() {
@@ -73,6 +74,21 @@ class UIPetPostCellVC: UITableViewCell {
     
     // Action Methods
     @IBAction open func attachementFileBtnOnClick(_ sender: UIButton) {
+        let alertController = UIAlertController(title: "첨부파일 목록", message: "다운로드 받을 파일을 선택합니다", preferredStyle: .actionSheet);
+        for (index, file) in self.fileAttachmentList.enumerated() {
+            alertController.addAction(UIAlertAction(title: file.name, style: .default) {
+                (action) in
+                PostUtil.reqHttpFetchPostFile(postId: self.post!.id, index: index, sender: self.senderVC!) {
+                    (res) in
+                    if (res.data != nil) {
+                        let activityViewController = UIActivityViewController(activityItems: ["첨부파일 저장 및 공유", res.data!], applicationActivities: nil);
+                        self.senderVC!.present(activityViewController, animated: true);
+                    }
+                }
+            })
+        }
+        alertController.addAction(UIAlertAction(title: "닫기", style: .cancel, handler: nil));
+        self.senderVC!.present(alertController, animated: true);
     }
     @IBAction open func commentBtnOnClick(_ sender: UIButton) {
     }
