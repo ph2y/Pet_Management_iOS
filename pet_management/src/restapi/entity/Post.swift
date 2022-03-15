@@ -105,6 +105,28 @@ class PostUtil {
         }
     }
     
+    // func reqHttpFetchPostFile
+    static func reqHttpFetchPostFile(postId: Int, index: Int, sender: UIViewController, resHandler: @escaping (DataResponse<Data, AFError>) -> Void) {
+        let reqApi = "post/file/fetch";
+        let reqUrl = APIBackendUtil.getUrl(api: reqApi);
+        let reqHeader: HTTPHeaders = APIBackendUtil.getAuthHeader();
+        let reqBody = [
+            "id": String(postId),
+            "index": String(index)
+        ]
+        
+        AF.request(reqUrl, method: .post, parameters: reqBody, encoding: JSONEncoding.default, headers: reqHeader).responseData() {
+            (res) in
+            guard (res.error == nil) else {
+                APIBackendUtil.logHttpError(reqApi: reqApi, errMsg: res.error?.localizedDescription);
+                sender.present(APIBackendUtil.makeHttpErrorPopup(errMsg: res.error?.localizedDescription), animated: true);
+                return;
+            }
+            
+            resHandler(res);
+        }
+    }
+    
     // func reqHttpUpdatePostFile
     static func reqHttpUpdatePostFile(postId: Int, fileType: String, fileList: [Data], sender: UIViewController, resHandler: @escaping (DataResponse<PostUpdateFileDto, AFError>) -> Void) {
         let reqApi = "post/file/update";

@@ -30,7 +30,7 @@ class UIPostEditorVC: UIViewController, UIPostEditorDelegate {
     
     let photoPicker = ImagePickerController();
     let videoPicker = ImagePickerController();
-    let filePicker = UIDocumentPickerViewController(forOpeningContentTypes: [UTType.text, UTType.zip], asCopy: true);
+    let filePicker = UIDocumentPickerViewController(forOpeningContentTypes: [UTType.text, UTType.pdf, UTType.zip], asCopy: true);
     var post: Post?;
     var newPost: PostCreateParam = PostCreateParam();
     var myPetList: [Pet] = [];
