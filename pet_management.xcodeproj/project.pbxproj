@@ -30,6 +30,7 @@
 		8F37F790279AB1920004394D /* Pet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F37F78F279AB1920004394D /* Pet.swift */; };
 		8F37F796279AC83E0004394D /* UIMyPetEmptyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F37F795279AC83E0004394D /* UIMyPetEmptyVC.swift */; };
 		8F7B840127E0268C00B2E11B /* PostUpdateFileDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7B840027E0268C00B2E11B /* PostUpdateFileDto.swift */; };
+		8F7B840527E06A8F00B2E11B /* PostDeleteDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7B840427E06A8F00B2E11B /* PostDeleteDto.swift */; };
 		8F82F33C27BE1A2300571697 /* Pageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F82F33B27BE1A2300571697 /* Pageable.swift */; };
 		8F82F33F27BE284100571697 /* LikeCreateDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F82F33E27BE284100571697 /* LikeCreateDto.swift */; };
 		8F82F34127BE284800571697 /* LikeDeleteDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F82F34027BE284800571697 /* LikeDeleteDto.swift */; };
@@ -135,6 +136,7 @@
 		8F37F78F279AB1920004394D /* Pet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pet.swift; sourceTree = "<group>"; };
 		8F37F795279AC83E0004394D /* UIMyPetEmptyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIMyPetEmptyVC.swift; sourceTree = "<group>"; };
 		8F7B840027E0268C00B2E11B /* PostUpdateFileDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostUpdateFileDto.swift; sourceTree = "<group>"; };
+		8F7B840427E06A8F00B2E11B /* PostDeleteDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDeleteDto.swift; sourceTree = "<group>"; };
 		8F82F33B27BE1A2300571697 /* Pageable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pageable.swift; sourceTree = "<group>"; };
 		8F82F33E27BE284100571697 /* LikeCreateDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeCreateDto.swift; sourceTree = "<group>"; };
 		8F82F34027BE284800571697 /* LikeDeleteDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeDeleteDto.swift; sourceTree = "<group>"; };
@@ -386,6 +388,7 @@
 				8F82F33D27BE283800571697 /* like */,
 				8FA426A827BA4EE6008FBD43 /* PostFetchDto.swift */,
 				8FB990B727D9ABEC0011F977 /* PostCreateDto.swift */,
+				8F7B840427E06A8F00B2E11B /* PostDeleteDto.swift */,
 			);
 			path = post;
 			sourceTree = "<group>";
@@ -748,6 +751,7 @@
 				8FA58B3A279AEE0900B83D00 /* AccountFetchDto.swift in Sources */,
 				8F82F34327BE2D9A00571697 /* LikeFetchDto.swift in Sources */,
 				8F82F34127BE284800571697 /* LikeDeleteDto.swift in Sources */,
+				8F7B840527E06A8F00B2E11B /* PostDeleteDto.swift in Sources */,
 				8FA8FCED27DB325A00F937A4 /* UIPostEditorFileVC.swift in Sources */,
 				8F7B840127E0268C00B2E11B /* PostUpdateFileDto.swift in Sources */,
 				8FF00FF727901B8D0087913B /* SceneDelegate.swift in Sources */,

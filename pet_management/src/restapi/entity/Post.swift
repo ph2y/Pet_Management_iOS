@@ -105,6 +105,31 @@ class PostUtil {
         }
     }
     
+    // func reqHttpDeletePost
+    static func reqHttpDeletePost(postId: Int, sender: UIViewController, resHandler: @escaping (DataResponse<PostDeleteDto, AFError>) -> Void) {
+        let reqApi = "post/delete";
+        let reqUrl = APIBackendUtil.getUrl(api: reqApi);
+        let reqHeader: HTTPHeaders = APIBackendUtil.getAuthHeader();
+        let reqBody = [
+            "id": String(postId)
+        ];
+        
+        AF.request(reqUrl, method: .post, parameters: reqBody, encoding: JSONEncoding.default, headers: reqHeader).responseDecodable(of: PostDeleteDto.self) {
+            (res) in
+            guard (res.error == nil) else {
+                APIBackendUtil.logHttpError(reqApi: reqApi, errMsg: res.error?.localizedDescription);
+                sender.present(APIBackendUtil.makeHttpErrorPopup(errMsg: res.error?.localizedDescription), animated: true);
+                return;
+            }
+            
+            guard (res.value?._metadata.status == true) else {
+                sender.present(APIBackendUtil.makeHttpErrorPopup(errMsg: res.value?._metadata.message), animated: true);
+                return;
+            }
+            resHandler(res);
+        }
+    }
+    
     // func reqHttpFetchPostFile
     static func reqHttpFetchPostFile(postId: Int, index: Int, sender: UIViewController, resHandler: @escaping (DataResponse<Data, AFError>) -> Void) {
         let reqApi = "post/file/fetch";

@@ -72,7 +72,7 @@ class UIPetPostWithImageCellVC: UIPetPostCellVC {
             (res) in
             guard (res.error == nil) else {
                 APIBackendUtil.logHttpError(reqApi: reqApi, errMsg: res.error?.localizedDescription);
-                self.delegate?.presentPopup(alert: APIBackendUtil.makeHttpErrorPopup(errMsg: res.error?.localizedDescription));
+                self.senderVC!.present(APIBackendUtil.makeHttpErrorPopup(errMsg: res.error?.localizedDescription), animated: true);
                 return;
             }
             guard (res.data != nil) else {
@@ -97,7 +97,7 @@ class UIPetPostWithImageCellVC: UIPetPostCellVC {
             (res) in
             guard (res.error == nil) else {
                 APIBackendUtil.logHttpError(reqApi: reqApi, errMsg: res.error?.localizedDescription);
-                self.delegate?.presentPopup(alert: APIBackendUtil.makeHttpErrorPopup(errMsg: res.error?.localizedDescription));
+                self.senderVC!.present(APIBackendUtil.makeHttpErrorPopup(errMsg: res.error?.localizedDescription), animated: true);
                 return;
             }
             guard (res.data != nil) else {

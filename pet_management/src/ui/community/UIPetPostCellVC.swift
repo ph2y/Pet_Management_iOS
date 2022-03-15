@@ -9,7 +9,7 @@ import UIKit;
 import Alamofire;
 
 protocol UIPetPostCellDelegate: AnyObject {
-    func presentPopup(alert: UIAlertController);
+    func refreshPostFeed();
 }
 
 class UIPetPostCellVC: UITableViewCell {
@@ -35,7 +35,6 @@ class UIPetPostCellVC: UITableViewCell {
         self.decodeFileMetadata();
         self.displayPetImage();
         self.displayPostContents();
-        print(self.fileAttachmentList);
     }
     
     func decodeFileMetadata() {
@@ -73,6 +72,29 @@ class UIPetPostCellVC: UITableViewCell {
     }
     
     // Action Methods
+    @IBAction func postMenuBtnOnClick(_ sender: UIButton) {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet);
+        let accountDetail = try! JSONSerialization.jsonObject(with: UserDefaults.standard.object(forKey: "loginAccountDetail") as! Data, options: []) as! [String: Any];
+        if (self.post!.author.id == accountDetail["id"] as! Int) {
+            alertController.addAction(UIAlertAction(title: "수정", style: .default) {
+                (sender) in
+                
+            });
+            alertController.addAction(UIAlertAction(title: "삭제", style: .destructive) {
+                (sender) in
+                PostUtil.reqHttpDeletePost(postId: self.post!.id, sender: self.senderVC!) {
+                    (res) in
+                    self.delegate!.refreshPostFeed();
+                }
+            });
+        } else {
+            alertController.addAction(UIAlertAction(title: "게시물 신고", style: .destructive) {
+                (sender) in
+            });
+        }
+        alertController.addAction(UIAlertAction(title: "닫기", style: .cancel));
+        self.senderVC!.present(alertController, animated: true);
+    }
     @IBAction open func attachementFileBtnOnClick(_ sender: UIButton) {
         let alertController = UIAlertController(title: "첨부파일 목록", message: "다운로드 받을 파일을 선택합니다", preferredStyle: .actionSheet);
         for (index, file) in self.fileAttachmentList.enumerated() {

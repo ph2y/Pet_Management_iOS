@@ -8,8 +8,8 @@
 import UIKit;
 import Alamofire;
 
-class UICommunityFeedVC: UIViewController {
-    //TODO: TableDelegate와 TableDataSource를 분리하여 코드 중복도 개선할 방법 찾기
+class UICommunityFeedVC: UIViewController, UIPetPostCellDelegate {
+    //TODO: TableDelegate와 TableDataSource를 분리하여 마이펫 탭의 피드와 코드 중복도 개선할 방법 찾기
     @IBOutlet weak var postFeedTableView: UITableView!;
     
     var postList: [Post] = [];
@@ -91,6 +91,7 @@ extension UICommunityFeedVC: UITableViewDelegate, UITableViewDataSource {
             cell.post = post;
             cell.indexPath = indexPath;
             cell.senderVC = self;
+            cell.delegate = self;
             cell.initCell();
             return cell;
         } else {
@@ -98,6 +99,7 @@ extension UICommunityFeedVC: UITableViewDelegate, UITableViewDataSource {
             cell.post = post;
             cell.indexPath = indexPath;
             cell.senderVC = self;
+            cell.delegate = self;
             cell.initCell();
             return cell;
         }
