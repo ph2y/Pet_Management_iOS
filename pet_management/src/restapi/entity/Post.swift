@@ -153,7 +153,7 @@ class PostUtil {
     }
     
     // func reqHttpUpdatePostFile
-    static func reqHttpUpdatePostFile(postId: Int, fileType: String, fileList: [Data], sender: UIViewController, resHandler: @escaping (DataResponse<PostUpdateFileDto, AFError>) -> Void) {
+    static func reqHttpUpdatePostFile(postId: Int, fileType: String, fileList: [Data], fileNameList: [String] = [], sender: UIViewController, resHandler: @escaping (DataResponse<PostUpdateFileDto, AFError>) -> Void) {
         let reqApi = "post/file/update";
         let reqUrl = APIBackendUtil.getUrl(api: reqApi);
         let reqHeader: HTTPHeaders = APIBackendUtil.getAuthHeader();
@@ -170,7 +170,10 @@ class PostUtil {
                     formdata.append(file, withName: "fileList[\(index)]", fileName: "swift_new_post\(postId)_video_\(index).mp4");
                 }
                 if (fileType == "GENERAL_FILE") {
-                    formdata.append(file, withName: "fileList[\(index)]", fileName: "swift_new_post\(postId)_general_\(index)");
+                    guard (!fileNameList.isEmpty && fileNameList.count == fileList.count) else {
+                        return;
+                    }
+                    formdata.append(file, withName: "fileList[\(index)]", fileName: fileNameList[index]);
                 }
             }
         }, to: reqUrl, headers: reqHeader).responseDecodable(of: PostUpdateFileDto.self) {
