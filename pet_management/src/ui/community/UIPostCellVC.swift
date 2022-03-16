@@ -1,5 +1,5 @@
 //
-//  UIPetPostCellVC.swift
+//  UIPostCellVC.swift
 //  pet_management
 //
 //  Created by newcentury99 on 2022/02/16.
@@ -8,11 +8,11 @@
 import UIKit;
 import Alamofire;
 
-protocol UIPetPostCellDelegate: AnyObject {
+protocol UIPostCellDelegate: AnyObject {
     func refreshPostFeed();
 }
 
-class UIPetPostCellVC: UITableViewCell {
+class UIPostCellVC: UITableViewCell {
     @IBOutlet open weak var petImage: UIImageView!;
     @IBOutlet open weak var authorAndPetNameLabel: UILabel!;
     @IBOutlet open weak var contentTextView: UITextView!;
@@ -21,7 +21,7 @@ class UIPetPostCellVC: UITableViewCell {
     @IBOutlet open weak var commentBtn: UIButton!;
     @IBOutlet open weak var likeBtn: UIButton!;
     
-    weak var delegate: UIPetPostCellDelegate?;
+    weak var delegate: UIPostCellDelegate?;
     var senderVC: UIViewController?;
     var indexPath: IndexPath?;
     var post: Post?;

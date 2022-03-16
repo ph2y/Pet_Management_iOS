@@ -1,5 +1,5 @@
 //
-//  UICommunityFeedVC.swift
+//  UIPostFeedVC.swift
 //  pet_management
 //
 //  Created by newcentury99 on 2022/03/04.
@@ -8,7 +8,7 @@
 import UIKit;
 import Alamofire;
 
-class UICommunityFeedVC: UIViewController, UIPetPostCellDelegate {
+class UIPostFeedVC: UIViewController, UIPostCellDelegate {
     //TODO: TableDelegate와 TableDataSource를 분리하여 마이펫 탭의 피드와 코드 중복도 개선할 방법 찾기
     @IBOutlet weak var postFeedTableView: UITableView!;
     
@@ -58,7 +58,7 @@ class UICommunityFeedVC: UIViewController, UIPetPostCellDelegate {
         PostUtil.reqHttpFetchPosts(pageIdx: self.loadedPageCnt, sender: self, resHandler: self.postFetch);
     }
     
-    // func petPostFetch
+    // func postFetch
     // Param res: DataResponse<PostFetchDto, AFError> - http response/error
     // Return Void
     // Append post to feed that loaded from server
@@ -76,7 +76,7 @@ class UICommunityFeedVC: UIViewController, UIPetPostCellDelegate {
     }
 }
 
-extension UICommunityFeedVC: UITableViewDelegate, UITableViewDataSource {
+extension UIPostFeedVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.postList.count;
     }
@@ -85,9 +85,9 @@ extension UICommunityFeedVC: UITableViewDelegate, UITableViewDataSource {
         let post = self.postList[indexPath.row];
         
         if (self.postList.count == 0) {
-            return tableView.dequeueReusableCell(withIdentifier: "petPostEmpty")!;
+            return tableView.dequeueReusableCell(withIdentifier: "postEmpty")!;
         } else if (post.imageAttachments == nil || post.imageAttachments!.count == 0) {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "petPost") as! UIPetPostCellVC;
+            let cell = tableView.dequeueReusableCell(withIdentifier: "post") as! UIPostCellVC;
             cell.post = post;
             cell.fileAttachmentList = PostUtil.decodeFileMetadata(post: post);
             cell.indexPath = indexPath;
@@ -96,7 +96,7 @@ extension UICommunityFeedVC: UITableViewDelegate, UITableViewDataSource {
             cell.initCell();
             return cell;
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "petPostWithImage") as! UIPetPostWithImageCellVC;
+            let cell = tableView.dequeueReusableCell(withIdentifier: "postWithImage") as! UIPostWithImageCellVC;
             cell.post = post;
             cell.fileAttachmentList = PostUtil.decodeFileMetadata(post: post);
             cell.indexPath = indexPath;
@@ -111,7 +111,7 @@ extension UICommunityFeedVC: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension UICommunityFeedVC: UIScrollViewDelegate {
+extension UIPostFeedVC: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if (self.postFeedTableView.contentOffset.y > self.postFeedTableView.contentSize.height - self.postFeedTableView.bounds.size.height && !self.isLastPage && !self.isLoading) {
             self.isLoading = true;
