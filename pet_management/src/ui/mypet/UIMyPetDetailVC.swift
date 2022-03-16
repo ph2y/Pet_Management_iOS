@@ -8,25 +8,25 @@
 import UIKit;
 import Alamofire;
 
-class UIMyPetDetailVC: UIViewController, UIPetPostCellDelegate {
+class UIMyPetDetailVC: UIViewController, UIPostCellDelegate {
     @IBOutlet weak var petNameLabel: UILabel!;
     @IBOutlet weak var petAgeLabel: UILabel!;
     @IBOutlet weak var petGenderLabel: UILabel!;
     @IBOutlet weak var petImage: UIImageView!;
-    @IBOutlet weak var petPostTableView: UITableView!;
+    @IBOutlet weak var postTableView: UITableView!;
     
     var pet: Pet?;
-    var petPostList: [Post] = [];
+    var postList: [Post] = [];
     var loadedPageCnt: Int = 0;
     var isLastPage: Bool = false;
     var isLoading: Bool = true;
     
     override func viewDidLoad() {
-        self.petPostTableView.delegate = self;
-        self.petPostTableView.dataSource = self;
+        self.postTableView.delegate = self;
+        self.postTableView.dataSource = self;
         if (self.pet != nil) {
             self.showPetDetails();
-            PostUtil.reqHttpFetchPetPosts(petId: self.pet!.id, pageIdx: self.loadedPageCnt, sender: self, resHandler: self.petPostFetch);
+            PostUtil.reqHttpFetchPetPosts(petId: self.pet!.id, pageIdx: self.loadedPageCnt, sender: self, resHandler: self.postFetch);
         }
         self.initPullToRefresh();
     }
@@ -50,7 +50,7 @@ class UIMyPetDetailVC: UIViewController, UIPetPostCellDelegate {
         let refresh = UIRefreshControl();
         refresh.addTarget(self, action: #selector(self.refreshPostFeed(refresh:)), for: .valueChanged);
         refresh.attributedTitle = NSAttributedString(string: "새로운 게시물을 로드합니다...");
-        self.petPostTableView.refreshControl = refresh;
+        self.postTableView.refreshControl = refresh;
     }
     
     // objc func refreshPostFeed
@@ -67,12 +67,12 @@ class UIMyPetDetailVC: UIViewController, UIPetPostCellDelegate {
     // Return Void
     // Reset PetPostListTableView
     func refreshPostFeed() {
-        self.petPostList = [];
+        self.postList = [];
         self.loadedPageCnt = 0;
         self.isLastPage = false;
         self.isLoading = true;
-        self.petPostTableView.reloadData();
-        PostUtil.reqHttpFetchPetPosts(petId: self.pet!.id, pageIdx: self.loadedPageCnt, sender: self, resHandler: self.petPostFetch);
+        self.postTableView.reloadData();
+        PostUtil.reqHttpFetchPetPosts(petId: self.pet!.id, pageIdx: self.loadedPageCnt, sender: self, resHandler: self.postFetch);
     }
     
     // func showPetDetails
@@ -122,13 +122,13 @@ class UIMyPetDetailVC: UIViewController, UIPetPostCellDelegate {
         }
     }
     
-    // func petPostFetch
+    // func postFetch
     // Param res: DataResponse<PostFetchDto, AFError> - http response/error
     // Return Void
     // Append post to feed that loaded from server
-    func petPostFetch(res: DataResponse<PostFetchDto, AFError>) {
-        self.petPostList.append(contentsOf: res.value?.postList ?? []);
-        self.petPostTableView.reloadData();
+    func postFetch(res: DataResponse<PostFetchDto, AFError>) {
+        self.postList.append(contentsOf: res.value?.postList ?? []);
+        self.postTableView.reloadData();
         self.loadedPageCnt += 1;
         self.isLastPage = res.value!.isLast;
         self.isLoading = false;
@@ -151,15 +151,15 @@ class UIMyPetDetailVC: UIViewController, UIPetPostCellDelegate {
 
 extension UIMyPetDetailVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.petPostList.count;
+        return self.postList.count;
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let post = self.petPostList[indexPath.row];
+        let post = self.postList[indexPath.row];
         
-        if (self.petPostList.count == 0) {
-            return tableView.dequeueReusableCell(withIdentifier: "petPostEmpty")!;
+        if (self.postList.count == 0) {
+            return tableView.dequeueReusableCell(withIdentifier: "postEmpty")!;
         } else if (post.imageAttachments == nil || post.imageAttachments!.count == 0) {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "petPost") as! UIPetPostCellVC;
+            let cell = tableView.dequeueReusableCell(withIdentifier: "post") as! UIPostCellVC;
             cell.post = post;
             cell.fileAttachmentList = PostUtil.decodeFileMetadata(post: post);
             cell.indexPath = indexPath;
@@ -168,7 +168,7 @@ extension UIMyPetDetailVC: UITableViewDelegate, UITableViewDataSource {
             cell.initCell();
             return cell;
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "petPostWithImage") as! UIPetPostWithImageCellVC;
+            let cell = tableView.dequeueReusableCell(withIdentifier: "postWithImage") as! UIPostWithImageCellVC;
             cell.post = post;
             cell.fileAttachmentList = PostUtil.decodeFileMetadata(post: post);
             cell.indexPath = indexPath;
@@ -185,9 +185,9 @@ extension UIMyPetDetailVC: UITableViewDelegate, UITableViewDataSource {
 
 extension UIMyPetDetailVC: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if (self.petPostTableView.contentOffset.y > self.petPostTableView.contentSize.height - self.petPostTableView.bounds.size.height && !self.isLastPage && !self.isLoading) {
+        if (self.postTableView.contentOffset.y > self.postTableView.contentSize.height - self.postTableView.bounds.size.height && !self.isLastPage && !self.isLoading) {
             self.isLoading = true;
-            PostUtil.reqHttpFetchPetPosts(petId: self.pet!.id, pageIdx: self.loadedPageCnt, sender: self, resHandler: self.petPostFetch);
+            PostUtil.reqHttpFetchPetPosts(petId: self.pet!.id, pageIdx: self.loadedPageCnt, sender: self, resHandler: self.postFetch);
         }
     }
 }

@@ -1,5 +1,5 @@
 //
-//  UIPetPostWithImageCellVC.swift
+//  UIPostWithImageCellVC.swift
 //  pet_management
 //
 //  Created by newcentury99 on 2022/02/16.
@@ -8,7 +8,7 @@
 import UIKit;
 import Alamofire;
 
-class UIPetPostWithImageCellVC: UIPetPostCellVC {
+class UIPostWithImageCellVC: UIPostCellVC {
     @IBOutlet weak var pageControl: UIPageControl!;
     @IBOutlet weak var postImageView: UIImageView!;
     
@@ -59,7 +59,7 @@ class UIPetPostWithImageCellVC: UIPetPostCellVC {
     }
     
     // TODO: 나중에 복수개의 이미지/동영상 불러오는 로직 짜면서 코드 정리 및 범용화할것
-    func reqHttpFetchPostImage(cell: UIPetPostWithImageCellVC, cellIndex: IndexPath, postId: Int, imageIndex: Int) {
+    func reqHttpFetchPostImage(cell: UIPostWithImageCellVC, cellIndex: IndexPath, postId: Int, imageIndex: Int) {
         let reqApi = "post/image/fetch";
         let reqUrl = APIBackendUtil.getUrl(api: reqApi);
         var reqBody = Dictionary<String, String>();
@@ -84,7 +84,7 @@ class UIPetPostWithImageCellVC: UIPetPostCellVC {
         }
     }
     
-    func reqHttpFetchPostVideo(cell: UIPetPostWithImageCellVC, cellIndex: IndexPath, postId: Int, imageIndex: Int) {
+    func reqHttpFetchPostVideo(cell: UIPostWithImageCellVC, cellIndex: IndexPath, postId: Int, imageIndex: Int) {
         let reqApi = "post/image/fetch";
         let reqUrl = APIBackendUtil.getUrl(api: reqApi);
         var reqBody = Dictionary<String, String>();
