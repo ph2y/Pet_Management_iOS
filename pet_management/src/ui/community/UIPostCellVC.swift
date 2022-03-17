@@ -52,7 +52,7 @@ class UIPostCellVC: UITableViewCell {
         self.postTagLabel.text = self.post!.serializedHashTags;
         self.attachmentFileBtn.setTitle("첨부파일\(self.fileAttachmentList.count)개", for: .normal);
         PostUtil.reqHttpFetchLike(postId: self.post!.id, sender: self.senderVC!, resHandler: self.displayPostLikes);
-        self.commentBtn.setTitle("댓글 X개", for: .normal);
+        self.commentBtn.setTitle("댓글 보기", for: .normal);
     }
     
     func displayPostLikes(res: DataResponse<LikeFetchDto, AFError>) {
@@ -103,6 +103,7 @@ class UIPostCellVC: UITableViewCell {
         self.senderVC!.present(alertController, animated: true);
     }
     @IBAction open func commentBtnOnClick(_ sender: UIButton) {
+        self.senderVC!.performSegue(withIdentifier: "CommentViewSegue", sender: self.indexPath);
     }
     @IBAction open func likeBtnOnClick(_ sender: UIButton) {
         if (self.isLikedPost) {

@@ -40,6 +40,14 @@ class UIMyPetDetailVC: UIViewController, UIPostCellDelegate {
             myPetEditorVC.pet = self.pet;
             myPetEditorVC.isNewPet = false;
         }
+        if (segue.identifier == "CommentViewSegue") {
+            let dest = segue.destination;
+            guard let destVC = dest as? UIPostCommentVC else {
+                return;
+            }
+            let index = sender as! IndexPath;
+            destVC.postId = self.postList[index.row].id;
+        }
     }
     
     // func initRefresh

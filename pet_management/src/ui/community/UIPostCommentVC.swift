@@ -6,7 +6,7 @@
 //
 
 import UIKit;
-import Alamofire
+import Alamofire;
 
 class UIPostCommentVC: UIViewController, UIPostCommentCellDelegate {
     @IBOutlet weak var commentTableView: UITableView!;
@@ -27,6 +27,16 @@ class UIPostCommentVC: UIViewController, UIPostCommentCellDelegate {
         CommentUtil.reqHttpFetchComment(postId: self.postId, sender: self, resHandler: self.commentFetch);
         self.initPullToRefresh();
     }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "ReplyViewSegue") {
+            let dest = segue.destination;
+            guard let destVC = dest as? UIPostReplyVC else {
+                return;
+            }
+            let index = sender as! IndexPath;
+            destVC.parentComment = self.commentList[index.row];
+        }
+    }
     
     // func initPullToRefresh
     // No Params
@@ -39,7 +49,7 @@ class UIPostCommentVC: UIViewController, UIPostCommentCellDelegate {
         self.commentTableView.refreshControl = refresh;
     }
     
-    // objc func refreshCommentFeed
+    // objc func refreshComment
     // refresh: UIRefreshControl - The controller class of UIRefresh
     // Return Void
     // Call CommentListTableView & Show refresh animation
@@ -59,7 +69,7 @@ class UIPostCommentVC: UIViewController, UIPostCommentCellDelegate {
         self.isLastPage = false;
         self.isLoading = true;
         self.commentTableView.reloadData();
-        CommentUtil.reqHttpFetchComment(postId: self.postId, topCommentId: self.topCommentId, sender: self, resHandler: self.commentFetch);
+        CommentUtil.reqHttpFetchComment(postId: self.postId, sender: self, resHandler: self.commentFetch);
     }
     
     func commentFetch(res: DataResponse<CommentFetchDto, AFError>) {
@@ -70,7 +80,7 @@ class UIPostCommentVC: UIViewController, UIPostCommentCellDelegate {
         self.isLoading = false;
         
         // Set topCommentId if it was first fetch
-        if (self.topCommentId == nil && res.value != nil) {
+        if (self.topCommentId == nil && res.value != nil && !self.commentList.isEmpty) {
             self.topCommentId = res.value!.commentList[0].id;
         }
     }
@@ -80,23 +90,56 @@ class UIPostCommentVC: UIViewController, UIPostCommentCellDelegate {
     @IBAction func unwindToComment(_ segue: UIStoryboardSegue) {
         self.refreshComment();
     }
+    @IBAction func newCommentTextFieldOnChange(_ sender: UITextField) {
+        if (self.newCommentTextField.text!.isEmpty) {
+            self.commentPublishButton.backgroundColor = UIColor.lightGray;
+            self.commentPublishButton.isEnabled = false;
+        } else {
+            self.commentPublishButton.backgroundColor = UIColor(red: CGFloat(196.0/255), green: CGFloat(92.0/255), blue: CGFloat(36.0/255), alpha: CGFloat(1.0));
+            self.commentPublishButton.isEnabled = true;
+        }
+    }
     @IBAction func commentPublishBtnOnClick(_ sender: UIButton) {
+        CommentUtil.reqHttpCreateComment(postId: self.postId, contents: self.newCommentTextField.text!, sender: self) {
+            (res) in
+            self.newCommentTextField.text = "";
+            self.commentPublishButton.backgroundColor = UIColor.lightGray;
+            self.commentPublishButton.isEnabled = false;
+            self.refreshComment();
+        }
     }
 }
 
 extension UIPostCommentVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.commentList.count;
+        if (self.commentList.isEmpty) {
+            return 1;
+        } else {
+            return self.commentList.count;
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let comment = self.commentList[indexPath.row];
-        
-        if (self.commentList.count == 0) {
+        if (self.commentList.isEmpty) {
             return tableView.dequeueReusableCell(withIdentifier: "postCommentEmpty")!;
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "postCommentCell")!;
+            let comment = self.commentList[indexPath.row];
+            let cell = tableView.dequeueReusableCell(withIdentifier: "postCommentCell")! as! UIPostCommentCell;
+            cell.delegate = self;
+            cell.senderVC = self;
+            cell.indexPath = indexPath;
+            cell.comment = comment;
+            cell.initCell();
             return cell;
+        }
+    }
+}
+
+extension UIPostCommentVC: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if (self.commentTableView.contentOffset.y > self.commentTableView.contentSize.height - self.commentTableView.bounds.size.height && !self.isLastPage && !self.isLoading) {
+            self.isLoading = true;
+            CommentUtil.reqHttpFetchComment(postId: self.postId, pageIdx: self.loadedPageCnt, topCommentId: self.topCommentId, sender: self, resHandler: self.commentFetch);
         }
     }
 }

@@ -602,6 +602,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="7bd-ur-wnL">
                                 <rect key="frame" x="0.0" y="88" width="390" height="756"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="postWithImage" rowHeight="404" id="Sy8-zo-HuH" customClass="UIPostWithImageCellVC" customModule="pet_management" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.666666030883789" width="390" height="404"/>
@@ -680,7 +681,6 @@
                                                     </state>
                                                     <connections>
                                                         <action selector="commentBtnOnClick:" destination="Sy8-zo-HuH" eventType="touchUpInside" id="X21-xn-K5h"/>
-                                                        <segue destination="pa4-Hn-xHM" kind="show" id="1Xi-ok-rkT"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J27-oh-40S">
@@ -829,7 +829,6 @@
                                                     </state>
                                                     <connections>
                                                         <action selector="commentBtnOnClick:" destination="xaB-pc-AK5" eventType="touchUpInside" id="Wlr-pR-6Lq"/>
-                                                        <segue destination="pa4-Hn-xHM" kind="show" id="pFB-KL-vhk"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ht5-Fo-7oc">
@@ -943,6 +942,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="postFeedTableView" destination="7bd-ur-wnL" id="f7O-Rk-CbM"/>
+                        <segue destination="pa4-Hn-xHM" kind="show" identifier="CommentViewSegue" id="cFS-9N-z4j"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TU3-Ka-pBd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1377,6 +1377,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="bwP-NY-rwc">
                                 <rect key="frame" x="0.0" y="186" width="390" height="575"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="FriendCell" id="uTb-Xt-KGp">
                                         <rect key="frame" x="0.0" y="44.666666030883789" width="390" height="43.666667938232422"/>
@@ -1448,14 +1449,15 @@
             <objects>
                 <viewController modalTransitionStyle="flipHorizontal" id="pa4-Hn-xHM" userLabel="Comment" customClass="UIPostCommentVC" customModule="pet_management" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Wn3-wo-SoP">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="SUf-zp-6lf">
-                                <rect key="frame" x="0.0" y="88" width="390" height="622"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="SUf-zp-6lf">
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="705"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="postCommentCell" rowHeight="110" id="V3w-i8-CEr" customClass="UIPostCommentCell" customModule="pet_management" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="postCommentCell" rowHeight="110" id="V3w-i8-CEr" customClass="UIPostCommentCell" customModule="pet_management" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.666666030883789" width="390" height="110"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="V3w-i8-CEr" id="sj6-uu-MdD">
@@ -1525,7 +1527,7 @@
                                             <outlet property="replyButton" destination="xXB-VI-ZE5" id="fhf-hZ-lwU"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="postCommentEmpty" id="Sh3-YM-dkN">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="postCommentEmpty" id="Sh3-YM-dkN">
                                         <rect key="frame" x="0.0" y="154.66666603088379" width="390" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Sh3-YM-dkN" id="mSZ-lU-L8i">
@@ -1544,9 +1546,9 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9wg-j2-C1Q">
-                                <rect key="frame" x="339" y="718" width="35" height="35"/>
-                                <color key="backgroundColor" red="0.76862752440000004" green="0.36078432199999999" blue="0.1411764771" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9wg-j2-C1Q">
+                                <rect key="frame" x="339" y="713" width="35" height="35"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="35" id="21U-bk-Nmi"/>
                                     <constraint firstAttribute="height" constant="35" id="IHa-rR-mf8"/>
@@ -1564,12 +1566,15 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="댓글 내용을 입력하세요" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nZy-eg-fRU">
-                                <rect key="frame" x="16" y="719" width="307" height="34"/>
+                                <rect key="frame" x="16" y="714" width="307" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="g7X-Jn-xAt"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="newCommentTextFieldOnChange:" destination="pa4-Hn-xHM" eventType="editingChanged" id="rfp-rQ-9Xj"/>
+                                </connections>
                             </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="oeT-CW-81M"/>
@@ -1591,7 +1596,7 @@
                         <outlet property="commentPublishButton" destination="9wg-j2-C1Q" id="rdR-e4-Gpc"/>
                         <outlet property="commentTableView" destination="SUf-zp-6lf" id="rw8-8E-DWb"/>
                         <outlet property="newCommentTextField" destination="nZy-eg-fRU" id="PJx-yK-5J3"/>
-                        <segue destination="jOj-Md-o8n" kind="show" identifier="replyToCommentSegue" id="4aF-Cj-dqc"/>
+                        <segue destination="jOj-Md-o8n" kind="show" identifier="ReplyViewSegue" id="4aF-Cj-dqc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="34i-3P-e6M" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1960,6 +1965,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="kZd-NQ-Lg3">
                                 <rect key="frame" x="16" y="144" width="358" height="601"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="petSchedule" rowHeight="100" id="65o-9O-O7J" customClass="UIMyPetScheduleCellVC" customModule="pet_management" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.666666030883789" width="358" height="100"/>
@@ -2610,6 +2616,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Uop-PN-RWk">
                                 <rect key="frame" x="0.0" y="205.66666666666669" width="390" height="604.33333333333326"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="postWithImage" rowHeight="404" id="rJX-j1-2u6" customClass="UIPostWithImageCellVC" customModule="pet_management" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.666666030883789" width="390" height="404"/>
@@ -2688,7 +2695,6 @@
                                                     </state>
                                                     <connections>
                                                         <action selector="commentBtnOnClick:" destination="rJX-j1-2u6" eventType="touchUpInside" id="13q-dP-5Va"/>
-                                                        <segue destination="pa4-Hn-xHM" kind="show" id="7Nq-Fp-aOZ"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="epb-be-FKC">
@@ -2837,7 +2843,6 @@
                                                     </state>
                                                     <connections>
                                                         <action selector="commentBtnOnClick:" destination="oMk-sO-wT2" eventType="touchUpInside" id="7Ig-m6-x1U"/>
-                                                        <segue destination="pa4-Hn-xHM" kind="show" id="phL-mf-GgB"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vH3-dL-A9A">
@@ -2946,6 +2951,7 @@
                         <outlet property="petImage" destination="pLK-tB-uML" id="ytO-ng-xE4"/>
                         <outlet property="petNameLabel" destination="k0r-2P-ryF" id="mTS-Kl-UjT"/>
                         <outlet property="postTableView" destination="Uop-PN-RWk" id="SuB-Db-RvR"/>
+                        <segue destination="pa4-Hn-xHM" kind="show" identifier="CommentViewSegue" id="YJQ-Zb-UGF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yi3-jj-lae" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -3517,17 +3523,88 @@
         <!--Reply-->
         <scene sceneID="226-s9-3Ov">
             <objects>
-                <viewController modalTransitionStyle="flipHorizontal" id="jOj-Md-o8n" userLabel="Reply" sceneMemberID="viewController">
+                <viewController modalTransitionStyle="flipHorizontal" id="jOj-Md-o8n" userLabel="Reply" customClass="UIPostReplyVC" customModule="pet_management" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tdz-uH-fZT">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ms4-qc-sGp">
-                                <rect key="frame" x="0.0" y="88" width="390" height="622"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ms4-qc-sGp">
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="705"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" shouldIndentWhileEditing="NO" reuseIdentifier="postReplyCell" rowHeight="80" id="jDE-NB-76N" customClass="UIPostReplyCell" customModule="pet_management" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.666666030883789" width="390" height="80"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="postCommentCell" rowHeight="110" id="3dL-xo-s41" customClass="UIPostCommentCell" customModule="pet_management" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="44.666666030883789" width="390" height="110"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3dL-xo-s41" id="kGl-fU-Zhc">
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="110"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu," textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="46z-10-jec">
+                                                    <rect key="frame" x="16" y="30" width="358" height="50"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="OcU-1E-c60"/>
+                                                    </constraints>
+                                                    <color key="textColor" systemColor="labelColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tdf-z8-362">
+                                                    <rect key="frame" x="20" y="80" width="66" height="30"/>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                    <state key="normal" title="댓답글 X개">
+                                                        <color key="titleColor" systemColor="systemGrayColor"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="replyButtonOnClick:" destination="3dL-xo-s41" eventType="touchUpInside" id="cXW-Yb-m3d"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="사용자명" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="teV-Qb-RVo">
+                                                    <rect key="frame" x="20" y="5" width="324" height="20"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uRa-3i-fR4">
+                                                    <rect key="frame" x="354" y="5" width="20" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="20" id="5bY-lX-Mcs"/>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="UQ2-KG-ROA"/>
+                                                        <constraint firstAttribute="width" constant="20" id="e7T-pH-gXn"/>
+                                                        <constraint firstAttribute="height" constant="20" id="oQ6-P5-IRZ"/>
+                                                    </constraints>
+                                                    <color key="tintColor" red="0.76862752440000004" green="0.36078432199999999" blue="0.1411764771" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                    <state key="normal" image="list.bullet" catalog="system"/>
+                                                    <connections>
+                                                        <action selector="menuButtonOnClick:" destination="3dL-xo-s41" eventType="touchUpInside" id="aF4-18-86p"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="teV-Qb-RVo" firstAttribute="top" secondItem="kGl-fU-Zhc" secondAttribute="top" constant="5" id="943-rR-g7k"/>
+                                                <constraint firstAttribute="trailing" secondItem="46z-10-jec" secondAttribute="trailing" constant="16" id="9xk-Hs-Sp7"/>
+                                                <constraint firstAttribute="bottom" secondItem="tdf-z8-362" secondAttribute="bottom" id="DFY-JY-XlR"/>
+                                                <constraint firstItem="uRa-3i-fR4" firstAttribute="top" secondItem="kGl-fU-Zhc" secondAttribute="top" constant="5" id="L8y-dY-m7y"/>
+                                                <constraint firstItem="tdf-z8-362" firstAttribute="leading" secondItem="kGl-fU-Zhc" secondAttribute="leading" constant="20" id="LN3-aX-aVR"/>
+                                                <constraint firstItem="tdf-z8-362" firstAttribute="top" secondItem="46z-10-jec" secondAttribute="bottom" id="MTL-aC-70v"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="tdf-z8-362" secondAttribute="trailing" constant="20" id="edY-GK-gXp"/>
+                                                <constraint firstItem="uRa-3i-fR4" firstAttribute="leading" secondItem="teV-Qb-RVo" secondAttribute="trailing" constant="10" id="fKx-rQ-V0l"/>
+                                                <constraint firstAttribute="trailing" secondItem="uRa-3i-fR4" secondAttribute="trailing" constant="16" id="gbl-mq-Gt4"/>
+                                                <constraint firstItem="46z-10-jec" firstAttribute="top" secondItem="teV-Qb-RVo" secondAttribute="bottom" constant="5" id="kxV-sm-zAa"/>
+                                                <constraint firstItem="46z-10-jec" firstAttribute="leading" secondItem="kGl-fU-Zhc" secondAttribute="leading" constant="16" id="tgm-cm-3Rv"/>
+                                                <constraint firstItem="teV-Qb-RVo" firstAttribute="leading" secondItem="kGl-fU-Zhc" secondAttribute="leading" constant="20" id="v5U-bE-I9C"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="authorNameLabel" destination="teV-Qb-RVo" id="eEl-rK-QWh"/>
+                                            <outlet property="contentTextView" destination="46z-10-jec" id="kUm-6p-9j4"/>
+                                            <outlet property="replyButton" destination="tdf-z8-362" id="HXS-Q4-7Kr"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationLevel="1" indentationWidth="16" shouldIndentWhileEditing="NO" reuseIdentifier="postReplyCell" rowHeight="80" id="jDE-NB-76N" customClass="UIPostCommentCell" customModule="pet_management" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="154.66666603088379" width="390" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jDE-NB-76N" id="HfU-Sb-vq4">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="80"/>
@@ -3563,7 +3640,7 @@
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                     <state key="normal" image="list.bullet" catalog="system"/>
                                                     <connections>
-                                                        <action selector="replyMenuButtonOnClick:" destination="jDE-NB-76N" eventType="touchUpInside" id="0zP-QB-RHh"/>
+                                                        <action selector="menuButtonOnClick:" destination="jDE-NB-76N" eventType="touchUpInside" id="JFF-WZ-NNq"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -3580,15 +3657,32 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="authorNameLabel" destination="EyE-wp-zqz" id="SLn-nP-bAz"/>
-                                            <outlet property="contentTextView" destination="LvG-aR-AFE" id="5Ak-xl-25U"/>
+                                            <outlet property="authorNameLabel" destination="EyE-wp-zqz" id="KLX-Eh-GDM"/>
+                                            <outlet property="contentTextView" destination="LvG-aR-AFE" id="TNB-7C-K67"/>
                                         </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationLevel="1" indentationWidth="16" reuseIdentifier="postCommentEmpty" id="ZfR-pd-YKG">
+                                        <rect key="frame" x="0.0" y="234.66666603088379" width="390" height="43.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZfR-pd-YKG" id="rc9-Jc-1Pd">
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="등록된 댓답글이 없습니다" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" id="8bf-U4-gfm">
+                                                    <rect key="frame" x="36" y="-0.66666603088378906" width="318" height="43.666667938232422"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6t4-GJ-3Zu">
-                                <rect key="frame" x="339" y="718" width="35" height="35"/>
-                                <color key="backgroundColor" red="0.76862752440000004" green="0.36078432199999999" blue="0.1411764771" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6t4-GJ-3Zu">
+                                <rect key="frame" x="339" y="713" width="35" height="35"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="35" id="JCN-ON-HTP"/>
                                     <constraint firstAttribute="height" constant="35" id="OXD-6g-ptc"/>
@@ -3602,16 +3696,19 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="commentPublishBtnOnClick:" destination="jOj-Md-o8n" eventType="touchUpInside" id="hat-F0-T0b"/>
+                                    <action selector="replyPublishButtonOnClick:" destination="jOj-Md-o8n" eventType="touchUpInside" id="64g-Lj-RuZ"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="댓글 내용을 입력하세요" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T0P-qB-yYM">
-                                <rect key="frame" x="16" y="719" width="307" height="34"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="댓답글 내용을 입력하세요" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T0P-qB-yYM">
+                                <rect key="frame" x="16" y="714" width="307" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="LEs-mF-Lgr"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="newReplyTextFieldOnChange:" destination="jOj-Md-o8n" eventType="editingChanged" id="YxB-GD-ri6"/>
+                                </connections>
                             </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="5iR-E9-RYz"/>
@@ -3630,19 +3727,21 @@
                     </view>
                     <navigationItem key="navigationItem" title="댓답글" id="tD1-nx-X5h"/>
                     <connections>
-                        <outlet property="commentPublishButton" destination="6t4-GJ-3Zu" id="stp-ve-CfU"/>
-                        <outlet property="commentTableView" destination="ms4-qc-sGp" id="QGP-sm-jiP"/>
-                        <outlet property="newCommentTextField" destination="T0P-qB-yYM" id="sTD-j2-msw"/>
+                        <outlet property="newReplyTextField" destination="T0P-qB-yYM" id="MEr-k7-7C1"/>
+                        <outlet property="replyPublishButton" destination="6t4-GJ-3Zu" id="CSe-q3-JXA"/>
+                        <outlet property="replyTableView" destination="ms4-qc-sGp" id="jlD-8K-9UQ"/>
+                        <segue destination="yLp-yQ-CNC" kind="unwind" identifier="ViewReplyUnwindSegue" unwindAction="unwindToComment:" id="QnG-bd-h47"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WgR-BU-suP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="yLp-yQ-CNC" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3720" y="2922"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="ZYl-VA-9Xc"/>
-        <segue reference="1Xi-ok-rkT"/>
+        <segue reference="YJQ-Zb-UGF"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="AppIconWithoutBackground.png" width="139" height="128"/>

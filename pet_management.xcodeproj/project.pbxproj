@@ -57,6 +57,7 @@
 		8FAA0E3E279D87A200E400F3 /* PetPhotoUpdateDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAA0E3D279D87A200E400F3 /* PetPhotoUpdateDto.swift */; };
 		8FAA0E42279D960200E400F3 /* PetDeleteDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAA0E41279D960200E400F3 /* PetDeleteDto.swift */; };
 		8FAC8C4227BCEB120082AAC0 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAC8C4127BCEB120082AAC0 /* Attachment.swift */; };
+		8FB2FFAD27E2D50200E45C30 /* UIPostReplyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB2FFAC27E2D50200E45C30 /* UIPostReplyVC.swift */; };
 		8FB493CB27D1EC19007EFEFA /* UIPostFeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB493CA27D1EC19007EFEFA /* UIPostFeedVC.swift */; };
 		8FB990B827D9ABEC0011F977 /* PostCreateDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB990B727D9ABEC0011F977 /* PostCreateDto.swift */; };
 		8FCEAFCF2794007D00CD8DA6 /* UIFindAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCEAFCE2794007D00CD8DA6 /* UIFindAccountVC.swift */; };
@@ -70,7 +71,6 @@
 		8FD2309A27E1C43F0059A0AA /* CommentDeleteDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD2309927E1C43F0059A0AA /* CommentDeleteDto.swift */; };
 		8FD2309C27E1C4470059A0AA /* CommentUpdateDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD2309B27E1C4470059A0AA /* CommentUpdateDto.swift */; };
 		8FD230A227E1D4AD0059A0AA /* UIPostCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD230A127E1D4AD0059A0AA /* UIPostCommentCell.swift */; };
-		8FD230A427E1D4B40059A0AA /* UIPostReplyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD230A327E1D4B40059A0AA /* UIPostReplyCell.swift */; };
 		8FE4F96A27D99EE500B6333D /* UIPostEditorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE4F96927D99EE500B6333D /* UIPostEditorVC.swift */; };
 		8FF00FF527901B8D0087913B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF00FF427901B8D0087913B /* AppDelegate.swift */; };
 		8FF00FF727901B8D0087913B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF00FF627901B8D0087913B /* SceneDelegate.swift */; };
@@ -171,6 +171,7 @@
 		8FAA0E3D279D87A200E400F3 /* PetPhotoUpdateDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetPhotoUpdateDto.swift; sourceTree = "<group>"; };
 		8FAA0E41279D960200E400F3 /* PetDeleteDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetDeleteDto.swift; sourceTree = "<group>"; };
 		8FAC8C4127BCEB120082AAC0 /* Attachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
+		8FB2FFAC27E2D50200E45C30 /* UIPostReplyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPostReplyVC.swift; sourceTree = "<group>"; };
 		8FB493CA27D1EC19007EFEFA /* UIPostFeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPostFeedVC.swift; sourceTree = "<group>"; };
 		8FB990B727D9ABEC0011F977 /* PostCreateDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreateDto.swift; sourceTree = "<group>"; };
 		8FCEAFCE2794007D00CD8DA6 /* UIFindAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFindAccountVC.swift; sourceTree = "<group>"; };
@@ -184,7 +185,6 @@
 		8FD2309927E1C43F0059A0AA /* CommentDeleteDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentDeleteDto.swift; sourceTree = "<group>"; };
 		8FD2309B27E1C4470059A0AA /* CommentUpdateDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentUpdateDto.swift; sourceTree = "<group>"; };
 		8FD230A127E1D4AD0059A0AA /* UIPostCommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPostCommentCell.swift; sourceTree = "<group>"; };
-		8FD230A327E1D4B40059A0AA /* UIPostReplyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPostReplyCell.swift; sourceTree = "<group>"; };
 		8FE4F96927D99EE500B6333D /* UIPostEditorVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPostEditorVC.swift; sourceTree = "<group>"; };
 		8FF00FF127901B8D0087913B /* pet_management.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pet_management.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FF00FF427901B8D0087913B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -422,7 +422,7 @@
 				8FA8FCEC27DB325A00F937A4 /* UIPostEditorFileVC.swift */,
 				8FD2309027E1C06A0059A0AA /* UIPostCommentVC.swift */,
 				8FD230A127E1D4AD0059A0AA /* UIPostCommentCell.swift */,
-				8FD230A327E1D4B40059A0AA /* UIPostReplyCell.swift */,
+				8FB2FFAC27E2D50200E45C30 /* UIPostReplyVC.swift */,
 			);
 			path = community;
 			sourceTree = "<group>";
@@ -777,6 +777,7 @@
 				8F25E7E32792E39F005070D6 /* AccountCreateDto.swift in Sources */,
 				8F9564F9279802CA00AE577B /* UIUtil.swift in Sources */,
 				8FCEAFCF2794007D00CD8DA6 /* UIFindAccountVC.swift in Sources */,
+				8FB2FFAD27E2D50200E45C30 /* UIPostReplyVC.swift in Sources */,
 				8F038FAA279E764000283867 /* UIMyPetScheduleEditorVC.swift in Sources */,
 				8F038FAE279E803700283867 /* PetSchedule.swift in Sources */,
 				8F37F796279AC83E0004394D /* UIMyPetEmptyVC.swift in Sources */,
@@ -792,7 +793,6 @@
 				8F7B840527E06A8F00B2E11B /* PostDeleteDto.swift in Sources */,
 				8FA8FCED27DB325A00F937A4 /* UIPostEditorFileVC.swift in Sources */,
 				8F7B840127E0268C00B2E11B /* PostUpdateFileDto.swift in Sources */,
-				8FD230A427E1D4B40059A0AA /* UIPostReplyCell.swift in Sources */,
 				8FF00FF727901B8D0087913B /* SceneDelegate.swift in Sources */,
 				8F038FB0279E8D8B00283867 /* PetScheduleUpdateDto.swift in Sources */,
 				8FD2309A27E1C43F0059A0AA /* CommentDeleteDto.swift in Sources */,
