@@ -135,4 +135,29 @@ class CommentUtil {
             resHandler(res);
         }
     }
+    
+    // func reqHttpReportComment
+    static func reqHttpReportComment(commentId: Int, sender: UIViewController, resHandler: @escaping (DataResponse<CommentReportDto, AFError>) -> Void) {
+        let reqApi = "comment/report";
+        let reqUrl = APIBackendUtil.getUrl(api: reqApi);
+        let reqHeader: HTTPHeaders = APIBackendUtil.getAuthHeader();
+        let reqBody = [
+            "id": String(commentId)
+        ];
+        
+        AF.request(reqUrl, method: .post, parameters: reqBody, encoding: JSONEncoding.default, headers: reqHeader).responseDecodable(of: CommentReportDto.self) {
+            (res) in
+            guard (res.error == nil) else {
+                APIBackendUtil.logHttpError(reqApi: reqApi, errMsg: res.error?.localizedDescription);
+                sender.present(APIBackendUtil.makeHttpErrorPopup(errMsg: res.error?.localizedDescription), animated: true);
+                return;
+            }
+            
+            guard (res.value?._metadata.status == true) else {
+                sender.present(APIBackendUtil.makeHttpErrorPopup(errMsg: res.value?._metadata.message), animated: true);
+                return;
+            }
+            resHandler(res);
+        }
+    }
 }
