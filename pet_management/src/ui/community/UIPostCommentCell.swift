@@ -18,7 +18,7 @@ class UIPostCommentCell: UITableViewCell {
     
     weak var delegate: UIPostCommentCellDelegate?;
     var senderVC: UIViewController?;
-    
+    var indexPath: IndexPath?;
     var comment: Comment?;
     
     func initCell() {
@@ -30,7 +30,9 @@ class UIPostCommentCell: UITableViewCell {
         self.contentTextView.isScrollEnabled = false;
         self.contentTextView.text = self.comment!.contents;
         self.contentTextView.sizeToFit();
-        self.replyButton.setTitle("댓답글 \(self.comment!.childCommentCnt)개", for: .normal);
+        if (self.replyButton != nil) {
+            self.replyButton.setTitle("댓답글 \(self.comment!.childCommentCnt)개", for: .normal);
+        }
     }
     
     
@@ -40,17 +42,42 @@ class UIPostCommentCell: UITableViewCell {
         if (self.comment!.author.id == accountDetail["id"] as! Int) {
             alertController.addAction(UIAlertAction(title: "수정", style: .default) {
                 (sender) in
+                let commentEditorAlert = UIAlertController(title: "댓글/댓답글 수정", message: "", preferredStyle: .alert);
                 
+                commentEditorAlert.addTextField() {
+                    (textfield) in
+                    textfield.placeholder = "댓글/댓답글 내용을 입력하세요";
+                    textfield.text = self.comment!.contents;
+                };
+                commentEditorAlert.addAction(UIAlertAction(title: "수정", style: .default) {
+                    (sender) in
+                    guard (commentEditorAlert.textFields != nil && !commentEditorAlert.textFields![0].text!.isEmpty) else {
+                        self.senderVC!.present(UIUtil.makeSimplePopup(title: "댓글/댓답글 수정 에러", message: "내용을 입력하세요", onClose: nil), animated: true);
+                        return;
+                    }
+                    let newCommentContents = commentEditorAlert.textFields![0].text!;
+                    CommentUtil.reqHttpUpdateComment(commentId: self.comment!.id, contents: newCommentContents, sender: self.senderVC!) {
+                        (res) in
+                        self.delegate!.refreshComment();
+                    }
+                });
+                commentEditorAlert.addAction(UIAlertAction(title: "취소", style: .cancel));
+                self.senderVC!.present(commentEditorAlert, animated: true);
             });
             alertController.addAction(UIAlertAction(title: "삭제", style: .destructive) {
                 (sender) in
                 CommentUtil.reqHttpDeleteComment(commentId: self.comment!.id, sender: self.senderVC!) {
                     (res) in
                     self.delegate!.refreshComment();
+                    
+                    // Unwind to comment page if parent comment deleted from replyView
+                    if (self.replyButton != nil && self.replyButton.isEnabled == false) {
+                        self.senderVC!.performSegue(withIdentifier: "ViewReplyUnwindSegue", sender: self.senderVC!);
+                    }
                 }
             });
         } else {
-            alertController.addAction(UIAlertAction(title: "게시물 신고", style: .destructive) {
+            alertController.addAction(UIAlertAction(title: "댓글 신고", style: .destructive) {
                 (sender) in
             });
         }
@@ -58,6 +85,6 @@ class UIPostCommentCell: UITableViewCell {
         self.senderVC!.present(alertController, animated: true);
     }
     @IBAction func replyButtonOnClick(_ sender: UIButton) {
-        self.senderVC!.performSegue(withIdentifier: "replyToCommentSegue", sender: self.senderVC);
+        self.senderVC!.performSegue(withIdentifier: "ReplyViewSegue", sender: self.indexPath);
     }
 }

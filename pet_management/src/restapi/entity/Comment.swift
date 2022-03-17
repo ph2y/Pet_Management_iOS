@@ -11,7 +11,7 @@ import Alamofire;
 struct Comment: Decodable {
     let id: Int;
     var author: Account;
-    var postId: Int;
+    var postId: Int?;
     var parentCommentId: Int?;
     var childCommentCnt: Int;
     var contents: String;
@@ -51,7 +51,7 @@ class CommentUtil {
         }
     }
     
-    static func reqHttpFetchComment(postId: Int? = nil, parentCommentId: Int? = nil, pageIndex: Int? = nil, topCommentId: Int? = nil, sender: UIViewController, resHandler: @escaping (DataResponse<CommentFetchDto, AFError>) -> Void) {
+    static func reqHttpFetchComment(postId: Int? = nil, parentCommentId: Int? = nil, pageIdx: Int? = nil, topCommentId: Int? = nil, sender: UIViewController, resHandler: @escaping (DataResponse<CommentFetchDto, AFError>) -> Void) {
         let reqApi = "comment/fetch";
         let reqUrl = APIBackendUtil.getUrl(api: reqApi);
         var reqBody = Dictionary<String, String>();
@@ -63,8 +63,8 @@ class CommentUtil {
         } else {
             return;
         }
-        if (pageIndex != nil && topCommentId != nil) {
-            reqBody["pageIndex"] = String(pageIndex!);
+        if (pageIdx != nil && topCommentId != nil) {
+            reqBody["pageIndex"] = String(pageIdx!);
             reqBody["topCommentId"] = String(topCommentId!);
         }
         
@@ -86,7 +86,7 @@ class CommentUtil {
     }
     
     static func reqHttpUpdateComment(commentId: Int, contents: String, sender: UIViewController, resHandler: @escaping (DataResponse<CommentUpdateDto, AFError>) -> Void) {
-        let reqApi = "comment/fetch";
+        let reqApi = "comment/update";
         let reqUrl = APIBackendUtil.getUrl(api: reqApi);
         let reqBody: Dictionary<String, String> = [
             "id": String(commentId),
@@ -112,7 +112,7 @@ class CommentUtil {
     }
     
     static func reqHttpDeleteComment(commentId: Int, sender: UIViewController, resHandler: @escaping (DataResponse<CommentDeleteDto, AFError>) -> Void) {
-        let reqApi = "comment/fetch";
+        let reqApi = "comment/delete";
         let reqUrl = APIBackendUtil.getUrl(api: reqApi);
         let reqBody: Dictionary<String, String> = [
             "id": String(commentId)
