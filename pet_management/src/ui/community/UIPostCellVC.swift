@@ -80,6 +80,10 @@ class UIPostCellVC: UITableViewCell {
         } else {
             alertController.addAction(UIAlertAction(title: "게시물 신고", style: .destructive) {
                 (sender) in
+                PostUtil.reqHttpReportPost(postId: self.post!.id, sender: self.senderVC!) {
+                    (res) in
+                    self.senderVC!.present(UIUtil.makeSimplePopup(title: "게시물 신고", message: "게시물 신고가 성공적으로 접수되었습니다.", onClose: nil), animated: true);
+                }
             });
         }
         alertController.addAction(UIAlertAction(title: "닫기", style: .cancel));

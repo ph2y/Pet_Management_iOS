@@ -39,6 +39,8 @@
 		8F9564F9279802CA00AE577B /* UIUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9564F8279802CA00AE577B /* UIUtil.swift */; };
 		8F95BB6627C7343200ED7630 /* PetPhotoFetchDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F95BB6527C7343200ED7630 /* PetPhotoFetchDto.swift */; };
 		8F95BB6827C745E600ED7630 /* PetPhotoDeleteDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F95BB6727C745E600ED7630 /* PetPhotoDeleteDto.swift */; };
+		8F99280C27E3114800F04B4B /* PostReportDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99280B27E3114800F04B4B /* PostReportDto.swift */; };
+		8F99280E27E3116A00F04B4B /* CommentReportDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99280D27E3116A00F04B4B /* CommentReportDto.swift */; };
 		8F9C743427A3F0E3004B1B79 /* PetScheduleDeleteDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9C743327A3F0E3004B1B79 /* PetScheduleDeleteDto.swift */; };
 		8F9C743627A3F805004B1B79 /* PetScheduleCreateDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9C743527A3F805004B1B79 /* PetScheduleCreateDto.swift */; };
 		8F9C743827A3F9E1004B1B79 /* UIMyPetScheduleCellVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9C743727A3F9E1004B1B79 /* UIMyPetScheduleCellVC.swift */; };
@@ -153,6 +155,8 @@
 		8F9564F8279802CA00AE577B /* UIUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIUtil.swift; sourceTree = "<group>"; };
 		8F95BB6527C7343200ED7630 /* PetPhotoFetchDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetPhotoFetchDto.swift; sourceTree = "<group>"; };
 		8F95BB6727C745E600ED7630 /* PetPhotoDeleteDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetPhotoDeleteDto.swift; sourceTree = "<group>"; };
+		8F99280B27E3114800F04B4B /* PostReportDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostReportDto.swift; sourceTree = "<group>"; };
+		8F99280D27E3116A00F04B4B /* CommentReportDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentReportDto.swift; sourceTree = "<group>"; };
 		8F9C743327A3F0E3004B1B79 /* PetScheduleDeleteDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetScheduleDeleteDto.swift; sourceTree = "<group>"; };
 		8F9C743527A3F805004B1B79 /* PetScheduleCreateDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetScheduleCreateDto.swift; sourceTree = "<group>"; };
 		8F9C743727A3F9E1004B1B79 /* UIMyPetScheduleCellVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIMyPetScheduleCellVC.swift; sourceTree = "<group>"; };
@@ -407,6 +411,7 @@
 				8FA426A827BA4EE6008FBD43 /* PostFetchDto.swift */,
 				8FB990B727D9ABEC0011F977 /* PostCreateDto.swift */,
 				8F7B840427E06A8F00B2E11B /* PostDeleteDto.swift */,
+				8F99280B27E3114800F04B4B /* PostReportDto.swift */,
 			);
 			path = community;
 			sourceTree = "<group>";
@@ -444,6 +449,7 @@
 				8FD2309727E1C4380059A0AA /* CommentCreateDto.swift */,
 				8FD2309927E1C43F0059A0AA /* CommentDeleteDto.swift */,
 				8FD2309B27E1C4470059A0AA /* CommentUpdateDto.swift */,
+				8F99280D27E3116A00F04B4B /* CommentReportDto.swift */,
 			);
 			path = comment;
 			sourceTree = "<group>";
@@ -733,6 +739,7 @@
 				8FA8AAAE27BCE80E009F5561 /* UIPostWithImageCellVC.swift in Sources */,
 				8FCEAFD32794009A00CD8DA6 /* UIFindAccountPasswordVC.swift in Sources */,
 				8F82F33C27BE1A2300571697 /* Pageable.swift in Sources */,
+				8F99280C27E3114800F04B4B /* PostReportDto.swift in Sources */,
 				8FAA0E36279D748600E400F3 /* UIMyPetEditorVC.swift in Sources */,
 				8FD2309127E1C06A0059A0AA /* UIPostCommentVC.swift in Sources */,
 				8F37F786279AACD50004394D /* UIMyPetPageVC.swift in Sources */,
@@ -742,6 +749,7 @@
 				8F9C743827A3F9E1004B1B79 /* UIMyPetScheduleCellVC.swift in Sources */,
 				8F9C743627A3F805004B1B79 /* PetScheduleCreateDto.swift in Sources */,
 				8FAA0E3C279D873200E400F3 /* PetUpdateDto.swift in Sources */,
+				8F99280E27E3116A00F04B4B /* CommentReportDto.swift in Sources */,
 				8F9564F62798011000AE577B /* AccountLoginDto.swift in Sources */,
 				8F9C743427A3F0E3004B1B79 /* PetScheduleDeleteDto.swift in Sources */,
 				8F25E7D62792CB1C005070D6 /* APIBackendConfig.swift in Sources */,
