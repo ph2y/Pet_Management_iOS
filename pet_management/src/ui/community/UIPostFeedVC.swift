@@ -24,6 +24,7 @@ class UIPostFeedVC: UIViewController, UIPostCellDelegate {
         PostUtil.reqHttpFetchPosts(pageIdx: self.loadedPageCnt, sender: self, resHandler: self.postFetch);
         self.initPullToRefresh();
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "CommentViewSegue") {
             let dest = segue.destination;
@@ -32,6 +33,15 @@ class UIPostFeedVC: UIViewController, UIPostCellDelegate {
             }
             let index = sender as! IndexPath;
             destVC.postId = self.postList[index.row].id;
+        }
+        if (segue.identifier == "PostEditorSegue") {
+            let dest = segue.destination;
+            guard let destVC = dest as? UIPostEditorVC else {
+                return;
+            }
+            let index = sender as! IndexPath;
+            destVC.isNewPost = false;
+            destVC.currentPost = self.postList[index.row];
         }
     }
     

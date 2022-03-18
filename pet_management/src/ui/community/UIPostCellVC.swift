@@ -68,7 +68,7 @@ class UIPostCellVC: UITableViewCell {
         if (self.post!.author.id == accountDetail["id"] as! Int) {
             alertController.addAction(UIAlertAction(title: "수정", style: .default) {
                 (sender) in
-                
+                self.senderVC!.performSegue(withIdentifier: "PostEditorSegue", sender: self.indexPath);
             });
             alertController.addAction(UIAlertAction(title: "삭제", style: .destructive) {
                 (sender) in
