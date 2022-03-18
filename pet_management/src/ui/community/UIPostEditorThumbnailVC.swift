@@ -10,19 +10,14 @@ import Photos;
 
 class UIPostEditorThumbnailVC: UIViewController {
     @IBOutlet weak var thumbnailImageView: UIImageView!;
-    let imageManager = PHImageManager.default();
-    let option = PHImageRequestOptions();
+    
     var delegate: UIPostEditorDelegate?;
-    var thumbnailAsset: PHAsset?;
+    var thumbnail: UIImage?;
+    var asset: PHAsset?;
     
     override func viewDidLoad() {
-        option.isSynchronous = true;
-        
-        if (self.thumbnailAsset != nil) {
-            imageManager.requestImage(for: self.thumbnailAsset!, targetSize: CGSize(width: 75, height: 75), contentMode: .aspectFit, options: option) {
-                (result, info) in
-                self.thumbnailImageView.image = result!;
-            }
+        if (self.thumbnail != nil) {
+            self.thumbnailImageView.image = thumbnail;
         }
     }
     
