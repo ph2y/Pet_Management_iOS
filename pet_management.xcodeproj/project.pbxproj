@@ -44,6 +44,7 @@
 		8F9C743427A3F0E3004B1B79 /* PetScheduleDeleteDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9C743327A3F0E3004B1B79 /* PetScheduleDeleteDto.swift */; };
 		8F9C743627A3F805004B1B79 /* PetScheduleCreateDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9C743527A3F805004B1B79 /* PetScheduleCreateDto.swift */; };
 		8F9C743827A3F9E1004B1B79 /* UIMyPetScheduleCellVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9C743727A3F9E1004B1B79 /* UIMyPetScheduleCellVC.swift */; };
+		8F9C9C6B27E4555000B55E6B /* UIFollower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9C9C6A27E4555000B55E6B /* UIFollower.swift */; };
 		8FA426A427BA4C92008FBD43 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA426A327BA4C92008FBD43 /* Post.swift */; };
 		8FA426A627BA4CF5008FBD43 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA426A527BA4CF5008FBD43 /* Account.swift */; };
 		8FA426A927BA4EE6008FBD43 /* PostFetchDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA426A827BA4EE6008FBD43 /* PostFetchDto.swift */; };
@@ -160,6 +161,7 @@
 		8F9C743327A3F0E3004B1B79 /* PetScheduleDeleteDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetScheduleDeleteDto.swift; sourceTree = "<group>"; };
 		8F9C743527A3F805004B1B79 /* PetScheduleCreateDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetScheduleCreateDto.swift; sourceTree = "<group>"; };
 		8F9C743727A3F9E1004B1B79 /* UIMyPetScheduleCellVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIMyPetScheduleCellVC.swift; sourceTree = "<group>"; };
+		8F9C9C6A27E4555000B55E6B /* UIFollower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFollower.swift; sourceTree = "<group>"; };
 		8FA426A327BA4C92008FBD43 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		8FA426A527BA4CF5008FBD43 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		8FA426A827BA4EE6008FBD43 /* PostFetchDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostFetchDto.swift; sourceTree = "<group>"; };
@@ -428,6 +430,7 @@
 				8FD2309027E1C06A0059A0AA /* UIPostCommentVC.swift */,
 				8FD230A127E1D4AD0059A0AA /* UIPostCommentCell.swift */,
 				8FB2FFAC27E2D50200E45C30 /* UIPostReplyVC.swift */,
+				8F9C9C6A27E4555000B55E6B /* UIFollower.swift */,
 			);
 			path = community;
 			sourceTree = "<group>";
@@ -737,6 +740,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8FA8AAAE27BCE80E009F5561 /* UIPostWithImageCellVC.swift in Sources */,
+				8F9C9C6B27E4555000B55E6B /* UIFollower.swift in Sources */,
 				8FCEAFD32794009A00CD8DA6 /* UIFindAccountPasswordVC.swift in Sources */,
 				8F82F33C27BE1A2300571697 /* Pageable.swift in Sources */,
 				8F99280C27E3114800F04B4B /* PostReportDto.swift in Sources */,
