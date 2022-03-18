@@ -36,12 +36,12 @@ class UIPostEditorVC: UIViewController, UIPostEditorDelegate {
     var myPetList: [Pet] = [];
     var isNewPost: Bool = true;
     var fromMyPetFeed: Bool = false;
-    var uploadAttachPhoto: [PHAsset] = [];
+    var uploadAttachPhoto: [UIImage] = [];
     var uploadAttachVideo: [PHAsset] = [];
     var uploadAttachFile: [URL] = [];
-    var deleteAttachPhoto: [Int] = [];
-    var deleteAttachVideo: [Int] = [];
-    var deleteAttachFile: [Int] = [];
+    var currentAttachedPhoto: [UIImage] = [];
+    var currentAttachedVideo: [URL] = [];
+    var currentAttachedFile: [URL] = [];
     
     override func viewDidLoad() {
         // Setup image picker
@@ -134,14 +134,17 @@ class UIPostEditorVC: UIViewController, UIPostEditorDelegate {
         guard (assetList.count != 0) else {
             return;
         }
-        self.uploadAttachPhoto = assetList;
+        self.uploadAttachPhoto = assetList.map({
+            (asset) in
+            return AttachmentUtil.getImageFromPHAsset(asset: asset, size: CGSize(width: 1000, height: 1000));
+        });
         for asset in assetList {
             // Privent duplication
             let duplicatedThumbnail = self.children.first() {
                 (vc) in
                 if (type(of: vc) == UIPostEditorThumbnailVC.self) {
                     let thumbnailVC = vc as! UIPostEditorThumbnailVC;
-                    return thumbnailVC.thumbnailAsset == asset;
+                    return thumbnailVC.asset != nil && thumbnailVC.asset == asset;
                 }
                 return false;
             }
@@ -152,20 +155,31 @@ class UIPostEditorVC: UIViewController, UIPostEditorDelegate {
             
             // Create image preview
             let thumbnailVC = storyboard!.instantiateViewController(withIdentifier: "PostEditorThumbnailVC") as! UIPostEditorThumbnailVC;
-            let assetIdx = self.uploadAttachPhoto.firstIndex(of: asset);
+            let assetIdx = self.uploadAttachPhoto.firstIndex() {
+                (photo) in
+                return photo.pngData() == AttachmentUtil.getImageFromPHAsset(asset: asset, size: CGSize(width: 1000, height: 1000)).pngData();
+            }
             thumbnailVC.delegate = self;
-            thumbnailVC.thumbnailAsset = asset;
-            thumbnailVC.view.frame = CGRect(x: 80 * CGFloat(assetIdx!), y: 0, width: 75, height: 75);
+            thumbnailVC.asset = asset;
+            thumbnailVC.thumbnail = AttachmentUtil.getImageFromPHAsset(asset: asset);
+            thumbnailVC.view.frame = CGRect(x: 80 * CGFloat(self.currentAttachedPhoto.count + assetIdx!), y: 0, width: 75, height: 75);
             self.addChild(thumbnailVC);
             self.attachedImageScrollView.addSubview(thumbnailVC.view);
         }
         self.resizeAttachedImageScrollViewWidth();
-        self.postAttachPhotoButton.setTitle("(\(assetList.count)/10)", for: .normal);
+        self.postAttachPhotoButton.setTitle("(\(self.currentAttachedPhoto.count + self.uploadAttachPhoto.count)/10)", for: .normal);
     }
     
     func removeAttachedPhotoAsset(sender: UIPostEditorThumbnailVC) {
-        let assetIdx = self.uploadAttachPhoto.firstIndex(of: sender.thumbnailAsset!);
-        self.uploadAttachPhoto.remove(at: assetIdx!);
+        // If the photo is newly uploaded
+        if (sender.asset != nil) {
+            let assetIdx = self.uploadAttachPhoto.firstIndex() {
+                (photo) in
+                return photo.pngData() == AttachmentUtil.getImageFromPHAsset(asset: sender.asset!, size: CGSize(width: 1000, height: 1000)).pngData();
+            }
+            self.uploadAttachPhoto.remove(at: assetIdx!);
+            self.photoPicker.deselect(asset: sender.asset!);
+        }
         sender.view.removeFromSuperview();
         sender.removeFromParent();
         
@@ -175,12 +189,21 @@ class UIPostEditorVC: UIViewController, UIPostEditorDelegate {
             return type(of: vc) == UIPostEditorThumbnailVC.self;
         }) {
             let thumbnailVC = thumbnailVC as! UIPostEditorThumbnailVC;
-            let assetIdx = self.uploadAttachPhoto.firstIndex(of: thumbnailVC.thumbnailAsset!);
-            thumbnailVC.view.frame = CGRect(x: 80 * CGFloat(assetIdx!), y: 0, width: 75, height: 75);
+            
+            if (thumbnailVC.asset != nil) {
+                let assetIdx = self.uploadAttachPhoto.firstIndex() {
+                    (photo) in
+                    return photo.pngData() == AttachmentUtil.getImageFromPHAsset(asset: thumbnailVC.asset!, size: CGSize(width: 1000, height: 1000)).pngData();
+                }
+                thumbnailVC.view.frame = CGRect(x: 80 * CGFloat(self.currentAttachedPhoto.count + assetIdx!), y: 0, width: 75, height: 75);
+            } else {
+                let assetIdx = self.currentAttachedPhoto.firstIndex(of: thumbnailVC.thumbnail!);
+                thumbnailVC.view.frame = CGRect(x: 80 * CGFloat(assetIdx!), y: 0, width: 75, height: 75);
+            }
         }
+        
         self.resizeAttachedImageScrollViewWidth();
-        self.postAttachPhotoButton.setTitle("(\(self.uploadAttachPhoto.count)/10)", for: .normal);
-        self.photoPicker.deselect(asset: sender.thumbnailAsset!);
+        self.postAttachPhotoButton.setTitle("(\(self.currentAttachedPhoto.count + self.uploadAttachPhoto.count)/10)", for: .normal);
     }
     
     func resizeAttachedImageScrollViewWidth() {
@@ -236,18 +259,9 @@ class UIPostEditorVC: UIViewController, UIPostEditorDelegate {
     }
     
     func uploadPhotoList(postId: Int, syncronizer: DispatchGroup) {
-        let imageManager = PHImageManager.default();
-        let option = PHImageRequestOptions();
-        option.isSynchronous = true;
-        
         syncronizer.enter();
         PostUtil.reqHttpUpdatePostFile(postId: postId, fileType: "IMAGE_FILE", fileList: self.uploadAttachPhoto.map({
-            (asset) in
-            var photo = UIImage();
-            imageManager.requestImage(for: asset, targetSize: CGSize(width: 1000, height: 1000), contentMode: .aspectFit, options: option) {
-                (result, info) in
-                photo = result!;
-            }
+            (photo) in
             return photo.jpegData(compressionQuality: 0.7)!;
         }), sender: self) {
             (res) in
@@ -326,7 +340,7 @@ class UIPostEditorVC: UIViewController, UIPostEditorDelegate {
             let thumbnailVC = thumbnailVCList.first() {
                 (vc) in
                 let thumbnailVC = vc as! UIPostEditorThumbnailVC;
-                return thumbnailVC.thumbnailAsset == asset;
+                return thumbnailVC.thumbnail!.pngData() == AttachmentUtil.getImageFromPHAsset(asset: asset).pngData();
             }
             if (thumbnailVC != nil) {
                 self.removeAttachedPhotoAsset(sender: thumbnailVC as! UIPostEditorThumbnailVC);
