@@ -117,6 +117,28 @@ class PostUtil {
         }
     }
     
+    // func reqHttpUpdatePost
+    static func reqHttpUpdatePost(postContent: PostUpdateParam, sender: UIViewController, resHandler: @escaping (DataResponse<PostUpdateDto, AFError>) -> Void) {
+        let reqApi = "post/update";
+        let reqUrl = APIBackendUtil.getUrl(api: reqApi);
+        let reqHeader: HTTPHeaders = APIBackendUtil.getAuthHeader();
+        
+        AF.request(reqUrl, method: .post, parameters: postContent, encoder: JSONParameterEncoder.default, headers: reqHeader).responseDecodable(of: PostUpdateDto.self) {
+            (res) in
+            guard (res.error == nil) else {
+                APIBackendUtil.logHttpError(reqApi: reqApi, errMsg: res.error?.localizedDescription);
+                sender.present(APIBackendUtil.makeHttpErrorPopup(errMsg: res.error?.localizedDescription), animated: true);
+                return;
+            }
+            
+            guard (res.value?._metadata.status == true) else {
+                sender.present(APIBackendUtil.makeHttpErrorPopup(errMsg: res.value?._metadata.message), animated: true);
+                return;
+            }
+            resHandler(res);
+        }
+    }
+    
     // func reqHttpDeletePost
     static func reqHttpDeletePost(postId: Int, sender: UIViewController, resHandler: @escaping (DataResponse<PostDeleteDto, AFError>) -> Void) {
         let reqApi = "post/delete";

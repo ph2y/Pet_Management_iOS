@@ -31,14 +31,16 @@ class UIPostEditorVC: UIViewController, UIPostEditorDelegate {
     let photoPicker = ImagePickerController();
     let videoPicker = ImagePickerController();
     let filePicker = UIDocumentPickerViewController(forOpeningContentTypes: [UTType.text, UTType.pdf, UTType.zip], asCopy: true);
-    var post: Post?;
-    var newPost: PostCreateParam = PostCreateParam();
-    var myPetList: [Pet] = [];
     var isNewPost: Bool = true;
     var fromMyPetFeed: Bool = false;
+    var myPetList: [Pet] = [];
+    // new post contents
+    var newPost: PostCreateParam = PostCreateParam();
     var uploadAttachPhoto: [UIImage] = [];
     var uploadAttachVideo: [PHAsset] = [];
     var uploadAttachFile: [URL] = [];
+    // current post contents (for edit only)
+    var currentPost: Post?;
     var currentAttachedPhoto: [UIImage] = [];
     var currentAttachedVideo: [URL] = [];
     var currentAttachedFile: [URL] = [];
@@ -58,8 +60,9 @@ class UIPostEditorVC: UIViewController, UIPostEditorDelegate {
         self.attachedFileScrollView.subviews[0].removeFromSuperview();
         
         // Load current post
-        if (self.post != nil) {
+        if (!self.isNewPost && self.currentPost != nil) {
             self.loadCurrentPostContent();
+            self.loadCurrentPhotoAttachment();
         }
     }
     
@@ -106,11 +109,18 @@ class UIPostEditorVC: UIViewController, UIPostEditorDelegate {
             "PRIVATE": 2
         ];
         
-        self.attachedPetLabel.text = "태그된 반려동물: \(self.post!.pet.name)";
-        self.postContentTextView.text = self.post!.contents;
-        self.postTagTextField.text = self.post!.serializedHashTags;
-        self.postDisclosureSegmentedControl.selectedSegmentIndex = disclosureIdx[self.post!.disclosure] ?? disclosureIdx["PUBLIC"]!;
-        self.postGeoTagSwitch.isOn = !(self.post!.geoTagLat == 0 && self.post!.geoTagLong == 0);
+        self.attachedPetLabel.text = "태그된 반려동물: \(self.currentPost!.pet.name)";
+        self.newPost.petId = self.currentPost!.pet.id;
+        self.postContentTextView.text = self.currentPost!.contents;
+        self.postContentTextView.textColor = UIColor.black;
+        self.postTagTextField.text = self.currentPost!.serializedHashTags;
+        self.postDisclosureSegmentedControl.selectedSegmentIndex = disclosureIdx[self.currentPost!.disclosure] ?? disclosureIdx["PUBLIC"]!;
+        self.postGeoTagSwitch.isOn = !(self.currentPost!.geoTagLat == 0 && self.currentPost!.geoTagLong == 0);
+        self.postGeoTagSwitch.isEnabled = false;
+    }
+    
+    func loadCurrentPhotoAttachment() {
+        
     }
     
     func validatePostContent() -> Bool {
@@ -327,6 +337,31 @@ class UIPostEditorVC: UIViewController, UIPostEditorDelegate {
         alert.view.addSubview(loadingIndicator);
         present(alert, animated: true, completion: nil);
     }
+    
+    func processAttachmentUploadQueue(postId: Int) {
+        let attachmentSyncronizer = DispatchGroup();
+        
+        self.lockEditor();
+        if (!self.uploadAttachPhoto.isEmpty) {
+            self.uploadPhotoList(postId: postId, syncronizer: attachmentSyncronizer);
+        }
+        if (!self.uploadAttachVideo.isEmpty) {
+            self.uploadVideoList(postId: postId, syncronizer: attachmentSyncronizer);
+        }
+        if (!self.uploadAttachFile.isEmpty) {
+            self.uploadFileList(postId: postId, syncronizer: attachmentSyncronizer);
+        }
+        
+        attachmentSyncronizer.notify(queue: .main) {
+            self.dismiss(animated: false) {
+                if (self.fromMyPetFeed) {
+                    self.performSegue(withIdentifier: "publishPostFromMyPetSegue", sender: self);
+                } else {
+                    self.performSegue(withIdentifier: "publishPostFromFeedSegue", sender: self);
+                }
+            }
+        }
+    }
 
     
     // Action Methods
@@ -370,33 +405,30 @@ class UIPostEditorVC: UIViewController, UIPostEditorDelegate {
         self.newPost.hashTags = self.postTagTextField.text!.components(separatedBy: ",");
         self.newPost.disclosure = disclosureString[self.postDisclosureSegmentedControl.selectedSegmentIndex] ?? "PUBLIC";
         
+        // Set geotag
+        if (self.isNewPost) {
+            self.newPost.geoTagLat = 0;
+            self.newPost.geoTagLong = 0;
+        } else {
+            self.newPost.geoTagLat = self.currentPost!.geoTagLat;
+            self.newPost.geoTagLong = self.currentPost!.geoTagLong;
+        }
+        
         guard(self.validatePostContent()) else {
             return;
         }
         
-        PostUtil.reqHttpCreatePost(postContent: self.newPost, sender: self) {
-            (res) in
-            let attachmentSyncronizer = DispatchGroup();
+        if (self.isNewPost) {
+            PostUtil.reqHttpCreatePost(postContent: self.newPost, sender: self) {
+                (res) in
+                self.processAttachmentUploadQueue(postId: res.value!.id);
+            }
+        } else {
+            let editedPost = PostUpdateParam(id: self.currentPost!.id, petId: self.newPost.petId, contents: self.newPost.contents, hashTags: self.newPost.hashTags, disclosure: self.newPost.disclosure, geoTagLat: self.newPost.geoTagLat, geoTagLong: self.newPost.geoTagLong);
             
-            self.lockEditor();
-            if (!self.uploadAttachPhoto.isEmpty) {
-                self.uploadPhotoList(postId: res.value!.id, syncronizer: attachmentSyncronizer);
-            }
-            if (!self.uploadAttachVideo.isEmpty) {
-                self.uploadVideoList(postId: res.value!.id, syncronizer: attachmentSyncronizer);
-            }
-            if (!self.uploadAttachFile.isEmpty) {
-                self.uploadFileList(postId: res.value!.id, syncronizer: attachmentSyncronizer);
-            }
-            
-            attachmentSyncronizer.notify(queue: .main) {
-                self.dismiss(animated: false) {
-                    if (self.fromMyPetFeed) {
-                        self.performSegue(withIdentifier: "publishPostFromMyPetSegue", sender: self);
-                    } else {
-                        self.performSegue(withIdentifier: "publishPostFromFeedSegue", sender: self);
-                    }
-                }
+            PostUtil.reqHttpUpdatePost(postContent: editedPost, sender: self) {
+                (res) in
+                self.processAttachmentUploadQueue(postId: self.currentPost!.id);
             }
         }
     }

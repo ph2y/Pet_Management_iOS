@@ -48,6 +48,16 @@ class UIMyPetDetailVC: UIViewController, UIPostCellDelegate {
             let index = sender as! IndexPath;
             destVC.postId = self.postList[index.row].id;
         }
+        if (segue.identifier == "PostEditorSegue") {
+            let dest = segue.destination;
+            guard let destVC = dest as? UIPostEditorVC else {
+                return;
+            }
+            let index = sender as! IndexPath;
+            destVC.isNewPost = false;
+            destVC.fromMyPetFeed = true;
+            destVC.currentPost = self.postList[index.row];
+        }
     }
     
     // func initRefresh

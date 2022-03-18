@@ -943,6 +943,7 @@
                     <connections>
                         <outlet property="postFeedTableView" destination="7bd-ur-wnL" id="f7O-Rk-CbM"/>
                         <segue destination="pa4-Hn-xHM" kind="show" identifier="CommentViewSegue" id="cFS-9N-z4j"/>
+                        <segue destination="CsU-Ww-eX5" kind="show" identifier="PostEditorSegue" id="e0z-5U-QN8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TU3-Ka-pBd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -954,11 +955,11 @@
             <objects>
                 <viewController id="CsU-Ww-eX5" userLabel="PostEditor" customClass="UIPostEditorVC" customModule="pet_management" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xeZ-8j-beb">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WWJ-9E-6Sx">
-                                <rect key="frame" x="0.0" y="88" width="390" height="673"/>
+                                <rect key="frame" x="0.0" y="44" width="390" height="746"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QLo-nV-I0Q">
                                         <rect key="frame" x="0.0" y="0.0" width="390" height="708.66666666666663"/>
@@ -982,7 +983,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="500" verticalCompressionResistancePriority="100" scrollEnabled="NO" text="게시글 내용을 입력하세요" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="5yl-D2-gEK">
-                                                <rect key="frame" x="16" y="78.333333333333343" width="358" height="175"/>
+                                                <rect key="frame" x="16" y="78.333333333333314" width="358" height="175"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="175" id="5zH-Fk-zmD"/>
@@ -1038,7 +1039,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rj9-l5-1Rd">
-                                                <rect key="frame" x="58.666666666666664" y="448.66666666666663" width="72.666666666666686" height="22"/>
+                                                <rect key="frame" x="58.666666666666664" y="448.66666666666669" width="72.666666666666686" height="22"/>
                                                 <color key="tintColor" red="0.76862752440000004" green="0.36078432199999999" blue="0.1411764771" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="(0/10)" image="camera.fill" catalog="system">
@@ -1049,7 +1050,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rMx-sd-hwc">
-                                                <rect key="frame" x="158.66666666666666" y="448.66666666666663" width="72.666666666666657" height="22"/>
+                                                <rect key="frame" x="158.66666666666666" y="448.66666666666669" width="72.666666666666657" height="22"/>
                                                 <color key="tintColor" red="0.76862752440000004" green="0.36078432199999999" blue="0.1411764771" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="(0/10)" image="video.fill" catalog="system">
@@ -1060,7 +1061,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EPd-e6-pgZ">
-                                                <rect key="frame" x="261" y="448.66666666666663" width="68" height="22"/>
+                                                <rect key="frame" x="261" y="448.66666666666669" width="68" height="22"/>
                                                 <color key="tintColor" red="0.76862752440000004" green="0.36078432199999999" blue="0.1411764771" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="(0/10)" image="paperclip" catalog="system">
@@ -2953,6 +2954,7 @@
                         <outlet property="petNameLabel" destination="k0r-2P-ryF" id="mTS-Kl-UjT"/>
                         <outlet property="postTableView" destination="Uop-PN-RWk" id="SuB-Db-RvR"/>
                         <segue destination="pa4-Hn-xHM" kind="show" identifier="CommentViewSegue" id="YJQ-Zb-UGF"/>
+                        <segue destination="CsU-Ww-eX5" kind="show" identifier="PostEditorSegue" id="i3k-eA-9oa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yi3-jj-lae" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -3743,6 +3745,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="ZYl-VA-9Xc"/>
         <segue reference="YJQ-Zb-UGF"/>
+        <segue reference="i3k-eA-9oa"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="AppIconWithoutBackground.png" width="139" height="128"/>
