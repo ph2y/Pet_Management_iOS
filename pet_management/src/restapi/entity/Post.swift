@@ -26,13 +26,13 @@ struct Post: Decodable, Encodable {
 
 class PostUtil {
     // func decodeFileMetadata
-    static func decodeFileMetadata(post: Post) -> [Attachment] {
+    static func decodeAttachmentMetadata(attachmentMetadata: String?) -> [Attachment] {
         let decoder = JSONDecoder();
-        guard (post.fileAttachments != nil) else {
+        guard (attachmentMetadata != nil) else {
             return [];
         }
-        if (post.fileAttachments!.data(using: .utf8) != nil) {
-            return try! decoder.decode([Attachment].self, from: post.fileAttachments!.data(using: .utf8)!);
+        if (attachmentMetadata!.data(using: .utf8) != nil) {
+            return try! decoder.decode([Attachment].self, from: attachmentMetadata!.data(using: .utf8)!);
         }
         return [];
     }
@@ -189,6 +189,30 @@ class PostUtil {
         }
     }
     
+    // func reqHttpFetchPostPhoto
+    static func reqHttpFetchPostPhoto(postId: Int, index: Int, sender: UIViewController, resHandler: @escaping (DataResponse<Data, AFError>) -> Void) {
+        let reqApi = "post/image/fetch";
+        let reqUrl = APIBackendUtil.getUrl(api: reqApi);
+        var reqBody = Dictionary<String, String>();
+        let reqHeader: HTTPHeaders = APIBackendUtil.getAuthHeader();
+        reqBody["id"] = String(postId);
+        reqBody["index"] = String(index);
+        reqBody["imageType"] = "2";
+        
+        AF.request(reqUrl, method: .post, parameters: reqBody, encoding: JSONEncoding.default, headers: reqHeader).responseData() {
+            (res) in
+            guard (res.error == nil) else {
+                APIBackendUtil.logHttpError(reqApi: reqApi, errMsg: res.error?.localizedDescription);
+                sender.present(APIBackendUtil.makeHttpErrorPopup(errMsg: res.error?.localizedDescription), animated: true);
+                return;
+            }
+            guard (res.data != nil) else {
+                return;
+            }
+            resHandler(res);
+        }
+    }
+    
     // func reqHttpFetchPostFile
     static func reqHttpFetchPostFile(postId: Int, index: Int, sender: UIViewController, resHandler: @escaping (DataResponse<Data, AFError>) -> Void) {
         let reqApi = "post/file/fetch";
@@ -248,6 +272,31 @@ class PostUtil {
                 return;
             }
             
+            resHandler(res);
+        }
+    }
+    
+    // func reqHttpDeletePostFile
+    static func reqHttpDeletePostFile(postId: Int, fileType: String, sender: UIViewController, resHandler: @escaping (DataResponse<PostDeleteFileDto, AFError>) -> Void) {
+        let reqApi = "post/file/delete";
+        let reqUrl = APIBackendUtil.getUrl(api: reqApi);
+        let reqHeader: HTTPHeaders = APIBackendUtil.getAuthHeader();
+        let reqBody: Dictionary<String, String> = [
+            "id": String(postId),
+            "fileType": fileType
+        ];
+        
+        AF.request(reqUrl, method: .post, parameters: reqBody, encoding: JSONEncoding.default, headers: reqHeader).responseDecodable(of: PostDeleteFileDto.self) {
+            (res) in
+            guard (res.error == nil) else {
+                APIBackendUtil.logHttpError(reqApi: reqApi, errMsg: res.error?.localizedDescription);
+                sender.present(APIBackendUtil.makeHttpErrorPopup(errMsg: res.error?.localizedDescription), animated: true);
+                return;
+            }
+            guard (res.value?._metadata.status == true) else {
+                sender.present(APIBackendUtil.makeHttpErrorPopup(errMsg: res.value?._metadata.message), animated: true);
+                return;
+            }
             resHandler(res);
         }
     }

@@ -179,7 +179,7 @@ extension UIMyPetDetailVC: UITableViewDelegate, UITableViewDataSource {
         } else if (post.imageAttachments == nil || post.imageAttachments!.count == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "post") as! UIPostCellVC;
             cell.post = post;
-            cell.fileAttachmentList = PostUtil.decodeFileMetadata(post: post);
+            cell.fileAttachmentList = PostUtil.decodeAttachmentMetadata(attachmentMetadata: post.fileAttachments);
             cell.indexPath = indexPath;
             cell.senderVC = self;
             cell.delegate = self;
@@ -188,7 +188,7 @@ extension UIMyPetDetailVC: UITableViewDelegate, UITableViewDataSource {
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "postWithImage") as! UIPostWithImageCellVC;
             cell.post = post;
-            cell.fileAttachmentList = PostUtil.decodeFileMetadata(post: post);
+            cell.fileAttachmentList = PostUtil.decodeAttachmentMetadata(attachmentMetadata: post.fileAttachments);
             cell.indexPath = indexPath;
             cell.senderVC = self;
             cell.delegate = self;

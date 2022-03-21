@@ -17,29 +17,18 @@ class UIPostWithImageCellVC: UIPostCellVC {
     let decoder = JSONDecoder();
     
     override func initCell() {
-        self.decodePhotoMetadata();
-        self.decodeVideoMetadata();
+        self.imageAttachementList = PostUtil.decodeAttachmentMetadata(attachmentMetadata: self.post!.imageAttachments);
+        self.videoAttachmentList = PostUtil.decodeAttachmentMetadata(attachmentMetadata: self.post!.videoAttachments);
         self.setupImageViewGesture();
         self.setupImagePagerControl();
         self.displayPetImage();
         self.displayPostContents();
-        self.reqHttpFetchPostImage(cell: self, cellIndex: self.indexPath!, postId: self.post!.id, imageIndex: 0);
-    }
-    
-    func decodePhotoMetadata() {
-        guard(self.post?.imageAttachments?.data(using: .utf8) != nil) else {
-            self.imageAttachementList = [];
-            return;
+        PostUtil.reqHttpFetchPostPhoto(postId: self.post!.id, index: 0, sender: self.senderVC!) {
+            (res) in
+            var reloadIndexPathList: [IndexPath] = [];
+            reloadIndexPathList.append(self.indexPath!);
+            self.postImageView.image = UIImage(data: res.data!);
         }
-        self.imageAttachementList = try! decoder.decode([Attachment].self, from: self.post!.imageAttachments!.data(using: .utf8)!);
-    }
-    
-    func decodeVideoMetadata() {
-        guard(self.post?.videoAttachments?.data(using: .utf8) != nil) else {
-            self.videoAttachmentList = [];
-            return;
-        }
-        self.videoAttachmentList = try! decoder.decode([Attachment].self, from: self.post!.videoAttachments!.data(using: .utf8)!);
     }
     
     func setupImageViewGesture() {
@@ -59,31 +48,6 @@ class UIPostWithImageCellVC: UIPostCellVC {
     }
     
     // TODO: 나중에 복수개의 이미지/동영상 불러오는 로직 짜면서 코드 정리 및 범용화할것
-    func reqHttpFetchPostImage(cell: UIPostWithImageCellVC, cellIndex: IndexPath, postId: Int, imageIndex: Int) {
-        let reqApi = "post/image/fetch";
-        let reqUrl = APIBackendUtil.getUrl(api: reqApi);
-        var reqBody = Dictionary<String, String>();
-        let reqHeader: HTTPHeaders = APIBackendUtil.getAuthHeader();
-        reqBody["id"] = String(postId);
-        reqBody["index"] = String(imageIndex);
-        reqBody["imageType"] = "1";
-        
-        AF.request(reqUrl, method: .post, parameters: reqBody, encoding: JSONEncoding.default, headers: reqHeader).responseData() {
-            (res) in
-            guard (res.error == nil) else {
-                APIBackendUtil.logHttpError(reqApi: reqApi, errMsg: res.error?.localizedDescription);
-                self.senderVC!.present(APIBackendUtil.makeHttpErrorPopup(errMsg: res.error?.localizedDescription), animated: true);
-                return;
-            }
-            guard (res.data != nil) else {
-                return;
-            }
-            var reloadIndexPathList: [IndexPath] = [];
-            reloadIndexPathList.append(cellIndex);
-            cell.postImageView.image = UIImage(data: res.data!);
-        }
-    }
-    
     func reqHttpFetchPostVideo(cell: UIPostWithImageCellVC, cellIndex: IndexPath, postId: Int, imageIndex: Int) {
         let reqApi = "post/image/fetch";
         let reqUrl = APIBackendUtil.getUrl(api: reqApi);
@@ -111,16 +75,31 @@ class UIPostWithImageCellVC: UIPostCellVC {
     
     @objc func swipeForNextImage(_ gesture: UIGestureRecognizer) {
         pageControl.currentPage += 1;
-        self.reqHttpFetchPostImage(cell: self, cellIndex: self.indexPath!, postId: self.post!.id, imageIndex: self.pageControl.currentPage);
+        PostUtil.reqHttpFetchPostPhoto(postId: self.post!.id, index: self.pageControl.currentPage, sender: self.senderVC!) {
+            (res) in
+            var reloadIndexPathList: [IndexPath] = [];
+            reloadIndexPathList.append(self.indexPath!);
+            self.postImageView.image = UIImage(data: res.data!);
+        }
     }
     
     @objc func swipeForPrevImage(_ gesture: UIGestureRecognizer) {
         pageControl.currentPage -= 1;
-        self.reqHttpFetchPostImage(cell: self, cellIndex: self.indexPath!, postId: self.post!.id, imageIndex: self.pageControl.currentPage);
+        PostUtil.reqHttpFetchPostPhoto(postId: self.post!.id, index: self.pageControl.currentPage, sender: self.senderVC!) {
+            (res) in
+            var reloadIndexPathList: [IndexPath] = [];
+            reloadIndexPathList.append(self.indexPath!);
+            self.postImageView.image = UIImage(data: res.data!);
+        }
     }
     
     // Action Methods
     @IBAction func pageChanged(_ sender: UIPageControl) {
-        self.reqHttpFetchPostImage(cell: self, cellIndex: self.indexPath!, postId: self.post!.id, imageIndex: self.pageControl.currentPage);
+        PostUtil.reqHttpFetchPostPhoto(postId: self.post!.id, index: self.pageControl.currentPage, sender: self.senderVC!) {
+            (res) in
+            var reloadIndexPathList: [IndexPath] = [];
+            reloadIndexPathList.append(self.indexPath!);
+            self.postImageView.image = UIImage(data: res.data!);
+        }
     }
 }
