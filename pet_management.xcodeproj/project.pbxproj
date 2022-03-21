@@ -41,6 +41,7 @@
 		8F95BB6827C745E600ED7630 /* PetPhotoDeleteDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F95BB6727C745E600ED7630 /* PetPhotoDeleteDto.swift */; };
 		8F99280C27E3114800F04B4B /* PostReportDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99280B27E3114800F04B4B /* PostReportDto.swift */; };
 		8F99280E27E3116A00F04B4B /* CommentReportDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99280D27E3116A00F04B4B /* CommentReportDto.swift */; };
+		8F99FE6B27E8604900261894 /* PostDeleteFileDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99FE6A27E8604900261894 /* PostDeleteFileDto.swift */; };
 		8F9C743427A3F0E3004B1B79 /* PetScheduleDeleteDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9C743327A3F0E3004B1B79 /* PetScheduleDeleteDto.swift */; };
 		8F9C743627A3F805004B1B79 /* PetScheduleCreateDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9C743527A3F805004B1B79 /* PetScheduleCreateDto.swift */; };
 		8F9C743827A3F9E1004B1B79 /* UIMyPetScheduleCellVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9C743727A3F9E1004B1B79 /* UIMyPetScheduleCellVC.swift */; };
@@ -159,6 +160,7 @@
 		8F95BB6727C745E600ED7630 /* PetPhotoDeleteDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetPhotoDeleteDto.swift; sourceTree = "<group>"; };
 		8F99280B27E3114800F04B4B /* PostReportDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostReportDto.swift; sourceTree = "<group>"; };
 		8F99280D27E3116A00F04B4B /* CommentReportDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentReportDto.swift; sourceTree = "<group>"; };
+		8F99FE6A27E8604900261894 /* PostDeleteFileDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDeleteFileDto.swift; sourceTree = "<group>"; };
 		8F9C743327A3F0E3004B1B79 /* PetScheduleDeleteDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetScheduleDeleteDto.swift; sourceTree = "<group>"; };
 		8F9C743527A3F805004B1B79 /* PetScheduleCreateDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetScheduleCreateDto.swift; sourceTree = "<group>"; };
 		8F9C743727A3F9E1004B1B79 /* UIMyPetScheduleCellVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIMyPetScheduleCellVC.swift; sourceTree = "<group>"; };
@@ -300,6 +302,7 @@
 			isa = PBXGroup;
 			children = (
 				8F7B840027E0268C00B2E11B /* PostUpdateFileDto.swift */,
+				8F99FE6A27E8604900261894 /* PostDeleteFileDto.swift */,
 			);
 			path = attachment;
 			sourceTree = "<group>";
@@ -744,6 +747,7 @@
 			files = (
 				8FA8AAAE27BCE80E009F5561 /* UIPostWithImageCellVC.swift in Sources */,
 				8F9C9C6B27E4555000B55E6B /* UIFollower.swift in Sources */,
+				8F99FE6B27E8604900261894 /* PostDeleteFileDto.swift in Sources */,
 				8FCEAFD32794009A00CD8DA6 /* UIFindAccountPasswordVC.swift in Sources */,
 				8F82F33C27BE1A2300571697 /* Pageable.swift in Sources */,
 				8F99280C27E3114800F04B4B /* PostReportDto.swift in Sources */,
