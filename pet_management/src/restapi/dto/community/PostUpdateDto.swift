@@ -11,8 +11,8 @@ struct PostUpdateParam: Encodable {
     var contents: String = "";
     var hashTags: [String] = [];
     var disclosure: String = "PUBLIC";
-    var geoTagLat: Float = 0;
-    var geoTagLong: Float = 0;
+    var geoTagLat: Double = 0;
+    var geoTagLong: Double = 0;
 }
 
 struct PostUpdateDto: Decodable {

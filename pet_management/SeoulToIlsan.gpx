@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<gpx version="1.1" creator="Xcode">
+    
+    <!--
+     Provide one or more waypoints containing a latitude/longitude pair. If you provide one
+     waypoint, Xcode will simulate that specific location. If you provide multiple waypoints,
+     Xcode will simulate a route visiting each waypoint.
+     -->
+    <wpt lat="37.546495" lon="126.907530">
+        <name>Hapjeong</name>
+        <time>2022-03-23T00:00:00Z</time>
+    </wpt>
+    <wpt lat="37.559990" lon="126.891718">
+        <name>Mangwon</name>
+        <time>2022-03-23T00:02:00Z</time>
+    </wpt>
+    <wpt lat="37.574699" lon="126.864841">
+        <name>Gayang Bridge (North)</name>
+        <time>2022-03-23T00:04:00Z</time>
+    </wpt>
+    <wpt lat="37.592332" lon="126.835533">
+        <name>Gangmae</name>
+        <time>2022-03-23T00:06:00Z</time>
+    </wpt>
+    <wpt lat="37.602815" lon="126.827242">
+        <name>Hangju</name>
+        <time>2022-03-23T00:06:30Z</time>
+    </wpt>
+    <wpt lat="37.607399" lon="126.812503">
+        <name>Hangju Bridge (North)</name>
+        <time>2022-03-23T00:07:00Z</time>
+    </wpt>
+    <wpt lat="37.617874" lon="126.798315">
+        <name>Gimpo Bridge (North)</name>
+        <time>2022-03-23T00:08:00Z</time>
+    </wpt>
+    <wpt lat="37.649990" lon="126.737792">
+        <name>Kintex Interchange</name>
+        <time>2022-03-23T00:11:00Z</time>
+    </wpt>
+    <wpt lat="37.665051" lon="126.748271">
+        <name>Kintex Junction</name>
+        <time>2022-03-23T00:13:00Z</time>
+    </wpt>
+</gpx>

@@ -9,6 +9,7 @@ import UIKit;
 import AVKit;
 import BSImagePicker;
 import Photos;
+import CoreLocation;
 
 protocol UIPostEditorDelegate {
     func removeAttachedPhotoAsset(sender: UIPostEditorThumbnailVC);
@@ -28,6 +29,7 @@ class UIPostEditorVC: UIViewController, UIPostEditorDelegate {
     @IBOutlet weak var attachedImageScrollView: UIScrollView!;
     @IBOutlet weak var attachedFileScrollView: UIScrollView!;
     
+    let locationManager = CLLocationManager();
     let photoPicker = ImagePickerController();
     let videoPicker = ImagePickerController();
     let filePicker = UIDocumentPickerViewController(forOpeningContentTypes: [UTType.text, UTType.pdf, UTType.zip], asCopy: true);
@@ -47,6 +49,9 @@ class UIPostEditorVC: UIViewController, UIPostEditorDelegate {
     var deleteAttachedFile: Bool = false;
     
     override func viewDidLoad() {
+        // Setup GPS framework
+        self.setupGeoTag();
+        
         // Setup image picker
         self.setupPhotoPicker();
         self.filePicker.delegate = self;
@@ -65,6 +70,18 @@ class UIPostEditorVC: UIViewController, UIPostEditorDelegate {
             self.loadCurrentPostContent();
             self.loadPreviousPhotoAssets();
             self.loadPreviousFileAssets();
+        }
+    }
+    
+    func setupGeoTag() {
+        self.locationManager.requestWhenInUseAuthorization();
+        if (CLLocationManager.locationServicesEnabled()) {
+            locationManager.delegate = self;
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
+            locationManager.startUpdatingLocation();
+        } else if (self.isNewPost) {
+            self.postGeoTagSwitch.isOn = false;
+            self.postGeoTagSwitch.isEnabled = false;
         }
     }
     
@@ -503,11 +520,8 @@ class UIPostEditorVC: UIViewController, UIPostEditorDelegate {
         self.newPost.hashTags = self.postTagTextField.text!.components(separatedBy: ",");
         self.newPost.disclosure = disclosureString[self.postDisclosureSegmentedControl.selectedSegmentIndex] ?? "PUBLIC";
         
-        // Set geotag
-        if (self.isNewPost) {
-            self.newPost.geoTagLat = 0;
-            self.newPost.geoTagLong = 0;
-        } else {
+        // Get previous geotag data if editing previous post
+        if (!self.isNewPost) {
             self.newPost.geoTagLat = self.currentPost!.geoTagLat;
             self.newPost.geoTagLong = self.currentPost!.geoTagLong;
         }
@@ -555,11 +569,22 @@ extension UIPostEditorVC: UITextViewDelegate {
     }
 }
 
-// Extension - UIDocumentPickerDelegate delegate
+// Extension - UIDocumentPickerDelegate
 extension UIPostEditorVC: UIDocumentPickerDelegate {
     public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         // TODO: 장래 애플 API 업데이트시 한꺼번에 다중 선택이 가능하도록 개선
         // API 문제로 multipleSelect 옵션이 작동하지 않아 1개씩 추가만 가능 (파일 1개를 선택하면 창이 닫힘)
         self.loadAttachedFileAssets(fileUrl: urls[0]);
+    }
+}
+
+// Extenstion - CLLocationManagerDelegate
+extension UIPostEditorVC: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let location = locations.last! as CLLocation;
+        if (self.postGeoTagSwitch.isOn) {
+            self.newPost.geoTagLat = location.coordinate.latitude;
+            self.newPost.geoTagLong = location.coordinate.longitude;
+        }
     }
 }

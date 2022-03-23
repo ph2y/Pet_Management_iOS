@@ -203,6 +203,7 @@ class UICreateAccountDetailsVC: UIViewController {
         self.paramDict["email"] = self.emailTextField.text;
         self.paramDict["nickname"] = self.paramDict["username"];
         self.paramDict["userMessage"] = "";
+        self.paramDict["notification"] = "true";
         
         AF.request(reqUrl, method: .post, parameters: self.paramDict, encoding: JSONEncoding.default).responseDecodable(of: AccountCreateDto.self) {
             (res) in

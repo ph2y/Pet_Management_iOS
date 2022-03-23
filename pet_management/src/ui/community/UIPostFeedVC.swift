@@ -7,22 +7,24 @@
 
 import UIKit;
 import Alamofire;
+import CoreLocation;
 
 class UIPostFeedVC: UIViewController, UIPostCellDelegate {
     //TODO: TableDelegate와 TableDataSource를 분리하여 마이펫 탭의 피드와 코드 중복도 개선할 방법 찾기
     @IBOutlet weak var postFeedTableView: UITableView!;
     
+    let locationManager = CLLocationManager();
     var postList: [Post] = [];
     var loadedPageCnt: Int = 0;
     var isLastPage: Bool = false;
     var isLoading: Bool = true;
+    var currentPosition: Position?;
 
     override func viewDidLoad() {
         self.postFeedTableView.delegate = self;
         self.postFeedTableView.dataSource = self;
-        
-        PostUtil.reqHttpFetchPosts(pageIdx: self.loadedPageCnt, sender: self, resHandler: self.postFetch);
         self.initPullToRefresh();
+        self.initPostFetchWithGeoTag();
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -42,6 +44,21 @@ class UIPostFeedVC: UIViewController, UIPostCellDelegate {
             let index = sender as! IndexPath;
             destVC.isNewPost = false;
             destVC.currentPost = self.postList[index.row];
+        }
+    }
+    
+    func initPostFetchWithGeoTag() {
+        self.locationManager.requestWhenInUseAuthorization();
+        if (CLLocationManager.locationServicesEnabled()) {
+            self.locationManager.delegate = self;
+            self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
+            self.locationManager.startUpdatingLocation();
+            if (self.locationManager.location != nil) {
+                self.currentPosition = Position(latitude: self.locationManager.location!.coordinate.latitude, longitude: self.locationManager.location!.coordinate.longitude);
+            }
+        } else {
+            self.currentPosition = nil;
+            PostUtil.reqHttpFetchPosts(pageIdx: self.loadedPageCnt, currentPostion: nil, sender: self, resHandler: self.postFetch);
         }
     }
     
@@ -75,7 +92,7 @@ class UIPostFeedVC: UIViewController, UIPostCellDelegate {
         self.isLastPage = false;
         self.isLoading = true;
         self.postFeedTableView.reloadData();
-        PostUtil.reqHttpFetchPosts(pageIdx: self.loadedPageCnt, sender: self, resHandler: self.postFetch);
+        PostUtil.reqHttpFetchPosts(pageIdx: self.loadedPageCnt, currentPostion: self.currentPosition, sender: self, resHandler: self.postFetch);
     }
     
     // func postFetch
@@ -131,11 +148,27 @@ extension UIPostFeedVC: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+// Extension - UIScrollViewDelegate
 extension UIPostFeedVC: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if (self.postFeedTableView.contentOffset.y > self.postFeedTableView.contentSize.height - self.postFeedTableView.bounds.size.height && !self.isLastPage && !self.isLoading) {
             self.isLoading = true;
-            PostUtil.reqHttpFetchPosts(pageIdx: self.loadedPageCnt, sender: self, resHandler: self.postFetch);
+            PostUtil.reqHttpFetchPosts(pageIdx: self.loadedPageCnt, currentPostion: self.currentPosition, topPostId: self.postList[0].id, sender: self, resHandler: self.postFetch);
+        }
+    }
+}
+
+// Extenstion - CLLocationManagerDelegate
+extension UIPostFeedVC: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let location = locations.last! as CLLocation;
+        var firstLoad = false;
+        if (self.currentPosition == nil) {
+            firstLoad = true;
+        }
+        self.currentPosition = Position(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude);
+        if (firstLoad == true) {
+            self.refreshPostFeed();
         }
     }
 }
