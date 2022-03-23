@@ -37,6 +37,7 @@
 		8F82F34327BE2D9A00571697 /* LikeFetchDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F82F34227BE2D9A00571697 /* LikeFetchDto.swift */; };
 		8F9564F62798011000AE577B /* AccountLoginDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9564F52798011000AE577B /* AccountLoginDto.swift */; };
 		8F9564F9279802CA00AE577B /* UIUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9564F8279802CA00AE577B /* UIUtil.swift */; };
+		8F95765827EAC89900B038A2 /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F95765727EAC89900B038A2 /* Position.swift */; };
 		8F95BB6627C7343200ED7630 /* PetPhotoFetchDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F95BB6527C7343200ED7630 /* PetPhotoFetchDto.swift */; };
 		8F95BB6827C745E600ED7630 /* PetPhotoDeleteDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F95BB6727C745E600ED7630 /* PetPhotoDeleteDto.swift */; };
 		8F99280C27E3114800F04B4B /* PostReportDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99280B27E3114800F04B4B /* PostReportDto.swift */; };
@@ -133,6 +134,7 @@
 		8F038FAD279E803700283867 /* PetSchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetSchedule.swift; sourceTree = "<group>"; };
 		8F038FAF279E8D8B00283867 /* PetScheduleUpdateDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetScheduleUpdateDto.swift; sourceTree = "<group>"; };
 		8F084A1F27D9F137003E3F5C /* UIPostEditorThumbnailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPostEditorThumbnailVC.swift; sourceTree = "<group>"; };
+		8F15A7BB27EAEC2F00E0EA9E /* SeoulToIlsan.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SeoulToIlsan.gpx; sourceTree = "<group>"; };
 		8F1D0984279418E2000CBC26 /* EmailVerificationTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationTimer.swift; sourceTree = "<group>"; };
 		8F1D0986279426F1000CBC26 /* AccountRecoverPasswordDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRecoverPasswordDto.swift; sourceTree = "<group>"; };
 		8F2016B0279FA307007B34B9 /* PetScheduleFetchDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetScheduleFetchDto.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 		8F82F34227BE2D9A00571697 /* LikeFetchDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeFetchDto.swift; sourceTree = "<group>"; };
 		8F9564F52798011000AE577B /* AccountLoginDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountLoginDto.swift; sourceTree = "<group>"; };
 		8F9564F8279802CA00AE577B /* UIUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIUtil.swift; sourceTree = "<group>"; };
+		8F95765727EAC89900B038A2 /* Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
 		8F95BB6527C7343200ED7630 /* PetPhotoFetchDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetPhotoFetchDto.swift; sourceTree = "<group>"; };
 		8F95BB6727C745E600ED7630 /* PetPhotoDeleteDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetPhotoDeleteDto.swift; sourceTree = "<group>"; };
 		8F99280B27E3114800F04B4B /* PostReportDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostReportDto.swift; sourceTree = "<group>"; };
@@ -373,6 +376,7 @@
 				8FAC8C4127BCEB120082AAC0 /* Attachment.swift */,
 				8F82F33B27BE1A2300571697 /* Pageable.swift */,
 				8FD2309227E1C1D40059A0AA /* Comment.swift */,
+				8F95765727EAC89900B038A2 /* Position.swift */,
 			);
 			path = entity;
 			sourceTree = "<group>";
@@ -492,6 +496,7 @@
 				8FF00FFD27901B8E0087913B /* Assets.xcassets */,
 				8FF00FFF27901B8E0087913B /* LaunchScreen.storyboard */,
 				8FF0100227901B8E0087913B /* Info.plist */,
+				8F15A7BB27EAEC2F00E0EA9E /* SeoulToIlsan.gpx */,
 			);
 			path = pet_management;
 			sourceTree = "<group>";
@@ -805,6 +810,7 @@
 				8FA426A927BA4EE6008FBD43 /* PostFetchDto.swift in Sources */,
 				8FCEAFD5279411B300CD8DA6 /* AccountRecoverUsernameDto.swift in Sources */,
 				8FD2309C27E1C4470059A0AA /* CommentUpdateDto.swift in Sources */,
+				8F95765827EAC89900B038A2 /* Position.swift in Sources */,
 				8F95BB6627C7343200ED7630 /* PetPhotoFetchDto.swift in Sources */,
 				8FD2309627E1C42D0059A0AA /* CommentFetchDto.swift in Sources */,
 				8FA58B3A279AEE0900B83D00 /* AccountFetchDto.swift in Sources */,

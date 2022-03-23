@@ -17,8 +17,8 @@ struct Post: Decodable, Encodable {
     var edited: Bool;
     var serializedHashTags: String;
     var disclosure: String;
-    var geoTagLat: Float;
-    var geoTagLong: Float;
+    var geoTagLat: Double;
+    var geoTagLong: Double;
     var imageAttachments: String?;
     var videoAttachments: String?;
     var fileAttachments: String?;
@@ -94,12 +94,22 @@ class PostUtil {
     // No Params
     // Return Void
     // Request to the server to get post feed data
-    static func reqHttpFetchPosts(pageIdx: Int, sender: UIViewController, resHandler: @escaping (DataResponse<PostFetchDto, AFError>) -> Void) {
+    static func reqHttpFetchPosts(pageIdx: Int, currentPostion: Position? = nil, topPostId: Int? = nil, sender: UIViewController, resHandler: @escaping (DataResponse<PostFetchDto, AFError>) -> Void) {
         let reqApi = "post/fetch";
         let reqUrl = APIBackendUtil.getUrl(api: reqApi);
         var reqBody = Dictionary<String, String>();
         let reqHeader: HTTPHeaders = APIBackendUtil.getAuthHeader();
-        reqBody["pageIndex"] = String(pageIdx);
+        
+        if (currentPostion != nil) {
+            reqBody["currentLat"] = String(currentPostion!.latitude);
+            reqBody["currentLong"] = String(currentPostion!.longitude);
+        }
+        if (pageIdx != 0){
+            reqBody["pageIndex"] = String(pageIdx);
+            if (topPostId != nil) {
+                reqBody["topPostId"] = String(topPostId!);
+            }
+        }
         
         AF.request(reqUrl, method: .post, parameters: reqBody, encoding: JSONEncoding.default, headers: reqHeader).responseDecodable(of: PostFetchDto.self) {
             (res) in
