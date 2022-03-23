@@ -35,7 +35,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="집사의 노트" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Xv-zo-kX4" userLabel="AppTitleLabel">
-                                <rect key="frame" x="115" y="396" width="160" height="32"/>
+                                <rect key="frame" x="115" y="396" width="160" height="37.333333333333314"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="PZr-kJ-IOn"/>
                                 </constraints>
@@ -44,7 +44,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="아이디" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kUQ-Sb-MWg" userLabel="UsernameTextField">
-                                <rect key="frame" x="70" y="452" width="250" height="34"/>
+                                <rect key="frame" x="70" y="457.33333333333331" width="250" height="34"/>
                                 <color key="backgroundColor" red="0.87058823529411766" green="0.49803921568627452" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="AlJ-D5-kkK"/>
@@ -59,7 +59,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="비밀번호" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QrY-Xd-dsW" userLabel="PasswordTextField">
-                                <rect key="frame" x="70" y="494" width="250" height="34"/>
+                                <rect key="frame" x="70" y="499.33333333333326" width="250" height="34"/>
                                 <color key="backgroundColor" red="0.87058823529411766" green="0.49803921568627452" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="OPN-ev-awb"/>
@@ -74,7 +74,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dSg-61-pH2" userLabel="LoginBtn">
-                                <rect key="frame" x="70" y="544" width="250" height="32"/>
+                                <rect key="frame" x="70" y="549.33333333333337" width="250" height="36"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="H65-kt-xL0"/>
@@ -95,7 +95,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c3Y-eS-lrI" userLabel="RegisterBtn">
-                                <rect key="frame" x="70" y="584" width="125" height="27"/>
+                                <rect key="frame" x="70" y="593.33333333333337" width="125" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="125" id="BsG-Rr-wPC"/>
                                 </constraints>
@@ -109,7 +109,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GdW-5B-P3c" userLabel="LostAndFoundBtn">
-                                <rect key="frame" x="195" y="584" width="125" height="27"/>
+                                <rect key="frame" x="195" y="593.33333333333337" width="125" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="125" id="AA7-sl-t0Z"/>
                                 </constraints>
@@ -1359,17 +1359,13 @@
         <!--Following-->
         <scene sceneID="edC-gn-UW0">
             <objects>
-                <viewController id="KbD-nV-1ke" userLabel="Following" sceneMemberID="viewController">
+                <viewController id="KbD-nV-1ke" userLabel="Following" customClass="UIFollowerVC" customModule="pet_management" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pDf-5N-ubf">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="hWm-vA-uts">
-                                <rect key="frame" x="0.0" y="88" width="390" height="51"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ENh-iq-MjP">
-                                <rect key="frame" x="16" y="147" width="358" height="32"/>
+                                <rect key="frame" x="16" y="96" width="358" height="32"/>
                                 <segments>
                                     <segment title="팔로워"/>
                                     <segment title="팔로잉"/>
@@ -1377,12 +1373,17 @@
                                 </segments>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="bwP-NY-rwc">
-                                <rect key="frame" x="0.0" y="186" width="390" height="575"/>
+                                <rect key="frame" x="0.0" y="135" width="390" height="626"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" placeholder="닉네임으로 다른 사용자 검색" id="hWm-vA-uts">
+                                    <rect key="frame" x="0.0" y="0.0" width="390" height="51"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </searchBar>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="FriendCell" id="uTb-Xt-KGp">
-                                        <rect key="frame" x="0.0" y="44.666666030883789" width="390" height="43.666667938232422"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="followCell" id="uTb-Xt-KGp" customClass="UIFollowerCellVC" customModule="pet_management" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="95.666666030883789" width="390" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uTb-Xt-KGp" id="GTn-LX-onV">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="43.666667938232422"/>
@@ -1421,6 +1422,44 @@
                                                 <constraint firstItem="EbG-bn-jGV" firstAttribute="leading" secondItem="BUO-cW-3AL" secondAttribute="trailing" constant="16" id="qDx-q4-gms"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="nicknameLabel" destination="EbG-bn-jGV" id="gzR-rn-gCF"/>
+                                            <outlet property="representativePetPhotoImageView" destination="BUO-cW-3AL" id="D8h-OJ-Wls"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="followEmpty" id="sEQ-gn-ioy">
+                                        <rect key="frame" x="0.0" y="139.33333396911621" width="390" height="43.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sEQ-gn-ioy" id="Zpw-wb-vRO">
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="팔로워/팔로잉한 유저가 없습니다" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" id="RyF-9u-uB1">
+                                                    <rect key="frame" x="36" y="-0.66666603088378906" width="318" height="43.666667938232422"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="followSearchEmpty" id="CqH-WW-9wv">
+                                        <rect key="frame" x="0.0" y="183.00000190734863" width="390" height="43.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CqH-WW-9wv" id="0kv-YO-ZvP">
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="검색 결과가 없습니다" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" id="jaB-sf-nds">
+                                                    <rect key="frame" x="36" y="-0.66666603088378906" width="318" height="43.666667938232422"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -1430,17 +1469,19 @@
                         <constraints>
                             <constraint firstItem="bwP-NY-rwc" firstAttribute="leading" secondItem="iLu-fC-CeU" secondAttribute="leading" id="1EB-xA-XRM"/>
                             <constraint firstItem="bwP-NY-rwc" firstAttribute="top" secondItem="ENh-iq-MjP" secondAttribute="bottom" constant="8" id="7ia-Ct-ecI"/>
+                            <constraint firstItem="ENh-iq-MjP" firstAttribute="top" secondItem="iLu-fC-CeU" secondAttribute="top" constant="8" id="PgW-fg-K0n"/>
                             <constraint firstItem="bwP-NY-rwc" firstAttribute="bottom" secondItem="iLu-fC-CeU" secondAttribute="bottom" id="XzE-7Q-tuw"/>
                             <constraint firstItem="ENh-iq-MjP" firstAttribute="leading" secondItem="iLu-fC-CeU" secondAttribute="leading" constant="16" id="Zlj-o4-Q00"/>
                             <constraint firstItem="bwP-NY-rwc" firstAttribute="trailing" secondItem="iLu-fC-CeU" secondAttribute="trailing" id="a5i-Nd-J8X"/>
-                            <constraint firstItem="hWm-vA-uts" firstAttribute="top" secondItem="iLu-fC-CeU" secondAttribute="top" id="ghU-CN-IUz"/>
-                            <constraint firstItem="ENh-iq-MjP" firstAttribute="top" secondItem="hWm-vA-uts" secondAttribute="bottom" constant="8" id="j2G-Xy-HSV"/>
-                            <constraint firstItem="hWm-vA-uts" firstAttribute="trailing" secondItem="iLu-fC-CeU" secondAttribute="trailing" id="kFs-6s-OR3"/>
                             <constraint firstItem="iLu-fC-CeU" firstAttribute="trailing" secondItem="ENh-iq-MjP" secondAttribute="trailing" constant="16" id="sAW-xK-HL5"/>
-                            <constraint firstItem="hWm-vA-uts" firstAttribute="leading" secondItem="iLu-fC-CeU" secondAttribute="leading" id="wq6-nO-Sy2"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="팔로워/팔로잉" id="1cQ-6l-nxi"/>
+                    <connections>
+                        <outlet property="categorySegmentedControl" destination="ENh-iq-MjP" id="wcB-wJ-F87"/>
+                        <outlet property="nicknameSearchBar" destination="hWm-vA-uts" id="w1u-hP-8mM"/>
+                        <outlet property="userTableView" destination="bwP-NY-rwc" id="Rhs-cF-Hbj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ONw-ir-Oyf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
