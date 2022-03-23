@@ -53,9 +53,6 @@ class UIPostFeedVC: UIViewController, UIPostCellDelegate {
             self.locationManager.delegate = self;
             self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
             self.locationManager.startUpdatingLocation();
-            if (self.locationManager.location != nil) {
-                self.currentPosition = Position(latitude: self.locationManager.location!.coordinate.latitude, longitude: self.locationManager.location!.coordinate.longitude);
-            }
         } else {
             self.currentPosition = nil;
             PostUtil.reqHttpFetchPosts(pageIdx: self.loadedPageCnt, currentPostion: nil, sender: self, resHandler: self.postFetch);
