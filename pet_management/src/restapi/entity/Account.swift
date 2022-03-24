@@ -26,6 +26,11 @@ struct Account: Decodable, Encodable {
 }
 
 struct AccountUtil {
+    // static func getAccountFromFetchedDto
+    static func getAccountFromFetchedDto(dto: AccountFetchDto) -> Account {
+        return Account(id: dto.id!, username: dto.username!, email: dto.email!, phone: dto.phone!, marketing: dto.marketing!, nickname: dto.nickname!, photoUrl: dto.photoUrl, userMessage: dto.userMessage, representativePetId: dto.representativePetId, fcmRegistrationToken: dto.fcmRegistrationToken, notification: dto.notification!, mapSearchRadius: dto.mapSearchRadius!);
+    }
+    
     // static func reqHttpFetchAccountByNickname
     static func reqHttpFetchAccountByNickname(nickname: String, sender: UIViewController, resHandler: @escaping (DataResponse<AccountFetchDto, AFError>) -> Void) {
             let reqApi = "account/fetch";
@@ -41,13 +46,27 @@ struct AccountUtil {
                     sender.present(APIBackendUtil.makeHttpErrorPopup(errMsg: res.error?.localizedDescription), animated: true);
                     return;
                 }
-                
-                guard (res.value?._metadata.status == true) else {
-                    sender.present(APIBackendUtil.makeHttpErrorPopup(errMsg: res.value?._metadata.message), animated: true);
-                    return;
-                }
                 resHandler(res);
             }
+    }
+    
+    // static func reqHttpFetchAccountPhoto
+    static func reqHttpFetchAccountPhoto(accountId: Int, sender: UIViewController, resHandler: @escaping (DataResponse<Data, AFError>) -> Void) {
+        let reqApi = "account/photo/fetch";
+        let reqUrl = APIBackendUtil.getUrl(api: reqApi);
+        var reqBody = Dictionary<String, String>();
+        let reqHeader: HTTPHeaders = APIBackendUtil.getAuthHeader();
+        reqBody["id"] = String(accountId);
+        
+        AF.request(reqUrl, method: .post, parameters: reqBody, encoding: JSONEncoding.default, headers: reqHeader).responseData() {
+            (res) in
+            guard (res.error == nil) else {
+                APIBackendUtil.logHttpError(reqApi: reqApi, errMsg: res.error?.localizedDescription);
+                sender.present(APIBackendUtil.makeHttpErrorPopup(errMsg: res.error?.localizedDescription), animated: true);
+                return;
+            }
+            resHandler(res);
+        }
     }
     
     // static func reqHttpCreateFollow
