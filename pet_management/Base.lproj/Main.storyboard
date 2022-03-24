@@ -35,7 +35,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="집사의 노트" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Xv-zo-kX4" userLabel="AppTitleLabel">
-                                <rect key="frame" x="115" y="396" width="160" height="37.333333333333314"/>
+                                <rect key="frame" x="115" y="396" width="160" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="PZr-kJ-IOn"/>
                                 </constraints>
@@ -44,7 +44,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="아이디" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kUQ-Sb-MWg" userLabel="UsernameTextField">
-                                <rect key="frame" x="70" y="457.33333333333331" width="250" height="34"/>
+                                <rect key="frame" x="70" y="452" width="250" height="34"/>
                                 <color key="backgroundColor" red="0.87058823529411766" green="0.49803921568627452" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="AlJ-D5-kkK"/>
@@ -59,7 +59,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="비밀번호" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QrY-Xd-dsW" userLabel="PasswordTextField">
-                                <rect key="frame" x="70" y="499.33333333333326" width="250" height="34"/>
+                                <rect key="frame" x="70" y="494" width="250" height="34"/>
                                 <color key="backgroundColor" red="0.87058823529411766" green="0.49803921568627452" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="OPN-ev-awb"/>
@@ -74,7 +74,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dSg-61-pH2" userLabel="LoginBtn">
-                                <rect key="frame" x="70" y="549.33333333333337" width="250" height="36"/>
+                                <rect key="frame" x="70" y="544" width="250" height="32"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="H65-kt-xL0"/>
@@ -95,7 +95,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c3Y-eS-lrI" userLabel="RegisterBtn">
-                                <rect key="frame" x="70" y="593.33333333333337" width="125" height="30"/>
+                                <rect key="frame" x="70" y="584" width="125" height="27"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="125" id="BsG-Rr-wPC"/>
                                 </constraints>
@@ -109,7 +109,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GdW-5B-P3c" userLabel="LostAndFoundBtn">
-                                <rect key="frame" x="195" y="593.33333333333337" width="125" height="30"/>
+                                <rect key="frame" x="195" y="584" width="125" height="27"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="125" id="AA7-sl-t0Z"/>
                                 </constraints>
@@ -1371,6 +1371,9 @@
                                     <segment title="팔로잉"/>
                                     <segment title="사용자 검색"/>
                                 </segments>
+                                <connections>
+                                    <action selector="categorySegmentCtrlOnClick:" destination="KbD-nV-1ke" eventType="valueChanged" id="Za4-So-mg8"/>
+                                </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="bwP-NY-rwc">
                                 <rect key="frame" x="0.0" y="135" width="390" height="626"/>
@@ -1423,8 +1426,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="accountPhotoImageView" destination="BUO-cW-3AL" id="Rby-tC-HTv"/>
                                             <outlet property="nicknameLabel" destination="EbG-bn-jGV" id="gzR-rn-gCF"/>
-                                            <outlet property="representativePetPhotoImageView" destination="BUO-cW-3AL" id="D8h-OJ-Wls"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="followEmpty" id="sEQ-gn-ioy">

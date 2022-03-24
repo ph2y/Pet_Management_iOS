@@ -8,7 +8,7 @@
 import UIKit;
 
 class UIFollowerCellVC: UITableViewCell {
-    @IBOutlet weak var representativePetPhotoImageView: UIImageView!;
+    @IBOutlet weak var accountPhotoImageView: UIImageView!;
     @IBOutlet weak var nicknameLabel: UILabel!;
     
     var followAccount: Account?;
@@ -23,13 +23,13 @@ class UIFollowerCellVC: UITableViewCell {
         self.nicknameLabel.text = self.followAccount!.nickname;
         
         // load representative pet's profile photo (if no pet -> show default)
-        if (self.followAccount?.representativePetId != nil) {
-            PetUtil.reqHttpFetchPetPhoto(petId: self.followAccount!.representativePetId!, sender: self.senderVC!) {
-                (photo) in
-                self.representativePetPhotoImageView.image = photo;
+        if (self.followAccount?.photoUrl != nil) {
+            AccountUtil.reqHttpFetchAccountPhoto(accountId: self.followAccount!.id, sender: self.senderVC!) {
+                (res) in
+                self.accountPhotoImageView.image = UIImage(data: res.data!);
             }
         } else {
-            self.representativePetPhotoImageView.image = UIImage(named: "ICBaselinePets60WithPadding")!;
+            self.accountPhotoImageView.image = UIImage(named: "ICBaselinePets60WithPadding")!;
         }
     }
 }
