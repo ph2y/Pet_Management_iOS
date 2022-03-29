@@ -4248,7 +4248,7 @@
                         <sections>
                             <tableViewSection headerTitle="커뮤니티" id="kac-3V-coL">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="ZLk-v6-OOc">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="ZLk-v6-OOc">
                                         <rect key="frame" x="0.0" y="44.666666030883789" width="390" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZLk-v6-OOc" id="9q0-No-A0F">
@@ -4257,6 +4257,9 @@
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="apf-Wa-vDm">
                                                     <rect key="frame" x="321" y="6.3333333333333321" width="51" height="30.999999999999996"/>
+                                                    <connections>
+                                                        <action selector="communityAllNotiSwitchOnChange:" destination="riD-6J-HhZ" eventType="valueChanged" id="gkI-q7-rau"/>
+                                                    </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="커뮤니티 알림 설정" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PIg-O9-RNz">
                                                     <rect key="frame" x="20" y="11.333333333333336" width="127" height="21"/>
@@ -4275,7 +4278,7 @@
                                         </tableViewCellContentView>
                                         <color key="tintColor" red="0.7843137255" green="0.2470588235" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationLevel="1" indentationWidth="20" id="LYS-hN-hW7">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationLevel="1" indentationWidth="20" id="LYS-hN-hW7">
                                         <rect key="frame" x="0.0" y="88.333333969116211" width="390" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LYS-hN-hW7" id="pA7-hl-fxe">
@@ -4302,7 +4305,7 @@
                                         </tableViewCellContentView>
                                         <color key="tintColor" red="0.7843137255" green="0.2470588235" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationLevel="1" indentationWidth="20" id="4kd-hD-Ifw">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationLevel="1" indentationWidth="20" id="4kd-hD-Ifw">
                                         <rect key="frame" x="0.0" y="132.00000190734863" width="390" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4kd-hD-Ifw" id="FAY-cU-S9J">
@@ -4329,7 +4332,7 @@
                                         </tableViewCellContentView>
                                         <color key="tintColor" red="0.7843137255" green="0.2470588235" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationLevel="1" indentationWidth="20" id="iuT-BC-Lul">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationLevel="1" indentationWidth="20" id="iuT-BC-Lul">
                                         <rect key="frame" x="0.0" y="175.66666984558105" width="390" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iuT-BC-Lul" id="XMU-v0-n2A">
@@ -4358,59 +4361,6 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="리마인더" id="E6t-hf-pzU">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Vsj-qq-qJa">
-                                        <rect key="frame" x="0.0" y="286.66666984558105" width="390" height="43.666667938232422"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Vsj-qq-qJa" id="afz-0B-gag">
-                                            <rect key="frame" x="0.0" y="0.0" width="390" height="43.666667938232422"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AbF-LL-vUJ">
-                                                    <rect key="frame" x="321" y="6.3333333333333321" width="51" height="30.999999999999996"/>
-                                                </switch>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="리마인더 알림 설정" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JPf-K8-R1S">
-                                                    <rect key="frame" x="20" y="11.333333333333336" width="127" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="AbF-LL-vUJ" secondAttribute="trailing" constant="20" id="51X-Cx-5yE"/>
-                                                <constraint firstItem="JPf-K8-R1S" firstAttribute="centerY" secondItem="afz-0B-gag" secondAttribute="centerY" id="ELx-C0-Ak4"/>
-                                                <constraint firstItem="JPf-K8-R1S" firstAttribute="leading" secondItem="afz-0B-gag" secondAttribute="leadingMargin" id="Ect-fh-S71"/>
-                                                <constraint firstItem="AbF-LL-vUJ" firstAttribute="centerY" secondItem="afz-0B-gag" secondAttribute="centerY" id="lcN-oL-vvn"/>
-                                                <constraint firstItem="AbF-LL-vUJ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="JPf-K8-R1S" secondAttribute="trailing" constant="16" id="vsE-e3-sMW"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="tintColor" red="0.7843137255" green="0.2470588235" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="100" id="Kid-YB-wQS">
-                                        <rect key="frame" x="0.0" y="330.33333778381348" width="390" height="100"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Kid-YB-wQS" id="yMw-4X-zux">
-                                            <rect key="frame" x="0.0" y="0.0" width="390" height="100"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="리마인더 알림 설정은 본 기기에만 적용되며, 해당 스케줄이 비활성화되지는 않습니다. 스케줄 활성화/비활성화는 마이펫 탭의 [리마인더 관리]에서 설정하시기 바랍니다" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ThD-NS-HEc">
-                                                    <rect key="frame" x="20" y="9.3333333333333357" width="350" height="81.333333333333314"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="ThD-NS-HEc" firstAttribute="leading" secondItem="yMw-4X-zux" secondAttribute="leadingMargin" id="L7u-VE-N3v"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="ThD-NS-HEc" secondAttribute="trailing" id="edG-xp-7zG"/>
-                                                <constraint firstItem="ThD-NS-HEc" firstAttribute="centerY" secondItem="yMw-4X-zux" secondAttribute="centerY" id="uiL-p4-aBZ"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="tintColor" red="0.7843137255" green="0.2470588235" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="riD-6J-HhZ" id="e5S-Rg-FMp"/>
@@ -4419,6 +4369,12 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="알림 설정" id="JIm-DH-0f7"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="communityAllNotificationSwitch" destination="apf-Wa-vDm" id="ST8-3X-5AV"/>
+                        <outlet property="communityCommentNotificationSwitch" destination="AKN-0Z-9Qy" id="llc-ZV-r3u"/>
+                        <outlet property="communityFollowNotificationSwitch" destination="s3D-3y-Iea" id="7LA-Ra-g8E"/>
+                        <outlet property="communityLikeNotificationSwitch" destination="JaL-ju-SNw" id="Mez-6v-gBa"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lpm-X7-aus" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -77,6 +77,7 @@ class UILoginVC: UIViewController {
                 "notification": res.value?.notification
             ];
             
+            // Load userdetails on userdefaults
             if let data = try? JSONSerialization.data(withJSONObject: loginAccountDetail, options: []) {
                 UserDefaults.standard.set(data, forKey: "loginAccountDetail");
                 UserDefaults.standard.synchronize();
