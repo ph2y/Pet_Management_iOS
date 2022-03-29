@@ -26,7 +26,7 @@ class UILoginVC: UIViewController {
         guard (UserDefaults.standard.string(forKey: "loginToken") != nil) else {
             return;
         }
-        self.reqHttpFetchAccount(resume: true);
+        self.fetchAccount(resume: true);
     }
     
     // func reqHttpLogin
@@ -52,35 +52,17 @@ class UILoginVC: UIViewController {
                 return;
             }
             UserDefaults.standard.set(res.value?.token, forKey: "loginToken");
-            self.reqHttpFetchAccount(resume: false);
+            self.fetchAccount(resume: false);
         }
     }
     
-    // func reqHttpFetchAccount
+    // func fetchAccount
     // Param resume: Bool - If true, application tries to reuse old auth token
     // Return Void
     // Fetch account infomation from backend and save to the userdefaults
-    func reqHttpFetchAccount(resume: Bool) {
-        let reqApi = "account/fetch";
-        let reqUrl = APIBackendUtil.getUrl(api: reqApi);
-        let reqBody = Dictionary<String, String>();
-        let reqHeader: HTTPHeaders = [
-            "Authorization": "Bearer \(UserDefaults.standard.string(forKey: "loginToken")!)"
-        ];
-        AF.request(reqUrl, method: .post, parameters: reqBody, encoding: JSONEncoding.default, headers: reqHeader).responseDecodable(of: AccountFetchDto.self) {
+    func fetchAccount(resume: Bool) {
+        AccountUtil.reqHttpFetchAccount(resume: resume, sender: self) {
             (res) in
-            guard (res.error == nil) else {
-                APIBackendUtil.logHttpError(reqApi: reqApi, errMsg: res.error?.localizedDescription);
-                self.present(APIBackendUtil.makeHttpErrorPopup(errMsg: res.error?.localizedDescription), animated: true);
-                return;
-            }
-            guard (res.value?._metadata.status == true) else {
-                if (!resume) {
-                    self.present(APIBackendUtil.makeHttpErrorPopup(errMsg: res.value?._metadata.message), animated: true);
-                }
-                return;
-            }
-            
             let loginAccountDetail: Dictionary<String, Any?> = [
                 "id": res.value?.id,
                 "username": res.value?.username,
