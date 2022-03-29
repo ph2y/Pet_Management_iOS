@@ -45,6 +45,10 @@ class UIProfileVC: UIViewController {
     @IBAction func changePasswordBtnOnClick(_ sender: UIButton) {
     }
     @IBAction func logoutBtnOnClick(_ sender: UIButton) {
+        UserDefaults.standard.removeObject(forKey: "loginToken");
+        UserDefaults.standard.removeObject(forKey: "loginAccountDetail");
+        UserDefaults.standard.removeObject(forKey: "myPetList");
+        self.performSegue(withIdentifier: "logoutUnwindSegue", sender: self);
     }
     @IBAction func deleteUserBtnOnClick(_ sender: UIButton) {
     }

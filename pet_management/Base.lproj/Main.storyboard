@@ -2135,9 +2135,11 @@
                         <outlet property="nicknameTestField" destination="5a2-B4-nf2" id="kB0-x7-7nc"/>
                         <outlet property="phoneTextField" destination="byv-02-5mu" id="KfW-yd-pIV"/>
                         <outlet property="profilePhotoImageView" destination="1Oy-Ph-n4B" id="cgX-RK-hdn"/>
+                        <segue destination="YD6-CA-rpL" kind="unwind" identifier="logoutUnwindSegue" unwindAction="unwindToLogin:" id="c4C-Jm-y4k"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fSl-IK-dn5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="YD6-CA-rpL" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2321.5384615384614" y="3625.5924170616113"/>
         </scene>
