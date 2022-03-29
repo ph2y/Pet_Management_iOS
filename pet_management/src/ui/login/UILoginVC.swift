@@ -88,6 +88,8 @@ class UILoginVC: UIViewController {
     
     // Action Methods
     @IBAction func unwindToLogin(_ segue: UIStoryboardSegue) {
+        self.usernameTextField.text = "";
+        self.passwordTextField.text = "";
     }
     
     @IBAction func loginBtnOnClick(_ sender: UIButton) {
