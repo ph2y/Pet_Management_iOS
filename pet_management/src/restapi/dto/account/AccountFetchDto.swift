@@ -17,6 +17,6 @@ struct AccountFetchDto: Decodable {
     var userMessage: String?;
     var representativePetId: Int?;
     var fcmRegistrationToken: String?;
-    var mapSearchRadius: Float?;
+    var mapSearchRadius: Double?;
     var notification: Bool?;
 }

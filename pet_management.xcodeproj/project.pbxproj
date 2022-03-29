@@ -24,6 +24,7 @@
 		8F25E7DF2792D5C9005070D6 /* HttpMetaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F25E7DE2792D5C9005070D6 /* HttpMetaData.swift */; };
 		8F25E7E12792E017005070D6 /* AccountVerifyAuthCodeDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F25E7E02792E017005070D6 /* AccountVerifyAuthCodeDto.swift */; };
 		8F25E7E32792E39F005070D6 /* AccountCreateDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F25E7E22792E39F005070D6 /* AccountCreateDto.swift */; };
+		8F280D2727F2E7B800C86A50 /* AccountUpdateDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F280D2627F2E7B800C86A50 /* AccountUpdateDto.swift */; };
 		8F37F786279AACD50004394D /* UIMyPetPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F37F785279AACD50004394D /* UIMyPetPageVC.swift */; };
 		8F37F788279AACE40004394D /* UIMyPetCardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F37F787279AACE40004394D /* UIMyPetCardVC.swift */; };
 		8F37F78D279AB0FF0004394D /* PetFetchDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F37F78C279AB0FF0004394D /* PetFetchDto.swift */; };
@@ -70,6 +71,9 @@
 		8FB2FFAD27E2D50200E45C30 /* UIPostReplyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB2FFAC27E2D50200E45C30 /* UIPostReplyVC.swift */; };
 		8FB493CB27D1EC19007EFEFA /* UIPostFeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB493CA27D1EC19007EFEFA /* UIPostFeedVC.swift */; };
 		8FB990B827D9ABEC0011F977 /* PostCreateDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB990B727D9ABEC0011F977 /* PostCreateDto.swift */; };
+		8FBAED1827F18C5400193145 /* UIProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBAED1727F18C5400193145 /* UIProfileVC.swift */; };
+		8FBAED1A27F18C8200193145 /* UISettingGeoTagVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBAED1927F18C8200193145 /* UISettingGeoTagVC.swift */; };
+		8FBAED1C27F18CAA00193145 /* UISettingNotificationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBAED1B27F18CAA00193145 /* UISettingNotificationVC.swift */; };
 		8FCEAFCF2794007D00CD8DA6 /* UIFindAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCEAFCE2794007D00CD8DA6 /* UIFindAccountVC.swift */; };
 		8FCEAFD12794009000CD8DA6 /* UIFindAccountUsernameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCEAFD02794009000CD8DA6 /* UIFindAccountUsernameVC.swift */; };
 		8FCEAFD32794009A00CD8DA6 /* UIFindAccountPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCEAFD22794009A00CD8DA6 /* UIFindAccountPasswordVC.swift */; };
@@ -83,7 +87,7 @@
 		8FD230A227E1D4AD0059A0AA /* UIPostCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD230A127E1D4AD0059A0AA /* UIPostCommentCell.swift */; };
 		8FD67D5E27E476B400DD5261 /* PostUpdateDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD67D5D27E476B400DD5261 /* PostUpdateDto.swift */; };
 		8FE4F96A27D99EE500B6333D /* UIPostEditorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE4F96927D99EE500B6333D /* UIPostEditorVC.swift */; };
-		8FE66EDA27ED99A0002DE206 /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE66ED927ED99A0002DE206 /* SettingVC.swift */; };
+		8FE66EDA27ED99A0002DE206 /* UISettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE66ED927ED99A0002DE206 /* UISettingVC.swift */; };
 		8FF00FF527901B8D0087913B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF00FF427901B8D0087913B /* AppDelegate.swift */; };
 		8FF00FF727901B8D0087913B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF00FF627901B8D0087913B /* SceneDelegate.swift */; };
 		8FF00FFC27901B8D0087913B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8FF00FFA27901B8D0087913B /* Main.storyboard */; };
@@ -151,6 +155,7 @@
 		8F25E7DE2792D5C9005070D6 /* HttpMetaData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpMetaData.swift; sourceTree = "<group>"; };
 		8F25E7E02792E017005070D6 /* AccountVerifyAuthCodeDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountVerifyAuthCodeDto.swift; sourceTree = "<group>"; };
 		8F25E7E22792E39F005070D6 /* AccountCreateDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCreateDto.swift; sourceTree = "<group>"; };
+		8F280D2627F2E7B800C86A50 /* AccountUpdateDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountUpdateDto.swift; sourceTree = "<group>"; };
 		8F37F785279AACD50004394D /* UIMyPetPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIMyPetPageVC.swift; sourceTree = "<group>"; };
 		8F37F787279AACE40004394D /* UIMyPetCardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIMyPetCardVC.swift; sourceTree = "<group>"; };
 		8F37F78C279AB0FF0004394D /* PetFetchDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetFetchDto.swift; sourceTree = "<group>"; };
@@ -197,6 +202,9 @@
 		8FB2FFAC27E2D50200E45C30 /* UIPostReplyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPostReplyVC.swift; sourceTree = "<group>"; };
 		8FB493CA27D1EC19007EFEFA /* UIPostFeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPostFeedVC.swift; sourceTree = "<group>"; };
 		8FB990B727D9ABEC0011F977 /* PostCreateDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreateDto.swift; sourceTree = "<group>"; };
+		8FBAED1727F18C5400193145 /* UIProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIProfileVC.swift; sourceTree = "<group>"; };
+		8FBAED1927F18C8200193145 /* UISettingGeoTagVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISettingGeoTagVC.swift; sourceTree = "<group>"; };
+		8FBAED1B27F18CAA00193145 /* UISettingNotificationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISettingNotificationVC.swift; sourceTree = "<group>"; };
 		8FCEAFCE2794007D00CD8DA6 /* UIFindAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFindAccountVC.swift; sourceTree = "<group>"; };
 		8FCEAFD02794009000CD8DA6 /* UIFindAccountUsernameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFindAccountUsernameVC.swift; sourceTree = "<group>"; };
 		8FCEAFD22794009A00CD8DA6 /* UIFindAccountPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFindAccountPasswordVC.swift; sourceTree = "<group>"; };
@@ -210,7 +218,7 @@
 		8FD230A127E1D4AD0059A0AA /* UIPostCommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPostCommentCell.swift; sourceTree = "<group>"; };
 		8FD67D5D27E476B400DD5261 /* PostUpdateDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostUpdateDto.swift; sourceTree = "<group>"; };
 		8FE4F96927D99EE500B6333D /* UIPostEditorVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPostEditorVC.swift; sourceTree = "<group>"; };
-		8FE66ED927ED99A0002DE206 /* SettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingVC.swift; sourceTree = "<group>"; };
+		8FE66ED927ED99A0002DE206 /* UISettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISettingVC.swift; sourceTree = "<group>"; };
 		8FF00FF127901B8D0087913B /* pet_management.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pet_management.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FF00FF427901B8D0087913B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8FF00FF627901B8D0087913B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -424,6 +432,7 @@
 				8F1D0986279426F1000CBC26 /* AccountRecoverPasswordDto.swift */,
 				8F9564F52798011000AE577B /* AccountLoginDto.swift */,
 				8FA58B39279AEE0900B83D00 /* AccountFetchDto.swift */,
+				8F280D2627F2E7B800C86A50 /* AccountUpdateDto.swift */,
 			);
 			path = account;
 			sourceTree = "<group>";
@@ -495,7 +504,10 @@
 		8FE66ED827ED9993002DE206 /* setting */ = {
 			isa = PBXGroup;
 			children = (
-				8FE66ED927ED99A0002DE206 /* SettingVC.swift */,
+				8FE66ED927ED99A0002DE206 /* UISettingVC.swift */,
+				8FBAED1727F18C5400193145 /* UIProfileVC.swift */,
+				8FBAED1927F18C8200193145 /* UISettingGeoTagVC.swift */,
+				8FBAED1B27F18CAA00193145 /* UISettingNotificationVC.swift */,
 			);
 			path = setting;
 			sourceTree = "<group>";
@@ -804,14 +816,16 @@
 				8F99280E27E3116A00F04B4B /* CommentReportDto.swift in Sources */,
 				8F9564F62798011000AE577B /* AccountLoginDto.swift in Sources */,
 				8F9C743427A3F0E3004B1B79 /* PetScheduleDeleteDto.swift in Sources */,
+				8FBAED1827F18C5400193145 /* UIProfileVC.swift in Sources */,
 				8F25E7D62792CB1C005070D6 /* APIBackendConfig.swift in Sources */,
 				8FCEAFD12794009000CD8DA6 /* UIFindAccountUsernameVC.swift in Sources */,
+				8F280D2727F2E7B800C86A50 /* AccountUpdateDto.swift in Sources */,
 				8F1D0985279418E2000CBC26 /* EmailVerificationTimer.swift in Sources */,
 				8F25E7D1279289D7005070D6 /* UICreateAccountCredentialsVC.swift in Sources */,
 				8FE4F96A27D99EE500B6333D /* UIPostEditorVC.swift in Sources */,
 				8F25E7DC2792D51B005070D6 /* AccountSendAuthCodeDto.swift in Sources */,
 				8F37F788279AACE40004394D /* UIMyPetCardVC.swift in Sources */,
-				8FE66EDA27ED99A0002DE206 /* SettingVC.swift in Sources */,
+				8FE66EDA27ED99A0002DE206 /* UISettingVC.swift in Sources */,
 				8FD2309827E1C4380059A0AA /* CommentCreateDto.swift in Sources */,
 				8FD2309327E1C1D40059A0AA /* Comment.swift in Sources */,
 				8F95BB6827C745E600ED7630 /* PetPhotoDeleteDto.swift in Sources */,
@@ -833,9 +847,11 @@
 				8FAC8C4227BCEB120082AAC0 /* Attachment.swift in Sources */,
 				8FAA0E34279D6CEF00E400F3 /* UIBorderView.swift in Sources */,
 				8F25E7E12792E017005070D6 /* AccountVerifyAuthCodeDto.swift in Sources */,
+				8FBAED1C27F18CAA00193145 /* UISettingNotificationVC.swift in Sources */,
 				8FB493CB27D1EC19007EFEFA /* UIPostFeedVC.swift in Sources */,
 				8FA8AAAC27BCE806009F5561 /* UIPostCellVC.swift in Sources */,
 				8F25E7E32792E39F005070D6 /* AccountCreateDto.swift in Sources */,
+				8FBAED1A27F18C8200193145 /* UISettingGeoTagVC.swift in Sources */,
 				8F9564F9279802CA00AE577B /* UIUtil.swift in Sources */,
 				8FCEAFCF2794007D00CD8DA6 /* UIFindAccountVC.swift in Sources */,
 				8FB2FFAD27E2D50200E45C30 /* UIPostReplyVC.swift in Sources */,
