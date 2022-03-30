@@ -57,6 +57,39 @@ class UIProfileVC: UIViewController {
         }
     }
     @IBAction func changePasswordBtnOnClick(_ sender: UIButton) {
+        let alertController = UIAlertController(title: "비밀번호 변경", message: "계정 비밀번호를 변경합니다", preferredStyle: .alert);
+        alertController.addTextField(configurationHandler: {
+            (textfield) in
+            textfield.placeholder = "현재 비밀번호";
+            textfield.isSecureTextEntry = true;
+        });
+        alertController.addTextField(configurationHandler: {
+            (textfield) in
+            textfield.placeholder = "변경할 비밀번호";
+            textfield.isSecureTextEntry = true;
+        });
+        alertController.addTextField(configurationHandler: {
+            (textfield) in
+            textfield.placeholder = "변경할 비밀번호 확인";
+            textfield.isSecureTextEntry = true;
+        });
+        alertController.addAction(UIAlertAction(title: "비밀번호 변경", style: .default) {
+            (action) in
+            guard (AccountUtil.validatePasswordInput(password: alertController.textFields![1].text!)) else {
+                self.present(UIUtil.makeSimplePopup(title: "비밀번호 변경 오류", message: "비밀번호는 8~20글자 이내여야 합니다", onClose: nil), animated: true);
+                return;
+            }
+            guard (alertController.textFields![1].text == alertController.textFields![2].text) else {
+                self.present(UIUtil.makeSimplePopup(title: "비밀번호 변경 오류", message: "비밀번호가 일치하지 않습니다", onClose: nil), animated: true);
+                return;
+            }
+            AccountUtil.reqHttpUpdateAccountPassword(password: alertController.textFields![0].text!, newPassword: alertController.textFields![1].text!, sender: self) {
+                (res) in
+                self.present(UIUtil.makeSimplePopup(title: "비밀번호 변경", message: "비밀번호가 변경되었습니다", onClose: nil), animated: true);
+            }
+        });
+        alertController.addAction(UIAlertAction(title: "취소", style: .cancel));
+        self.present(alertController, animated: true);
     }
     @IBAction func logoutBtnOnClick(_ sender: UIButton) {
         UserDefaults.standard.removeObject(forKey: "loginToken");
