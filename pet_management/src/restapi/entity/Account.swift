@@ -150,6 +150,30 @@ struct AccountUtil {
         }
     }
     
+    // static func reqHttpUpdateAccountPassword
+    static func reqHttpUpdateAccountPassword(password: String, newPassword: String, sender: UIViewController, resHandler: @escaping (DataResponse<AccountUpdateDto, AFError>) -> Void) {
+        let reqApi = "account/password/update";
+        let reqUrl = APIBackendUtil.getUrl(api: reqApi);
+        var reqBody = Dictionary<String, String>();
+        let reqHeader: HTTPHeaders = APIBackendUtil.getAuthHeader();
+        reqBody["password"] = String(password);
+        reqBody["newPassword"] = String(newPassword);
+        
+        AF.request(reqUrl, method: .post, parameters: reqBody, encoding: JSONEncoding.default, headers: reqHeader).responseDecodable(of: AccountUpdateDto.self) {
+            (res) in
+            guard (res.error == nil) else {
+                APIBackendUtil.logHttpError(reqApi: reqApi, errMsg: res.error?.localizedDescription);
+                sender.present(APIBackendUtil.makeHttpErrorPopup(errMsg: res.error?.localizedDescription), animated: true);
+                return;
+            }
+            guard (res.value?._metadata.status == true) else {
+                sender.present(APIBackendUtil.makeHttpErrorPopup(errMsg: res.value?._metadata.message), animated: true);
+                return;
+            }
+            resHandler(res);
+        }
+    }
+    
     // static func reqHttpDeleteAccount
     static func reqHttpDeleteAccount(accountId: Int, sender: UIViewController, resHandler: @escaping (DataResponse<AccountDeleteDto, AFError>) -> Void) {
         let reqApi = "account/delete";
