@@ -1881,7 +1881,7 @@
         <!--개인정보 처리방침-->
         <scene sceneID="ObX-55-Jhi">
             <objects>
-                <viewController id="18q-vu-9A9" sceneMemberID="viewController">
+                <viewController id="18q-vu-9A9" customClass="UIInfomationVC" customModule="pet_management" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="h7H-iZ-UsH">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1904,6 +1904,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="개인정보 처리방침" id="IIE-DT-CJ3"/>
+                    <connections>
+                        <outlet property="infoTextView" destination="DqW-1x-q8i" id="vgh-9N-jAB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8vv-ZH-SMg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1912,7 +1915,7 @@
         <!--서비스 이용약관-->
         <scene sceneID="vPm-i4-u1w">
             <objects>
-                <viewController id="Czw-Rk-Rq7" sceneMemberID="viewController">
+                <viewController id="Czw-Rk-Rq7" customClass="UIInfomationVC" customModule="pet_management" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="A3x-uv-VPd">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1935,6 +1938,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="서비스 이용약관" id="GX6-Ai-uLc"/>
+                    <connections>
+                        <outlet property="infoTextView" destination="7hR-1V-TQb" id="Rbl-Ga-Y3Y"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m1a-S3-C2e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -2145,7 +2151,7 @@
         <!--라이센스-->
         <scene sceneID="gBR-Us-t2M">
             <objects>
-                <viewController id="0VI-ty-249" sceneMemberID="viewController">
+                <viewController id="0VI-ty-249" customClass="UIInfomationVC" customModule="pet_management" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EDd-wn-Kza">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2168,6 +2174,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="라이센스" id="9Ca-f6-xGQ"/>
+                    <connections>
+                        <outlet property="infoTextView" destination="i2a-dM-7uL" id="0yH-3b-AzS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lqu-cl-7pN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
