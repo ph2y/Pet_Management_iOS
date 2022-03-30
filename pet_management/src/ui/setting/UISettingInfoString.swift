@@ -285,19 +285,17 @@ struct UISettingInfoString {
         
         This application use Open Source Software (OSS). List below shows information of each open source projects this application use. Thanks to developers for their work and contributions.
         
-        =================================================================
+        << Alamofire >>
         Alamofire v5.5.0 - an HTTP networking library written in Swift.
         Copyright (c) 2014-2022 Alamofire Software Foundation (http://alamofire.org/)
         Repository: https://github.com/Alamofire/Alamofire
         (MIT License)
-        =================================================================
         
-        =================================================================
+        << BSImagePicker >>
         BSImagePicker v3.3.1 - a multiple image picker for iOS.
         Copyright (c) 2015 Joakim Gyllstrom <joakim@backslashed.se>
         Repository: https://github.com/mikaoj/BSImagePicker
         (MIT License)
-        =================================================================
         
         For more information about our license notification, email phy2@gmail.com
         """;

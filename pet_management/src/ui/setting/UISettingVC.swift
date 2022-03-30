@@ -13,6 +13,7 @@ class UISettingVC: UITableViewController {
     @IBOutlet var nicknameLabel: UILabel!;
     var accountDetail: Account?;
     var accountPhoto: UIImage?;
+    let infomation = UISettingInfoString();
     
     override func viewDidLoad() {
         self.loadAccountDetails();
@@ -27,6 +28,18 @@ class UISettingVC: UITableViewController {
         if (segue.identifier == "SettingGeoTagShowSegue") {
             let vc = segue.destination as! UISettingGeoTagVC;
             vc.currentSearchRange = self.accountDetail!.mapSearchRadius;
+        }
+        if (segue.identifier == "PrivacyShowSegue") {
+            let vc = segue.destination as! UIInfomationVC;
+            vc.infoTextString = self.infomation.privacy;
+        }
+        if (segue.identifier == "TermsShowSegue") {
+            let vc = segue.destination as! UIInfomationVC;
+            vc.infoTextString = self.infomation.termsOfService;
+        }
+        if (segue.identifier == "LicenseShowSegue") {
+            let vc = segue.destination as! UIInfomationVC;
+            vc.infoTextString = self.infomation.license;
         }
     }
     
