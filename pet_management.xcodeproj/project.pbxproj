@@ -53,6 +53,7 @@
 		8F9C743627A3F805004B1B79 /* PetScheduleCreateDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9C743527A3F805004B1B79 /* PetScheduleCreateDto.swift */; };
 		8F9C743827A3F9E1004B1B79 /* UIMyPetScheduleCellVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9C743727A3F9E1004B1B79 /* UIMyPetScheduleCellVC.swift */; };
 		8F9C9C6B27E4555000B55E6B /* UIFollowerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9C9C6A27E4555000B55E6B /* UIFollowerVC.swift */; };
+		8FA2B0BD27F429080091F4BD /* AccountDeleteDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA2B0BC27F429080091F4BD /* AccountDeleteDto.swift */; };
 		8FA426A427BA4C92008FBD43 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA426A327BA4C92008FBD43 /* Post.swift */; };
 		8FA426A627BA4CF5008FBD43 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA426A527BA4CF5008FBD43 /* Account.swift */; };
 		8FA426A927BA4EE6008FBD43 /* PostFetchDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA426A827BA4EE6008FBD43 /* PostFetchDto.swift */; };
@@ -60,6 +61,7 @@
 		8FA8AAAC27BCE806009F5561 /* UIPostCellVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA8AAAB27BCE806009F5561 /* UIPostCellVC.swift */; };
 		8FA8AAAE27BCE80E009F5561 /* UIPostWithImageCellVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA8AAAD27BCE80E009F5561 /* UIPostWithImageCellVC.swift */; };
 		8FA8FCED27DB325A00F937A4 /* UIPostEditorFileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA8FCEC27DB325A00F937A4 /* UIPostEditorFileVC.swift */; };
+		8FA97F6227F2FE5C005C8FC3 /* UISettingInfoString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA97F6127F2FE5C005C8FC3 /* UISettingInfoString.swift */; };
 		8FAA0E34279D6CEF00E400F3 /* UIBorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAA0E33279D6CEF00E400F3 /* UIBorderView.swift */; };
 		8FAA0E36279D748600E400F3 /* UIMyPetEditorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAA0E35279D748600E400F3 /* UIMyPetEditorVC.swift */; };
 		8FAA0E38279D749100E400F3 /* UIMyPetDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAA0E37279D749100E400F3 /* UIMyPetDetailVC.swift */; };
@@ -184,6 +186,7 @@
 		8F9C743527A3F805004B1B79 /* PetScheduleCreateDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetScheduleCreateDto.swift; sourceTree = "<group>"; };
 		8F9C743727A3F9E1004B1B79 /* UIMyPetScheduleCellVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIMyPetScheduleCellVC.swift; sourceTree = "<group>"; };
 		8F9C9C6A27E4555000B55E6B /* UIFollowerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFollowerVC.swift; sourceTree = "<group>"; };
+		8FA2B0BC27F429080091F4BD /* AccountDeleteDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDeleteDto.swift; sourceTree = "<group>"; };
 		8FA426A327BA4C92008FBD43 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		8FA426A527BA4CF5008FBD43 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		8FA426A827BA4EE6008FBD43 /* PostFetchDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostFetchDto.swift; sourceTree = "<group>"; };
@@ -191,6 +194,7 @@
 		8FA8AAAB27BCE806009F5561 /* UIPostCellVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPostCellVC.swift; sourceTree = "<group>"; };
 		8FA8AAAD27BCE80E009F5561 /* UIPostWithImageCellVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPostWithImageCellVC.swift; sourceTree = "<group>"; };
 		8FA8FCEC27DB325A00F937A4 /* UIPostEditorFileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPostEditorFileVC.swift; sourceTree = "<group>"; };
+		8FA97F6127F2FE5C005C8FC3 /* UISettingInfoString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISettingInfoString.swift; sourceTree = "<group>"; };
 		8FAA0E33279D6CEF00E400F3 /* UIBorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBorderView.swift; sourceTree = "<group>"; };
 		8FAA0E35279D748600E400F3 /* UIMyPetEditorVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIMyPetEditorVC.swift; sourceTree = "<group>"; };
 		8FAA0E37279D749100E400F3 /* UIMyPetDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIMyPetDetailVC.swift; sourceTree = "<group>"; };
@@ -433,6 +437,7 @@
 				8F9564F52798011000AE577B /* AccountLoginDto.swift */,
 				8FA58B39279AEE0900B83D00 /* AccountFetchDto.swift */,
 				8F280D2627F2E7B800C86A50 /* AccountUpdateDto.swift */,
+				8FA2B0BC27F429080091F4BD /* AccountDeleteDto.swift */,
 			);
 			path = account;
 			sourceTree = "<group>";
@@ -508,6 +513,7 @@
 				8FBAED1727F18C5400193145 /* UIProfileVC.swift */,
 				8FBAED1927F18C8200193145 /* UISettingGeoTagVC.swift */,
 				8FBAED1B27F18CAA00193145 /* UISettingNotificationVC.swift */,
+				8FA97F6127F2FE5C005C8FC3 /* UISettingInfoString.swift */,
 			);
 			path = setting;
 			sourceTree = "<group>";
@@ -871,6 +877,7 @@
 				8F82F34327BE2D9A00571697 /* LikeFetchDto.swift in Sources */,
 				8F82F34127BE284800571697 /* LikeDeleteDto.swift in Sources */,
 				8F7B840527E06A8F00B2E11B /* PostDeleteDto.swift in Sources */,
+				8FA97F6227F2FE5C005C8FC3 /* UISettingInfoString.swift in Sources */,
 				8F925D8927EAF7E800B37885 /* FollowDeleteDto.swift in Sources */,
 				8FA8FCED27DB325A00F937A4 /* UIPostEditorFileVC.swift in Sources */,
 				8F7B840127E0268C00B2E11B /* PostUpdateFileDto.swift in Sources */,
@@ -878,6 +885,7 @@
 				8F038FB0279E8D8B00283867 /* PetScheduleUpdateDto.swift in Sources */,
 				8FD2309A27E1C43F0059A0AA /* CommentDeleteDto.swift in Sources */,
 				8FA426A627BA4CF5008FBD43 /* Account.swift in Sources */,
+				8FA2B0BD27F429080091F4BD /* AccountDeleteDto.swift in Sources */,
 				8F925D8527EAF7CF00B37885 /* FollowerFetchDto.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
