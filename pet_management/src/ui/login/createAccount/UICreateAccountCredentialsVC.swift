@@ -37,22 +37,6 @@ class UICreateAccountCredentialsVC: UIViewController {
         destVC.paramDict = paramDict;
     }
     
-    // func valicateUsernameInput
-    // No Param
-    // Return Bool - validity of input
-    // Check username input is valid for api requirement
-    func validateUsernameInput() -> Bool {
-        return 5 <= self.usernameTextField.text!.count && self.usernameTextField.text!.count <= 20;
-    }
-    
-    // func validatePasswordInput
-    // No Param
-    // Return Bool - validity of input
-    // Check password input is valid for api requirement
-    func validatePasswordInput() -> Bool {
-        return 8 <= self.passwordTextField.text!.count && self.passwordTextField.text!.count <= 20;
-    }
-    
     // func validatePasswordCheckInput
     // No Param
     // Return Bool - validity of input
@@ -74,7 +58,7 @@ class UICreateAccountCredentialsVC: UIViewController {
     // Return Void
     // Check user input is all valid
     func checkRequirementsForNextStep() {
-        if (self.validateUsernameInput() && self.validatePasswordInput() && self.validatePasswordCheckInput()) {
+        if (AccountUtil.validateUsernameInput(username: self.usernameTextField.text!) && AccountUtil.validatePasswordInput(password: self.passwordTextField.text!) && self.validatePasswordCheckInput()) {
             self.nextStepBtn.isEnabled = true;
         } else {
             self.nextStepBtn.isEnabled = false;
@@ -83,7 +67,7 @@ class UICreateAccountCredentialsVC: UIViewController {
     
     // Action Methods
     @IBAction func usernameTextFieldOnChange(_ sender: UITextField) {
-        if (self.validateUsernameInput()) {
+        if (AccountUtil.validateUsernameInput(username: self.usernameTextField.text!)) {
             self.usernameErrorMsg = "";
         } else {
             self.usernameErrorMsg = "아이디는 5~20글자 이내여야 합니다\n";
@@ -92,7 +76,7 @@ class UICreateAccountCredentialsVC: UIViewController {
         self.checkRequirementsForNextStep();
     }
     @IBAction func passwordTextFieldOnChange(_ sender: UITextField) {
-        if (self.validatePasswordInput()) {
+        if (AccountUtil.validatePasswordInput(password: self.passwordTextField.text!)) {
             self.passwordErrorMsg = "";
         } else {
             self.passwordErrorMsg = "비밀번호는 8~20글자 이내여야 합니다\n";

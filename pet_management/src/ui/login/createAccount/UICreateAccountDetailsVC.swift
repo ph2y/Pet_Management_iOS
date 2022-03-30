@@ -50,25 +50,7 @@ class UICreateAccountDetailsVC: UIViewController {
         );
     }
     
-    // func validatePhoneInput
-    // No Param
-    // Return Bool - validity of input
-    // Validate phone number input
-    func validatePhoneInput() -> Bool {
-        let regex = "(^02|^\\d{3})-(\\d{3}|\\d{4})-\\d{4}";
-        let phonePredicate = NSPredicate(format: "SELF MATCHES %@", regex);
-        return phonePredicate.evaluate(with: self.phoneTextField.text);
-    }
     
-    // func validateEmailInput
-    // No Param
-    // Return Bool - validity of input
-    // Validate email address input
-    func validateEmailInput() -> Bool {
-        let regex = "[A-Z0-9a-z_-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}";
-        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", regex);
-        return emailPredicate.evaluate(with: self.emailTextField.text);
-    }
     
     // func updateErrorMessage
     // No Param
@@ -83,7 +65,7 @@ class UICreateAccountDetailsVC: UIViewController {
     // Return Void
     // Check requirements if there is no problem to request to send verification email
     func checkRequirementsForVerification() {
-        if (self.validateEmailInput()) {
+        if (AccountUtil.validateEmailInput(email: self.emailTextField.text!)) {
             self.sendCodeBtn.isEnabled = true;
         } else {
             self.sendCodeBtn.isEnabled = false;
@@ -95,7 +77,7 @@ class UICreateAccountDetailsVC: UIViewController {
     // Return Void
     // Check requirements if there is no problem to request to verify verification code and create account
     func checkRequirementsForCreateAccount() {
-        if (self.validatePhoneInput() && self.validateEmailInput() && self.verificationTimer!.isTimerRunning()) {
+        if (AccountUtil.validatePhoneInput(phone: self.phoneTextField.text!) && AccountUtil.validateEmailInput(email: self.emailTextField.text!) && self.verificationTimer!.isTimerRunning()) {
             self.createAccountBtn.isEnabled = true;
         } else {
             self.createAccountBtn.isEnabled = false;
@@ -237,7 +219,7 @@ class UICreateAccountDetailsVC: UIViewController {
     
     // Action Methods
     @IBAction func phoneTextFieldOnChange(_ sender: UITextField) {
-        if (self.validatePhoneInput()) {
+        if (AccountUtil.validatePhoneInput(phone: self.phoneTextField.text!)) {
             self.phoneErrorMsg = "";
         } else {
             self.phoneErrorMsg = "전화번호는 '-'를 포함한 유효한 양식이어야 합니다\n"
@@ -248,7 +230,7 @@ class UICreateAccountDetailsVC: UIViewController {
     }
     
     @IBAction func emailTextFieldOnChange(_ sender: UITextField) {
-        if (self.validateEmailInput()) {
+        if (AccountUtil.validateEmailInput(email: self.emailTextField.text!)) {
             self.emailErrorMsg = "";
         } else {
             self.emailErrorMsg = "이메일 양식이 유효하지 않습니다\n"

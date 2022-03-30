@@ -52,6 +52,10 @@ class UISettingVC: UITableViewController {
         }
     }
     
+    @IBAction func unwindToSetting(_ segue: UIStoryboardSegue) {
+        self.loadAccountDetails();
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch (indexPath.section) {
         case 0:
